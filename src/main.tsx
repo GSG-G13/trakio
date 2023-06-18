@@ -1,6 +1,9 @@
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <h1>Welcome Here, Happy Coding!</h1>,
-)
+  <React.StrictMode>
+    <h1>Welcome Here, Happy Coding!</h1>
+  </React.StrictMode>,
+);
