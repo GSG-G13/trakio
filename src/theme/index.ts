@@ -1,16 +1,22 @@
 import React from 'react';
 import { createTheme } from '@mui/material/styles';
 
-declare module '@mui/material/styles' {
-  interface PaletteOptions {
-    custom: {
-      background: React.CSSProperties['color'];
-      white: React.CSSProperties['color'];
-      black: React.CSSProperties['color'];
-      purple: React.CSSProperties['color'];
-    };
+  interface ICustom {
+    background: React.CSSProperties['color'];
+    white: React.CSSProperties['color'];
+    black: React.CSSProperties['color'];
+    purple: React.CSSProperties['color'];
   }
-}
+
+  declare module '@mui/material/styles' {
+    interface PaletteOptions {
+      custom: ICustom
+    }
+
+    interface Palette {
+      custom: ICustom,
+    }
+  }
 
 const theme = createTheme({
   palette: {
