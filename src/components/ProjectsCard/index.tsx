@@ -3,6 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { styled } from '@mui/material';
 
 export default function ProjectsCard() {
@@ -26,11 +27,13 @@ export default function ProjectsCard() {
     width: '100px',
     borderRadius: 4,
     marginTop: '-40px',
+    marginBottom: '15px',
     textAlign: 'center',
     marginRight: '20px',
   }));
   const WrapperDes = styled(Typography)(({ theme }) => ({
-    color: theme.palette.custom.purple,
+    color: theme.palette.custom.gray,
+    fontSize: '12px',
   }));
   const WrapperApp = styled(CardContent)(({ theme }) => ({
     background: theme.palette.custom.black,
@@ -39,6 +42,7 @@ export default function ProjectsCard() {
   const WrapperH1 = styled(Typography)(({ theme }) => ({
     color: theme.palette.custom.white,
     fontSize: '27px',
+    marginBottom: '10px',
   }));
   const WrapperUserName = styled(Typography)(({ theme }) => ({
     color: theme.palette.custom.white,
@@ -57,13 +61,26 @@ export default function ProjectsCard() {
     marginTop: '15px',
     marginRight: '5px',
   }));
+  const WrappBtnDone = styled(Button)(({ theme }) => ({
+    color: theme.palette.custom.green,
+  }));
+  const WrapperBtnUD = styled(Button)(({ theme }) => ({
+    color: theme.palette.custom.orange,
+  }));
+  const WrapperIc = styled(DashboardIcon)(({ theme }) => ({
+    color: theme.palette.custom.white,
+    marginRight: '10px',
+  }));
   return (
     <WrapperApp>
       <WrapperUserName>
         <WrapperUNDiv>MS</WrapperUNDiv>
         <h2> Mohammed Sbeata</h2>
       </WrapperUserName>
-      <WrapperH1> My Projects</WrapperH1>
+      <WrapperH1>
+        <WrapperIc />
+        My Projects
+      </WrapperH1>
       <Wrapper>
         <Wrapper2>
           <CardContent>
@@ -76,12 +93,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -94,12 +108,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -112,12 +123,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -130,12 +138,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -148,12 +153,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -166,12 +168,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -184,12 +183,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -202,12 +198,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -220,12 +213,9 @@ export default function ProjectsCard() {
             </WrapperDes>
           </CardContent>
           <CardActions>
-            <Button size="small">Low</Button>
-            <Button size="small">completed</Button>
+            <WrapperBtnUD>undone</WrapperBtnUD>
+            <WrappBtnDone>done</WrappBtnDone>
           </CardActions>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size="small">files</Button>
-          </div>
         </Wrapper2>
       </Wrapper>
     </WrapperApp>
