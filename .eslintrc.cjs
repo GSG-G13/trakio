@@ -5,7 +5,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'airbnb', 
+    'airbnb',
     'airbnb/hooks',
     'plugin:react/jsx-runtime',
   ],
@@ -14,7 +14,10 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts'] }],
     'linebreak-style': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    indent: ['error', 2],
   },
 };
