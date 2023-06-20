@@ -1,9 +1,11 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from '@mui/material';
 import './index.css';
+import ProjectsCard from './components';
+import theme from './theme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <h1>Welcome Here, Happy Coding!</h1>
-  </React.StrictMode>,
+  <ThemeProvider theme={theme}>
+    <ProjectsCard />
+  </ThemeProvider>,
 );
