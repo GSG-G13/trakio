@@ -75,7 +75,10 @@ export default function PermanentAppBar() {
           <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
         </Search>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+        <Box sx={{
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem',
+        }}
+        >
           <Avatar sx={{ bgcolor: deepOrange[500] }}>A</Avatar>
           <Typography>Amal Mousa</Typography>
         </Box>
