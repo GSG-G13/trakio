@@ -12,7 +12,12 @@ import {
 import HomeIcon from '@mui/icons-material/Home';
 import ReactLogo from './logo.svg';
 import PermanentAppBar from '../AppBar';
-import { DrawerItem, ListItemTextItem, ProjectTextItem } from './layout.styled';
+import {
+  DrawerItem,
+  ListItemTextItem,
+  MainComponent,
+  ProjectTextItem,
+} from './layout.styled';
 
 const PermanentDrawerLeft = () => (
   <Box sx={{ display: 'flex' }}>
@@ -27,7 +32,7 @@ const PermanentDrawerLeft = () => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon sx={{ minWidth: '42px' }}>
-                <HomeIcon sx={{ fontSize: 40, color: 'red' }} />
+                <HomeIcon sx={{ fontSize: 40, color: '#fff' }} />
               </ListItemIcon>
               <ListItemTextItem primary={text} />
             </ListItemButton>
@@ -48,7 +53,7 @@ const PermanentDrawerLeft = () => (
         ))}
       </List>
     </DrawerItem>
-    <Box component="main" sx={{ flexGrow: 1, p: 3, background: '#fff' }} />
+    <MainComponent component="main" />
     {/* OUTLET GOES HERE */}
   </Box>
 );

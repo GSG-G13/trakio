@@ -2,28 +2,18 @@
 /* eslint-disable no-tabs */
 import { Toolbar, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import SearchIcon from '@mui/icons-material/Search';
 import { deepOrange } from '@mui/material/colors';
 import {
   AppBarItem,
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
   AvatarBox,
 } from './app.styled';
 
-const PermanentAppBar = () => (
+export const PermanentAppBar = () => (
   <AppBarItem position="fixed">
-    <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
-      </Search>
+    <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       <AvatarBox>
         <Avatar sx={{ bgcolor: deepOrange[500] }}>A</Avatar>
-        <Typography>Amal Mousa</Typography>
+        <Typography sx={{ color: '#fff' }}>Amal Mousa</Typography>
       </AvatarBox>
     </Toolbar>
   </AppBarItem>

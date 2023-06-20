@@ -64,4 +64,5 @@ export const AvatarBox = styled(Box)(() => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   gap: '1rem',
+  marginRight: '15px',
 }));

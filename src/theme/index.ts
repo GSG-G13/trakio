@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
       white: React.CSSProperties['color'];
       black: React.CSSProperties['color'];
       purple: React.CSSProperties['color'];
+      divider: React.CSSProperties['color'];
     };
   }
 }
@@ -25,6 +26,7 @@ const theme = createTheme({
       white: '#FFFFFF',
       black: '#000000',
       purple: '#A9AAC0',
+      divider: '#343537',
     },
   },
 
