@@ -6,6 +6,7 @@ import { createTheme } from '@mui/material/styles';
     white: React.CSSProperties['color'];
     black: React.CSSProperties['color'];
     purple: React.CSSProperties['color'];
+    fontGray: React.CSSProperties['color'];
   }
 
   declare module '@mui/material/styles' {
@@ -31,11 +32,20 @@ const theme = createTheme({
       white: '#FFFFFF',
       black: '#000000',
       purple: '#A9AAC0',
+      fontGray: '#B8B8B8',
     },
+
   },
 
   typography: {
     fontFamily: ['Montserrat', 'Poppins'].join(','),
+    h6: {
+      fontSize: 18,
+      fontWeight: '500',
+    },
+    body1: {
+      fontSize: 16,
+    },
   },
 });
 
