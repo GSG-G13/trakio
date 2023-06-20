@@ -31,10 +31,8 @@ export const ProjectTextItem = styled(ListItemText)(({ theme }) => ({
   },
 }));
 
-export const MainComponent = styled(Box)(({ theme }) => ({
+export const MainComponent = styled(Box)(() => ({
   marginLeft: '3.4rem',
-  marginTop: '7rem',
+  marginTop: '10rem',
   flexGrow: 1,
-  p: 3,
-  background: theme.palette.custom.white,
 }));

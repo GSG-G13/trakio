@@ -18,6 +18,7 @@ import {
   MainComponent,
   ProjectTextItem,
 } from './layout.styled';
+import BasicCard from '../WelcomeCard';
 
 const PermanentDrawerLeft = () => (
   <Box sx={{ display: 'flex' }}>
@@ -53,8 +54,10 @@ const PermanentDrawerLeft = () => (
         ))}
       </List>
     </DrawerItem>
-    <MainComponent component="main" />
-    {/* OUTLET GOES HERE */}
+    <MainComponent component="main">
+      {/* OUTLET GOES HERE */}
+      <BasicCard />
+    </MainComponent>
   </Box>
 );
 
