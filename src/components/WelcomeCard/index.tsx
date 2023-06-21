@@ -7,7 +7,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import myImage from './welcome.svg';
+import myImage from '../../assets/welcome.svg';
 
 const BasicCard = () => (
   <Box sx={{

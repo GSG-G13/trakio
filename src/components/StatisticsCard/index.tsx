@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 const StatisticsCard = () => (
   <Card sx={{
     marginTop: '15px',
-    background: '#343537',
-    color: '#fff',
+    background: 'custom.divider',
+    color: 'custom.white',
     borderRadius: '15px',
     width: '200px',
   }}

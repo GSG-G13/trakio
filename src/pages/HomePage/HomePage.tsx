@@ -1,9 +1,7 @@
 import PermanentDrawerLeft from '../../components';
 
 const HomePage = () => (
-  <div>
-    <PermanentDrawerLeft />
-  </div>
+  <PermanentDrawerLeft />
 );
 
 export default HomePage;

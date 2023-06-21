@@ -1,8 +1,7 @@
 import { styled } from '@mui/system';
 import { AppBar, InputBase, Box } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-
-const drawerWidth = 225;
+import drawerWidth from '../../constants';
 
 export const AppBarItem = styled(AppBar)(({ theme: { palette: { custom } } }) => ({
   width: `calc(100% - ${drawerWidth}px)`,
