@@ -4,18 +4,18 @@ import {
   Button,
   CardContent,
   Typography,
+  CardActions,
 } from '@mui/material';
 import { MdDashboard } from 'react-icons/md';
 
 export const Wrapper = styled(Card)(({ theme }) => ({
   background: theme.palette.custom.black,
-  // height: '100%',
   width: '50em',
   display: 'grid',
   gap: '3vw',
   gridTemplateColumns: 'auto auto auto',
   padding: '0.8vw',
-  marginLeft: '20vw',
+  marginLeft: '15vw',
 }));
 export const Wrapper2 = styled(CardContent)(({ theme }) => ({
   background: theme.palette.custom.background,
@@ -39,13 +39,13 @@ export const WrapperDes = styled(Typography)(({ theme }) => ({
 }));
 export const WrapperApp = styled(CardContent)(({ theme }) => ({
   background: theme.palette.custom.black,
-  width: '80vw',
+  width: '70vw',
 }));
 export const WrapperH1 = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.white,
   fontSize: '2em',
-  marginRight: '19vw',
   marginBottom: '1vw',
+  marginLeft: '15.5vw',
 }));
 export const WrapperUserName = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.white,
@@ -73,4 +73,9 @@ export const WrapperBtnUD = styled(Button)(({ theme }) => ({
 export const WrapperIc = styled(MdDashboard)(({ theme }) => ({
   color: theme.palette.custom.white,
   marginRight: '0.6vw',
+}));
+
+export const WrappBtn = styled(CardActions)(() => ({
+  display: 'flex',
+  justifyContent: 'flex-end',
 }));

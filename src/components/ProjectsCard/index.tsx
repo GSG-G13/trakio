@@ -1,4 +1,4 @@
-import { CardActions, CardContent, Typography } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
 import {
   Wrapper,
   WrappBtnDone,
@@ -11,6 +11,7 @@ import {
   WrapperPN,
   WrapperUNDiv,
   WrapperUserName,
+  WrappBtn,
 } from './cards.styled';
 
 export default function ProjectsCard() {
@@ -35,10 +36,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -50,10 +51,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -65,10 +66,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -80,10 +81,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -95,10 +96,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -110,10 +111,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -125,10 +126,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -140,10 +141,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
         <Wrapper2>
           <CardContent>
@@ -155,10 +156,10 @@ export default function ProjectsCard() {
               Description for projects and explanation about it
             </WrapperDes>
           </CardContent>
-          <CardActions>
+          <WrappBtn>
             <WrapperBtnUD>undone</WrapperBtnUD>
             <WrappBtnDone>done</WrappBtnDone>
-          </CardActions>
+          </WrappBtn>
         </Wrapper2>
       </Wrapper>
     </WrapperApp>
