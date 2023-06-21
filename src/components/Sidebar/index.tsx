@@ -26,8 +26,7 @@ const Sidebar = () => (
           component="img"
           alt="Trackio"
           image={ReactLogo}
-          sx={{ 
-            marginTop: '15px', width: '70%', marginLeft: '9px' }}
+          sx={{ marginTop: '15px', width: '70%', marginLeft: '9px' }}
         />
       </Typography>
       <Divider />
