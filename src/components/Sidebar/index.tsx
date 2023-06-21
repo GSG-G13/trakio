@@ -6,6 +6,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
+  CardMedia,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import ReactLogo from '../../assets/logo.svg';
@@ -21,7 +22,13 @@ const Sidebar = () => (
     <PermanentAppBar />
     <DrawerItem variant="permanent" anchor="left">
       <Typography>
-        <img src={ReactLogo} style={{ marginTop: '15px', width: '70%', marginLeft: '9px' }} alt="Trakio" />
+        <CardMedia
+          component="img"
+          alt="Trackio"
+          image={ReactLogo}
+          sx={{ 
+            marginTop: '15px', width: '70%', marginLeft: '9px' }}
+        />
       </Typography>
       <Divider />
       <List>

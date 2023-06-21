@@ -1,7 +1,7 @@
 import React from 'react';
 import { createTheme } from '@mui/material/styles';
 
-interface iCustom {
+interface ICustom {
   background: React.CSSProperties['color'];
   white: React.CSSProperties['color'];
   black: React.CSSProperties['color'];
@@ -10,13 +10,12 @@ interface iCustom {
   fontGray: React.CSSProperties['color'];
   darkFont: React.CSSProperties['color'];
 }
-
 declare module '@mui/material/styles' {
-  interface Palette {
-    custom: iCustom;
-  }
   interface PaletteOptions {
-    custom: Partial<iCustom>;
+    custom: Partial<ICustom>;
+  }
+  interface Palette {
+    custom: ICustom,
   }
 }
 
