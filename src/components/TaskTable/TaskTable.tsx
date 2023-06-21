@@ -1,8 +1,15 @@
 import {
-  Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Box,
 } from '@mui/material';
-import { TaskRow } from '../index.ts';
-import theme from '../../theme/index.ts';
+import { TaskRow } from '../index';
+import Theme from '../../theme';
 
 export default function TaskTable() {
   const data = [
@@ -51,42 +58,36 @@ export default function TaskTable() {
       section: 'To-Do',
     },
   ];
+  const COLS = [
+    'Task name',
+    'Project',
+    'Priority',
+    'Status',
+    'Due date',
+    'Actions',
+  ];
   return (
     <TableContainer component={Box} bgcolor="transparent">
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-
-            <TableCell>
-              <Typography variant="subtitle2" color={theme.palette.custom.fontGray}>Task name</Typography>
-            </TableCell>
-
-            <TableCell align="right">
-              <Typography variant="subtitle2" color={theme.palette.custom.fontGray}>Project</Typography>
-            </TableCell>
-
-            <TableCell align="right">
-              <Typography variant="subtitle2" color={theme.palette.custom.fontGray}>Priority</Typography>
-            </TableCell>
-
-            <TableCell align="right">
-              <Typography variant="subtitle2" color={theme.palette.custom.fontGray}>Status</Typography>
-            </TableCell>
-
-            <TableCell align="right">
-              <Typography variant="subtitle2" color={theme.palette.custom.fontGray}>Due date</Typography>
-            </TableCell>
-
-            <TableCell align="right">
-              <Typography variant="subtitle2" color={theme.palette.custom.fontGray}>Actions</Typography>
-            </TableCell>
-
+            {COLS.map((col, index) => (
+              <TableCell>
+                <Typography
+                  variant="subtitle2"
+                  align={index !== 0 ? 'right' : 'left'}
+                  color={Theme.palette.custom.fontGray}
+                >
+                  {col}
+                </Typography>
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-            data.map((task) => <TaskRow key={task.id} task={task} />)
-          }
+          {data.map((task) => (
+            <TaskRow key={task.id} task={task} />
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

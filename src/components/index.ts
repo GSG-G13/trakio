@@ -1,4 +1,4 @@
-import TaskTable from './tableOfTasks/TaskTable';
-import TaskRow from './tableOfTasks/TaskRow';
+import TaskTable from './TaskTable/TaskTable';
+import TaskRow from './TaskTable/TaskRow';
 
 export { TaskTable, TaskRow };
