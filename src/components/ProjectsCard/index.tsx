@@ -11,7 +11,7 @@ import {
   WrapperPN,
   WrapperUNDiv,
   WrapperUserName,
-} from './Project.styled';
+} from './cards.styled';
 
 export default function ProjectsCard() {
   return (

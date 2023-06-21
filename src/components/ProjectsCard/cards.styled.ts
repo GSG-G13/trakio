@@ -5,15 +5,17 @@ import {
   CardContent,
   Typography,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import { MdDashboard } from 'react-icons/md';
 
 export const Wrapper = styled(Card)(({ theme }) => ({
   background: theme.palette.custom.black,
-  height: '100%',
+  // height: '100%',
+  width: '50em',
   display: 'grid',
-  gap: '52px',
+  gap: '3vw',
   gridTemplateColumns: 'auto auto auto',
-  padding: '10px',
+  padding: '0.8vw',
+  marginLeft: '20vw',
 }));
 export const Wrapper2 = styled(CardContent)(({ theme }) => ({
   background: theme.palette.custom.background,
@@ -24,25 +26,26 @@ export const Wrapper2 = styled(CardContent)(({ theme }) => ({
 export const WrapperPN = styled(Typography)(({ theme }) => ({
   background: theme.palette.primary.main,
   color: theme.palette.custom.black,
-  width: '100px',
+  width: '7vw',
   borderRadius: 4,
-  marginTop: '-40px',
-  marginBottom: '15px',
+  marginTop: '-3vw',
+  marginLeft: '-1.2vw',
+  marginBottom: '1vw',
   textAlign: 'center',
-  marginRight: '20px',
 }));
 export const WrapperDes = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.gray,
-  fontSize: '12px',
+  fontSize: '1vw',
 }));
 export const WrapperApp = styled(CardContent)(({ theme }) => ({
   background: theme.palette.custom.black,
-  width: '995px',
+  width: '80vw',
 }));
 export const WrapperH1 = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.white,
-  fontSize: '27px',
-  marginBottom: '10px',
+  fontSize: '2em',
+  marginRight: '19vw',
+  marginBottom: '1vw',
 }));
 export const WrapperUserName = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.white,
@@ -53,13 +56,13 @@ export const WrapperUNDiv = styled(Typography)(({ theme }) => ({
   background: theme.palette.custom.white,
   color: theme.palette.custom.black,
   borderRadius: '50%',
-  width: '50px',
-  height: '50px',
+  width: '3vw',
+  height: '3vw',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  marginTop: '15px',
-  marginRight: '5px',
+  marginTop: '1vw',
+  marginRight: '0.5vw',
 }));
 export const WrappBtnDone = styled(Button)(({ theme }) => ({
   color: theme.palette.custom.green,
@@ -67,7 +70,7 @@ export const WrappBtnDone = styled(Button)(({ theme }) => ({
 export const WrapperBtnUD = styled(Button)(({ theme }) => ({
   color: theme.palette.custom.orange,
 }));
-export const WrapperIc = styled(DashboardIcon)(({ theme }) => ({
+export const WrapperIc = styled(MdDashboard)(({ theme }) => ({
   color: theme.palette.custom.white,
-  marginRight: '10px',
+  marginRight: '0.6vw',
 }));
