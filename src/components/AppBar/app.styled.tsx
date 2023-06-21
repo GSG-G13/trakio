@@ -1,6 +1,5 @@
-import { styled } from '@mui/system';
 import { AppBar, InputBase, Box } from '@mui/material';
-import { alpha } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import drawerWidth from '../../constants';
 
 export const AppBarItem = styled(AppBar)(({ theme: { palette: { custom } } }) => ({

@@ -1,5 +1,5 @@
 import { Drawer, ListItemText } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import drawerWidth from '../../constants';
 
 export const DrawerItem = styled(Drawer)(({ theme: { palette: { secondary } } }) => ({
