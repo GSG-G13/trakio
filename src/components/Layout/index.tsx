@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
 import {
   Box,
   Typography,
@@ -19,6 +17,7 @@ import {
   ProjectTextItem,
 } from './layout.styled';
 import BasicCard from '../WelcomeCard';
+import StatisticsCard from '../StatisticsCard';
 
 const PermanentDrawerLeft = () => (
   <Box sx={{ display: 'flex' }}>
@@ -56,7 +55,18 @@ const PermanentDrawerLeft = () => (
     </DrawerItem>
     <MainComponent component="main">
       {/* OUTLET GOES HERE */}
-      <BasicCard />
+      <Box sx={{
+        display: 'flex', flexDirection: 'column',
+      }}
+      >
+        <BasicCard />
+        <Box sx={{ display: 'flex', gap: '12px', width: '800px' }}>
+          <StatisticsCard />
+          <StatisticsCard />
+          <StatisticsCard />
+          <StatisticsCard />
+        </Box>
+      </Box>
     </MainComponent>
   </Box>
 );

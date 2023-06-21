@@ -1,7 +1,4 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-import { Toolbar, Typography } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
+import { Toolbar, Typography, Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import {
   AppBarItem,

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
-import PermanentDrawerLeft from './Layout/index';
+import PermanentDrawerLeft from './Layout';
 
 export default PermanentDrawerLeft;
