@@ -8,6 +8,7 @@ interface iCustom {
   purple: React.CSSProperties['color'];
   divider: React.CSSProperties['color'];
   fontGray: React.CSSProperties['color'];
+  darkFont: React.CSSProperties['color'];
 }
 
 declare module '@mui/material/styles' {
@@ -34,11 +35,12 @@ const THEME = createTheme({
       purple: '#A9AAC0',
       divider: '#343537',
       fontGray: '#B8B8B8',
+      darkFont: '#455A64',
     },
   },
 
   typography: {
-    fontFamily: 'Montserrat',
+    fontFamily: 'Poppins',
     h6: {
       fontSize: 18,
       fontWeight: '500',
