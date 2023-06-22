@@ -1,13 +1,10 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import { ThemeProvider } from '@mui/material';
-import theme from './theme/index';
+import { ThemeProvider } from '@mui/material/styles';
+import HomePage from './pages';
+import theme from './theme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <h1 style={{ color: theme.palette.custom.black }}>Welcome Here, Happy Coding!</h1>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={theme}>
+    <HomePage />
+  </ThemeProvider>,
 );

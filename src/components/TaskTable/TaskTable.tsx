@@ -11,7 +11,7 @@ import {
 import { TaskRow } from '../index';
 import Theme from '../../theme';
 
-export default function TaskTable() {
+const TaskTable = () => {
   const data = [
     {
       id: 1,
@@ -92,4 +92,6 @@ export default function TaskTable() {
       </Table>
     </TableContainer>
   );
-}
+};
+
+export default TaskTable;
