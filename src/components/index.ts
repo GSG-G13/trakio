@@ -1,3 +1,4 @@
 import ProjectsCard from './ProjectsCard';
+import PermanentDrawerLeft from './Layout';
 
-export default ProjectsCard;
+export { PermanentDrawerLeft, ProjectsCard };
