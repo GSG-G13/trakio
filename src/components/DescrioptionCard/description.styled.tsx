@@ -1,5 +1,5 @@
 import {
-  Box, Button, Card, CardMedia, Typography, styled,
+  Box, Card, CardMedia, Typography, styled,
 } from '@mui/material';
 
 export const DescriptionCardBox = styled(Box)(() => ({
