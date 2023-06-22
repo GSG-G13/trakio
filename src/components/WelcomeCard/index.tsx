@@ -21,7 +21,7 @@ const BasicCard = () => (
       </CardContent>
       <CardActions>
         <CardButton variant="contained">
-          Learn More
+          Today&apos;s Scedule
         </CardButton>
       </CardActions>
     </ContentCard>

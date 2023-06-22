@@ -5,51 +5,52 @@ import {
 export const BasicCardBox = styled(Box)(() => ({
   position: 'relative',
   display: 'flex',
-  width: '740px',
+  width: '45rem',
   background: '#343537',
   justifyContent: 'space-between',
-  borderRadius: '20px',
-  padding: '30px',
+  borderRadius: '1.25rem',
+  padding: '1.87rem',
 }));
 
-export const ContentCard = styled(Card)(()=> ({
+export const ContentCard = styled(Card)(() => ({
   background: 'transparent',
   boxShadow: 'none',
   borderRadius: '0px',
 }));
 
 export const CardTitle = styled(Typography)(() => ({
-  fontSize: '36px',
+  fontSize: '2.25rem',
   color: '#FFDA3C',
 }));
 
 export const CardText = styled(Typography)(() => ({
   lineHeight: '2',
-  letterSpacing: '.5px',
+  letterSpacing: '.03rem',
   fontWeight: 'light',
-  fontSize: '14px',
+  fontSize: '.87rem',
   color: '#FFDA3C',
 }));
 
 export const CardButton = styled(Button)(() => ({
-  width: '193px',
+  width: '12.06rem',
   color: '#455A64',
-  fontWeight: '400',
-  borderRadius: '10px',
+  fontWeight: '600',
+  borderRadius: '.6rem',
   '&:hover': {
     backgroundColor: '#FFDA3C',
   },
+  textTransform: 'capitalize',
 }));
 
 export const ImageCard = styled(Card)(() => ({
   background: 'transparent',
   boxShadow: 'none',
   position: 'absolute',
-  right: '32px',
-  bottom: '15px',
+  right: '2rem',
+  bottom: '.93rem',
 }));
 
 export const CardImage = styled(CardMedia)(() => ({
-  width: '290px',
-  height: '250px',
+  width: '18.12rem',
+  height: '15.6rem',
 }));
