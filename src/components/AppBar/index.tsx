@@ -8,7 +8,7 @@ export const PermanentAppBar = () => (
   <AppBarItem position="fixed">
     <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       <AvatarBox>
-        <Avatar sx={{ bgcolor: 'primary.main', color: 'custom.darkFont' }}>A</Avatar>
+        <Avatar sx={{ bgcolor: 'custom.black' }}>A</Avatar>
         <Typography sx={{ color: 'custom.white' }}>Amal Mousa</Typography>
       </AvatarBox>
     </Toolbar>
