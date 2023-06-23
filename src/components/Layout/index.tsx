@@ -6,12 +6,17 @@ import AccountPage from '../AcountPage';
 // import BasicCard from '../WelcomeCard';
 // import StatisticsCard from '../StatisticsCard';
 // import { TaskTable } from '../TaskTable/TaskTable';
+import { ProjectsCard } from '..';
+import BasicCard from '../WelcomeCard';
+import StatisticsCard from '../StatisticsCard';
+import DescriptionCard from '../DescrioptionCard';
 
 const PermanentDrawerLeft = () => (
   <Box sx={{ display: 'flex' }}>
     <PermanentAppBar />
     <Sidebar />
     <MainComponent component="main">
+      <ProjectsCard />
       {/* OUTLET GOES HERE */}
       {/* <TaskTable /> */}
       <AccountPage />
@@ -24,6 +29,18 @@ const PermanentDrawerLeft = () => (
           <StatisticsCard />
         </Box>
       </Box> */}
+      <Box sx={{ display: 'flex' }}>
+        <Box>
+          <BasicCard />
+          <Box sx={{ display: 'flex', gap: '.75rem', width: '48.75rem' }}>
+            <StatisticsCard />
+            <StatisticsCard />
+            <StatisticsCard />
+            <StatisticsCard />
+          </Box>
+        </Box>
+        <DescriptionCard />
+      </Box>
     </MainComponent>
   </Box>
 );
