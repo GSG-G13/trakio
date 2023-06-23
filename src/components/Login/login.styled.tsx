@@ -49,3 +49,20 @@ export const CustomContainer = styled(Container)(({ theme: { palette: { custom }
   borderRadius: '66px',
   borderColor: custom.white,
 }));
+
+export const DontHaveAcount = styled(Typography)(() => ({
+  position: 'absolute',
+  top: '610px',
+  fontSize: '12px',
+  left: '-30px',
+  fontFamily: 'Montserrat',
+  fontStyle: 'normal',
+  color: '#777777',
+}));
+export const SignupText = styled(Typography)(() => ({
+  position: 'absolute',
+  top: '0px',
+  left: '148px',
+  fontSize: '14px',
+  color: '#FFDA3C',
+}));

@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material';
-import LoginForm from '../../section/auth/LoginForm';
+import LoginForm from './LoginForm';
 import {
-  BodyContainer, CustomContainer, CustomTypography1, CustomTypography2, FormContent,
+  BodyContainer, CustomContainer, CustomTypography1,
+  CustomTypography2, FormContent, DontHaveAcount, SignupText,
 } from './login.styled';
 
 const Login = () => (
@@ -16,11 +16,14 @@ const Login = () => (
       <FormContent />
       <LoginForm />
     </CustomContainer>
-    <Typography variant="h5">
+    <DontHaveAcount variant="h5">
       Don’t have an account?
       {' '}
-      <Typography variant="h5"> Signup</Typography>
-    </Typography>
+      <SignupText variant="h5">
+        {' '}
+        Signup
+      </SignupText>
+    </DontHaveAcount>
   </BodyContainer>
 );
 

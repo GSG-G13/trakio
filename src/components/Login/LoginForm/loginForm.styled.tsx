@@ -1,8 +1,29 @@
 import { LoadingButton } from '@mui/lab';
-import { IconButton, TextField } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Field, ErrorMessage } from 'formik';
 
-export const EmailInput = styled(TextField)(() => ({
+export const EmailErrorMessage = styled(ErrorMessage)(() => ({
+  position: 'absolute',
+  top: '374px',
+  left: '70px',
+  right: '650px',
+  transform: 'translate(-50%, -50%)',
+  color: 'red',
+  fontSize: '10px',
+}));
+
+export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
+  position: 'absolute',
+  top: '460px',
+  left: '430px',
+  right: '650px',
+  transform: 'translate(-50%, -50%)',
+  color: 'red',
+  fontSize: '10px',
+  minWidth: '100%',
+}));
+export const EmailInput = styled(Field)(() => ({
   position: 'absolute',
   width: '406px',
   height: '60px',
@@ -18,14 +39,18 @@ export const EmailInput = styled(TextField)(() => ({
   backgroundColor: '#282A36',
   border: '1px solid #818098',
   borderRadius: '8px',
+  '::placeholder': {
+    fontSize: '16px',
+
+  },
 }));
 
-export const PasswordInput = styled(TextField)(() => ({
+export const PasswordInput = styled(Field)(() => ({
   position: 'absolute',
   width: '406px',
   height: '60px',
   left: '18.3px',
-  top: '360px',
+  top: '385px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -36,9 +61,14 @@ export const PasswordInput = styled(TextField)(() => ({
   backgroundColor: '#282A36',
   border: '1px solid #818098',
   borderRadius: '8px',
+  '::placeholder': {
+    fontSize: '16px',
+  },
 }));
 export const CustomIconButton = styled(IconButton)(() => ({
-  marginRight: '10px',
+  position: 'absolute',
+  left: '380px',
+  top: '396px',
 }));
 
 export const SigninButton = styled(LoadingButton)(() => ({
@@ -61,7 +91,7 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
   width: '406px',
   height: '60px',
   left: '18.3px',
-  top: '550px',
+  top: '545px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
