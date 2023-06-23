@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import PermanentAppBar from '../AppBar';
 import MainComponent from './layout.styled';
 import Sidebar from '../Sidebar';
+import { ProjectsCard } from '..';
 import BasicCard from '../WelcomeCard';
 import StatisticsCard from '../StatisticsCard';
 // import { TaskTable } from '../TaskTable/TaskTable';
@@ -11,6 +12,7 @@ const PermanentDrawerLeft = () => (
     <PermanentAppBar />
     <Sidebar />
     <MainComponent component="main">
+      <ProjectsCard />
       {/* OUTLET GOES HERE */}
       {/* <TaskTable /> */}
       <Box>
