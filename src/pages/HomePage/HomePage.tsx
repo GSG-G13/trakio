@@ -1,4 +1,4 @@
-import PermanentDrawerLeft from '../../components';
+import { PermanentDrawerLeft } from '../../components';
 
 const HomePage = () => (
   <PermanentDrawerLeft />

@@ -1,3 +1,4 @@
 import PermanentDrawerLeft from './Layout';
+import Login from './Login';
 
-export default PermanentDrawerLeft;
+export { PermanentDrawerLeft, Login };
