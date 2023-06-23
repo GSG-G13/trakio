@@ -12,6 +12,8 @@ import { createTheme } from '@mui/material/styles';
     divider: React.CSSProperties['color'];
     fontGray: React.CSSProperties['color'];
     darkFont: React.CSSProperties['color'];
+    editIcon: React.CSSProperties['color'];
+    deleteIcon: React.CSSProperties['color'];
 }
 declare module '@mui/material/styles' {
   interface PaletteOptions {
@@ -40,6 +42,8 @@ const THEME = createTheme({
       orange: '#FFA500',
       divider: '#343537',
       fontGray: '#B8B8B8',
+      editIcon: '#3E7BFA',
+      deleteIcon: '#FF3333',
       darkFont: '#455A64',
     },
   },

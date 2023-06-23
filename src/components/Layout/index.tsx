@@ -3,6 +3,9 @@ import PermanentAppBar from '../AppBar';
 import MainComponent from './layout.styled';
 import Sidebar from '../Sidebar';
 import { ProjectsCard } from '..';
+import BasicCard from '../WelcomeCard';
+import StatisticsCard from '../StatisticsCard';
+// import { TaskTable } from '../TaskTable/TaskTable';
 
 const PermanentDrawerLeft = () => (
   <Box sx={{ display: 'flex' }}>
@@ -10,6 +13,17 @@ const PermanentDrawerLeft = () => (
     <Sidebar />
     <MainComponent component="main">
       <ProjectsCard />
+      {/* OUTLET GOES HERE */}
+      {/* <TaskTable /> */}
+      <Box>
+        <BasicCard />
+        <Box sx={{ display: 'flex', gap: '12px', width: '780px' }}>
+          <StatisticsCard />
+          <StatisticsCard />
+          <StatisticsCard />
+          <StatisticsCard />
+        </Box>
+      </Box>
     </MainComponent>
   </Box>
 );
