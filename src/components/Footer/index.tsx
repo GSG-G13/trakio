@@ -1,62 +1,109 @@
-import './footer.css';
+import { Container, Grid, Typography } from '@mui/material';
 
 const Footer = () => (
-  <div className="footer">
-    <div className="sb__footer section__padding">
-      <div className="sb__footer-links">
-        <div className="sb__footer-links-div">
-          <h4>Company</h4>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-        </div>
-        <div className="sb__fotter-links_div">
-          <h4>Company</h4>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-        </div>
-        <div className="sb__footer-links_div">
-          <h4>Company</h4>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-          <a href="#company">
-            <p>Mission</p>
-          </a>
-        </div>
-        <hr />
-        <div className="sb__footer-below">
-          <div className="sb__footer-copyright">
-            <p>Landing Page Trakio Created By Mohammed Sbeata</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    <Container sx={{ color: 'white' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Typography variant="h4" sx={{ margin: '1vw' }}> Product </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Computer
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            CPU
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Earphone
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Programming
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Javascript
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Typography variant="h4" sx={{ margin: '1vw' }}>
+            Service
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Computer
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            CPU
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Earphone
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Programming
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Javascript
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Typography variant="h4" sx={{ margin: '1vw' }}>
+            About US
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Computer
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            CPU
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Earphone
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Programming
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Javascript
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Typography variant="h4" sx={{ margin: '1vw' }}>
+            Social Media
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Computer
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            CPU
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Earphone
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Programming
+          </Typography>
+          <Typography variant="h6" sx={{ margin: '1vw' }}>
+            {' '}
+            Javascript
+          </Typography>
+        </Grid>
+      </Grid>
+    </Container>
   </div>
 );
 
