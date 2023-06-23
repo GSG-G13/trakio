@@ -5,7 +5,6 @@ import Sidebar from '../Sidebar';
 import BasicCard from '../WelcomeCard';
 import StatisticsCard from '../StatisticsCard';
 import DescriptionCard from '../DescrioptionCard';
-// import { TaskTable } from '../TaskTable/TaskTable';
 
 const PermanentDrawerLeft = () => (
   <Box sx={{ display: 'flex' }}>
@@ -13,11 +12,10 @@ const PermanentDrawerLeft = () => (
     <Sidebar />
     <MainComponent component="main">
       {/* OUTLET GOES HERE */}
-      {/* <TaskTable /> */}
       <Box sx={{ display: 'flex' }}>
         <Box>
           <BasicCard />
-          <Box sx={{ display: 'flex', gap: '12px', width: '780px' }}>
+          <Box sx={{ display: 'flex', gap: '.75rem', width: '48.75rem' }}>
             <StatisticsCard />
             <StatisticsCard />
             <StatisticsCard />

@@ -2,13 +2,13 @@ import {
   Box, Card, CardMedia, Typography, styled,
 } from '@mui/material';
 
-export const DescriptionCardBox = styled(Box)(() => ({
+export const DescriptionCardBox = styled(Box)(({ theme: { palette: { custom } } }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
   alignItems: 'center',
   width: '12rem',
-  background: '#343537',
+  background: custom.divider,
   borderRadius: '1.25rem',
   padding: '1.87rem',
   marginLeft: '1rem',
@@ -20,9 +20,9 @@ export const ContentCard = styled(Card)(() => ({
   borderRadius: '0px',
 }));
 
-export const CardTitle = styled(Typography)(() => ({
+export const CardTitle = styled(Typography)(({ theme: { palette: { primary } } }) => ({
   fontSize: '2.25rem',
-  color: '#FFDA3C',
+  color: primary.main,
 }));
 
 export const CardText = styled(Typography)(() => ({

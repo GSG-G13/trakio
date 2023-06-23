@@ -15,7 +15,7 @@ const DescriptionCard = () => (
       />
     </DescriptionImageCard>
     <ContentCard>
-      <Typography sx={{ textAlign: 'left', marginTop: '20px', color: 'primary.main' }}>
+      <Typography sx={{ textAlign: 'left', marginTop: '1.25rem', color: 'primary.main' }}>
         Simplify tasks, enhance productivity with our  Trackio app.
       </Typography>
     </ContentCard>
