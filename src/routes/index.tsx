@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { HomePage, TaskBoard } from '../pages';
+import {
+  HomePage, LoginPage, TaskBoard, AccountPage,
+} from '../pages';
 import { ProjectsCard, TaskTable } from '../components';
 import HomeLayout from '../layout';
 import data from '../fake';
@@ -30,7 +32,15 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: '/account',
+        element: <AccountPage />,
+      },
     ],
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
   },
 ]);
 

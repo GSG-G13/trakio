@@ -1,3 +1,3 @@
-import { PermanentDrawerLeft } from '../components';
+import { Layout } from '../components';
 
-export default PermanentDrawerLeft;
+export default Layout;

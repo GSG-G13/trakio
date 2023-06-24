@@ -29,7 +29,9 @@ const NavList = [
   {
     title: 'Tasks',
     path: '/tasks',
-    icon: <FormatListNumberedIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
+    icon: (
+      <FormatListNumberedIcon sx={{ fontSize: 24, color: 'custom.white' }} />
+    ),
   },
   {
     title: 'Account',
@@ -52,16 +54,6 @@ const Sidebar = () => (
       </Typography>
       <Divider />
       <List>
-        {/* {['Home', 'Tasks', 'Account'].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ minWidth: '42px' }}>
-                <HomeIcon sx={{ fontSize: 24, color: 'custom.white' }} />
-              </ListItemIcon>
-              <ListItemTextItem primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))} */}
         {NavList.map((nav) => (
           <NavLink to={nav.path}>
             <ListItem key={nav.title} disablePadding>
@@ -77,12 +69,10 @@ const Sidebar = () => (
       </List>
       <Divider />
       <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
-        <ProjectTextItem>
-          Projects
-        </ProjectTextItem>
+        <ProjectTextItem>Projects</ProjectTextItem>
         {['project-A', 'Project1', 'Team 5'].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton sx={{ fontSize: '16px' }}>
               <ListItemTextItem primary={text} />
             </ListItemButton>
           </ListItem>
