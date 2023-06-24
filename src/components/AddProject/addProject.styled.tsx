@@ -1,10 +1,8 @@
-import { Box, Typography, styled } from '@mui/material';
+import { styled, TextareaAutosize } from '@mui/material';
 
-const WrapBox = styled(Box)(({ theme }) => ({
-  background: theme.palette.custom.background,
+const DesTextArea = styled(TextareaAutosize)(({ theme }) => ({
+  background: theme.palette.custom.divider,
   color: theme.palette.custom.white,
+  marginTop: '1vw',
 }));
-const WrapTypo = styled(Typography)(({ theme }) => ({
-  color: theme.palette.custom.white,
-}));
-export { WrapBox, WrapTypo };
+export default DesTextArea;
