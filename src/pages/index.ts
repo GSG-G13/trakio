@@ -1,3 +1,4 @@
 import HomePage from './HomePage/HomePage';
+import AccountPage from './AccountPage';
 
-export default HomePage;
+export { HomePage, AccountPage };
