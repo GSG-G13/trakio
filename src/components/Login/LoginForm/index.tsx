@@ -6,7 +6,7 @@ import {
   EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage,
   SigninButton, GooglePlusButton, LoginImage, EmailErrorMessage,
 } from './loginForm.styled';
-import validationSchema from '../../../helper/validation/yupSchema';
+import { validationSchema } from '../../../helper/validation/schema';
 
 interface LoginFormValues {
   email: string;
