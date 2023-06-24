@@ -9,7 +9,7 @@ export const BasicCardBox = styled(Box)(() => ({
   background: '#343537',
   justifyContent: 'space-between',
   borderRadius: '1.25rem',
-  padding: '1.87rem',
+  padding: '0.87rem 1.87rem',
 }));
 
 export const ContentCard = styled(Card)(() => ({
@@ -51,6 +51,6 @@ export const ImageCard = styled(Card)(() => ({
 }));
 
 export const CardImage = styled(CardMedia)(() => ({
-  width: '18.12rem',
-  height: '15.6rem',
+  width: '17rem',
+  height: '14.7rem',
 }));
