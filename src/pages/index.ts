@@ -1,3 +1,5 @@
 import HomePage from './HomePage/HomePage';
+import AccountPage from './AccountPage';
+import LoginPage from '../components/Login';
 
-export default HomePage;
+export { HomePage, AccountPage, LoginPage };
