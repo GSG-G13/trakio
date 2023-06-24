@@ -28,12 +28,10 @@ const Sigup = () => (
       </CustomContainer>
       <DontHaveAcount>
         Already have an account ?
-        {' '}
-        <SigninText>
-          {' '}
-          Sign in
-        </SigninText>
       </DontHaveAcount>
+      <SigninText>
+        Sign in
+      </SigninText>
     </BodyContainer>
     <SignupImage src="src/assets/todo.svg" alt="login" />
 

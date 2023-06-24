@@ -77,11 +77,9 @@ const SignupForm = () => {
         <SignupButton fullWidth size="large" type="submit" variant="contained">
           Sign Up
         </SignupButton>
-
         <GooglePlusButton fullWidth size="large" type="submit" variant="contained">
           Sign up with Google
         </GooglePlusButton>
-
       </Form>
     </Formik>
   );
