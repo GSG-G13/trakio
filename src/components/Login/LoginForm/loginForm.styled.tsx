@@ -5,18 +5,18 @@ import { Field, ErrorMessage } from 'formik';
 
 export const EmailErrorMessage = styled(ErrorMessage)(() => ({
   position: 'absolute',
-  top: '374px',
+  top: '370px',
   left: '70px',
-  right: '650px',
+  right: '575px',
   transform: 'translate(-50%, -50%)',
   color: 'red',
   fontSize: '10px',
 }));
 export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
   position: 'absolute',
-  top: '460px',
-  left: '430px',
-  right: '650px',
+  top: '450px',
+  left: '392px',
+  right: '575px',
   transform: 'translate(-50%, -50%)',
   color: 'red',
   fontSize: '10px',
@@ -48,7 +48,7 @@ export const PasswordInput = styled(Field)(() => ({
   width: '380px',
   height: '54px',
   left: '12.3px',
-  top: '375px',
+  top: '380px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -66,8 +66,8 @@ export const PasswordInput = styled(Field)(() => ({
 }));
 export const CustomIconButton = styled(IconButton)(() => ({
   position: 'absolute',
-  left: '345px',
-  top: '386px',
+  left: '350px',
+  top: '380px',
   color: '#818098',
 }));
 export const SigninButton = styled(LoadingButton)(() => ({
@@ -75,7 +75,7 @@ export const SigninButton = styled(LoadingButton)(() => ({
   width: '380px',
   height: '54px',
   left: '12.3px',
-  top: '460px',
+  top: '465px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
@@ -90,7 +90,7 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
   width: '380px',
   height: '54px',
   left: '12.3px',
-  top: '530px',
+  top: '528px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
@@ -105,7 +105,7 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
 export const LoginImage = styled('img')(() => ({
   borderStyle: 'none',
   width: '600px',
-  height: '800px',
+  height: '600px',
   marginLeft: '450px',
-  marginTop: '-250px',
+  marginTop: '-210px',
 }));

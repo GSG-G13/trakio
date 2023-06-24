@@ -4,8 +4,14 @@ import TaskRow from './TaskTable/TaskRow';
 import PermanentDrawerLeft from './Layout';
 import ProjectsCard from './ProjectsCard';
 import TaskCard from './TaskCard';
+import AccountInput from './AccountInput';
 
 export {
-  TaskTable, TaskRow, PermanentDrawerLeft,
-  Login, ProjectsCard, TaskCard,
+  TaskTable,
+  TaskRow,
+  PermanentDrawerLeft,
+  ProjectsCard,
+  TaskCard,
+  AccountInput,
+  Login,
 };

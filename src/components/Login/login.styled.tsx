@@ -7,9 +7,9 @@ export const CustomTypography1 = styled(Typography)(({ theme: { palette: { custo
   position: 'absolute',
   width: '301px',
   height: '34px',
-  left: '18.3px',
-  top: '124px',
-  fontSize: '28px',
+  left: '12.3px',
+  top: '180px',
+  fontSize: '25px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
@@ -19,30 +19,30 @@ export const CustomTypography2 = styled(Typography)(({ theme: { palette: { custo
   position: 'absolute',
   width: '316px',
   height: '52px',
-  left: '18.3px',
-  top: '180.88px',
+  left: '12.3px',
+  top: '220.88px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
-  fontSize: '43px',
+  fontSize: '30px',
 }));
 export const FormContent = styled('div')(() => ({
   maxWidth: '380px',
   alignItems: 'center',
-  marginLeft: '18.3px',
+  marginLeft: '12.3px',
   marginTop: '280.88px',
 }));
 export const BodyContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
-  height: '50.6rem',
+  height: '100vh',
   top: '0px',
   right: '0px',
   backgroundColor: custom.purple,
 }));
 export const CustomContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
-  width: '50.875rem',
-  height: '50.6rem',
+  width: '46.875rem',
+  height: '100vh',
   left: '-3.7rem',
   top: '0rem',
   background: custom.background,
@@ -52,8 +52,8 @@ export const CustomContainer = styled(Container)(({ theme: { palette: { custom }
 
 export const DontHaveAcount = styled(Typography)(() => ({
   position: 'absolute',
-  top: '610px',
-  fontSize: '12px',
+  top: '585px',
+  fontSize: '11px',
   left: '-30px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -61,8 +61,8 @@ export const DontHaveAcount = styled(Typography)(() => ({
 }));
 export const SignupText = styled(Typography)(() => ({
   position: 'absolute',
-  top: '0px',
-  left: '148px',
-  fontSize: '14px',
+  top: '585px',
+  left: '107px',
+  fontSize: '12px',
   color: '#FFDA3C',
 }));
