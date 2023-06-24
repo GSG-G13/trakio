@@ -9,7 +9,6 @@ import {
   WrapperH1,
   WrapperIc,
   WrapperPN,
-
   WrappBtn,
 } from './cards.styled';
 
