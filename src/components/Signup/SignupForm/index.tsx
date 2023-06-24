@@ -3,28 +3,44 @@ import { InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
 import {
-  EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage,
-  SigninButton, GooglePlusButton, LoginImage, EmailErrorMessage,
-} from './loginForm.styled';
-import { validationSchema } from '../../../helper/validation/schema';
+  EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage, UsernameInput,
+  SignupButton, GooglePlusButton, LoginImage, EmailErrorMessage, PhoneInput,
+} from './signupForm';
+import { signupSchema } from '../../../helper/validation/schema';
 
-interface LoginFormValues {
+interface SignupFormValues {
   email: string;
   password: string;
+  phone: string;
+  username: string;
 }
-const LoginForm = () => {
+const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (values: LoginFormValues) => {
+  const handleSubmit = (values: SignupFormValues) => {
     console.log(values);
   };
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
-      validationSchema={validationSchema}
+      initialValues={{
+        email: '', password: '', username: '', phone: '',
+      }}
+      validationSchema={signupSchema}
       onSubmit={handleSubmit}
     >
       <Form>
+        <div />
+        <div>
+          <UsernameInput
+            type="email"
+            name="email"
+            label="Email address"
+            variant="standard"
+            placeholder="Enter your email address"
+          />
+          <EmailErrorMessage name="email" component="div" className="error-message" />
+        </div>
+
         <div>
           <EmailInput
             type="email"
@@ -32,10 +48,16 @@ const LoginForm = () => {
             label="Email address"
             variant="standard"
             placeholder="Enter your email address"
-            InputProps={{ disableUnderline: true }}
-            InputLabelProps={{
-              style: { color: 'white', marginLeft: '10px' },
-            }}
+          />
+          <EmailErrorMessage name="email" component="div" className="error-message" />
+        </div>
+        <div>
+          <PhoneInput
+            type="email"
+            name="email"
+            label="Email address"
+            variant="standard"
+            placeholder="Enter your email address"
           />
           <EmailErrorMessage name="email" component="div" className="error-message" />
         </div>
@@ -59,9 +81,9 @@ const LoginForm = () => {
           <PasswordErrorMessage name="password" component="div" className="error-message" />
         </div>
 
-        <SigninButton fullWidth size="large" type="submit" variant="contained">
+        <SignupButton fullWidth size="large" type="submit" variant="contained">
           Sign In
-        </SigninButton>
+        </SignupButton>
 
         <GooglePlusButton fullWidth size="large" type="submit" variant="contained">
           Sign in with Google
@@ -73,4 +95,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
