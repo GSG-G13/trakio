@@ -4,7 +4,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
 import {
   EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage, UsernameInput,
-  SignupButton, GooglePlusButton, LoginImage, EmailErrorMessage, PhoneInput,
+  SignupButton, GooglePlusButton, EmailErrorMessage, PhoneInput,
 } from './signupForm';
 import { signupSchema } from '../../../helper/validation/schema';
 
@@ -20,58 +20,51 @@ const SignupForm = () => {
   const handleSubmit = (values: SignupFormValues) => {
     console.log(values);
   };
+
   return (
     <Formik
       initialValues={{
-        email: '', password: '', username: '', phone: '',
+        email: '',
+        password: '',
+        username: '',
+        phone: '',
       }}
       validationSchema={signupSchema}
       onSubmit={handleSubmit}
     >
       <Form>
-        <div />
         <div>
           <UsernameInput
-            type="email"
-            name="email"
-            label="Email address"
-            variant="standard"
-            placeholder="Enter your email address"
+            type="text"
+            name="username"
+            placeholder="Enter your name"
           />
-          <EmailErrorMessage name="email" component="div" className="error-message" />
+          <EmailErrorMessage name="username" component="div" className="error-message" />
         </div>
 
         <div>
           <EmailInput
             type="email"
             name="email"
-            label="Email address"
-            variant="standard"
-            placeholder="Enter your email address"
-          />
-          <EmailErrorMessage name="email" component="div" className="error-message" />
-        </div>
-        <div>
-          <PhoneInput
-            type="email"
-            name="email"
-            label="Email address"
-            variant="standard"
             placeholder="Enter your email address"
           />
           <EmailErrorMessage name="email" component="div" className="error-message" />
         </div>
 
         <div>
+          <PhoneInput
+            type="tel"
+            name="phone"
+            placeholder="Enter your phone number"
+          />
+          <EmailErrorMessage name="phone" component="div" className="error-message" />
+        </div>
+
+        <div>
           <PasswordInput
             type={showPassword ? 'text' : 'password'}
             name="password"
-            label="Password"
-            variant="standard"
             placeholder="Enter your password"
-            InputLabelProps={{
-              style: { color: 'white', marginLeft: '10px' },
-            }}
           />
           <InputAdornment position="end">
             <CustomIconButton onClick={() => setShowPassword(!showPassword)} edge="end">
@@ -82,14 +75,13 @@ const SignupForm = () => {
         </div>
 
         <SignupButton fullWidth size="large" type="submit" variant="contained">
-          Sign In
+          Sign Up
         </SignupButton>
 
         <GooglePlusButton fullWidth size="large" type="submit" variant="contained">
-          Sign in with Google
+          Sign up with Google
         </GooglePlusButton>
 
-        <LoginImage src="src/assets/todo.svg" alt="login" />
       </Form>
     </Formik>
   );

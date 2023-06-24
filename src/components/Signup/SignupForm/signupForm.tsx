@@ -25,11 +25,10 @@ export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
 }));
 export const UsernameInput = styled(Field)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  top: '300px',
-  left: '12.3px',
-  right: '10px',
+  width: '380px',
+  height: '54px',
+  top: '250px',
+  right: '12.3px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -42,15 +41,16 @@ export const UsernameInput = styled(Field)(() => ({
   borderRadius: '8px',
   '::placeholder': {
     fontSize: '16px',
+    padding: '10px',
 
   },
 }));
 export const EmailInput = styled(Field)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '13.3px',
-  top: '300px',
+  width: '380px',
+  height: '54px',
+  right: '12.3px',
+  top: '330px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -63,16 +63,16 @@ export const EmailInput = styled(Field)(() => ({
   borderRadius: '8px',
   '::placeholder': {
     fontSize: '16px',
-
+    padding: '10px',
   },
 }));
 
 export const PhoneInput = styled(Field)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '385px',
+  width: '380px',
+  height: '54px',
+  right: '12.3px',
+  top: '410px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -85,14 +85,15 @@ export const PhoneInput = styled(Field)(() => ({
   borderRadius: '8px',
   '::placeholder': {
     fontSize: '16px',
+    padding: '10px',
   },
 }));
 export const PasswordInput = styled(Field)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '385px',
+  width: '380px',
+  height: '54px',
+  right: '12.3px',
+  top: '490px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -105,20 +106,22 @@ export const PasswordInput = styled(Field)(() => ({
   borderRadius: '8px',
   '::placeholder': {
     fontSize: '16px',
+    padding: '10px',
   },
 }));
 export const CustomIconButton = styled(IconButton)(() => ({
   position: 'absolute',
-  left: '380px',
-  top: '396px',
+  right: '40px',
+  color: '#818098',
+  top: '499px',
 }));
 
 export const SignupButton = styled(LoadingButton)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '470px',
+  width: '380px',
+  height: '54px',
+  right: '12.3px',
+  top: '570px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
@@ -130,10 +133,10 @@ export const SignupButton = styled(LoadingButton)(() => ({
 }));
 export const GooglePlusButton = styled(LoadingButton)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '545px',
+  width: '380px',
+  height: '54px',
+  right: '12.3px',
+  top: '640px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
@@ -145,10 +148,10 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
   textTransform: 'none',
 }));
 
-export const LoginImage = styled('img')(() => ({
+export const SignupImage = styled('img')(() => ({
   borderStyle: 'none',
   width: '800px',
   height: '800px',
-  marginLeft: '450px',
+  marginLeft: '95px',
   marginTop: '-250px',
 }));
