@@ -7,7 +7,7 @@ import {
   BasicCardBox, CardText, ContentCard, CardTitle, CardButton, ImageCard, CardImage,
 } from './card.styled';
 
-const BasicCard = () => (
+const WelcomeCard = () => (
   <BasicCardBox>
     <ContentCard>
       <CardContent>
@@ -36,4 +36,4 @@ const BasicCard = () => (
   </BasicCardBox>
 );
 
-export default BasicCard;
+export default WelcomeCard;
