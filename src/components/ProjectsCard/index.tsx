@@ -23,11 +23,11 @@ const ProjectsCard = () => (
       <Wrapper2>
         <CardContent>
           <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             Title Project
           </Typography>
           <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
+            Brainstorming brings team members' diverse experience into play.
           </WrapperDes>
         </CardContent>
         <WrappBtn>
@@ -35,126 +35,7 @@ const ProjectsCard = () => (
           <WrappBtnDone>done</WrappBtnDone>
         </WrappBtn>
       </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-      <Wrapper2>
-        <CardContent>
-          <WrapperPN>Project Name</WrapperPN>
-          <Typography gutterBottom variant="h5" component="div">
-            Title Project
-          </Typography>
-          <WrapperDes variant="body2" color="text.secondary">
-            Description for projects and explanation about it
-          </WrapperDes>
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>undone</WrapperBtnUD>
-          <WrappBtnDone>done</WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
+
     </Wrapper>
   </WrapperApp>
 );

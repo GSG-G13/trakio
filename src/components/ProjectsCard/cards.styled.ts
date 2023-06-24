@@ -8,43 +8,48 @@ import {
 } from '@mui/material';
 import { MdDashboard } from 'react-icons/md';
 
-export const Wrapper = styled(Card)(({ theme }) => ({
-  background: theme.palette.custom.background,
-  width: '70em',
+export const Wrapper = styled(Card)(({ theme: { palette: { custom } } }) => ({
+  background: custom.background,
   display: 'grid',
-  gap: '2vw',
-  gridTemplateColumns: 'auto auto auto auto',
+  gap: '1.5rem 1rem',
+  boxShadow: 'none',
+  gridTemplateColumns: 'auto auto auto',
   padding: '0.8vw',
   marginLeft: '1vw',
 }));
-export const Wrapper2 = styled(CardContent)(({ theme }) => ({
-  background: theme.palette.custom.divider,
+export const Wrapper2 = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
+  background: custom.divider,
   borderRadius: 10,
-  color: theme.palette.custom.white,
+  color: custom.white,
+  maxWidth: '330px',
 }));
-export const WrapperPN = styled(Typography)(({ theme }) => ({
-  background: theme.palette.primary.main,
-  color: theme.palette.custom.black,
+export const WrapperPN = styled(Typography)(({ theme: { palette: { custom, primary } } }) => ({
+  background: primary.main,
+  color: custom.darkFont,
   width: '7vw',
-  borderRadius: 4,
+  borderRadius: '4px',
   height: '2vw',
   overflow: 'hidden',
   marginTop: '-3vw',
   marginLeft: '-1.2vw',
   marginBottom: '1vw',
   textAlign: 'center',
+  fontWeight: 'bold',
 }));
-export const WrapperDes = styled(Typography)(({ theme }) => ({
-  color: theme.palette.custom.gray,
-  fontSize: '1vw',
+export const WrapperDes = styled(Typography)(({ theme: { palette: { custom } } }) => ({
+  color: custom.gray,
+  // fontSize: '1vw',
 }));
-export const WrapperApp = styled(CardContent)(({ theme }) => ({
-  background: theme.palette.custom.background,
-  width: '30vw',
+export const WrapperApp = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
+  background: custom.background,
+  marginTop: '-2rem',
+  marginLeft: '-2rem',
+
+  // width: '30vw',
 }));
 export const WrapperH1 = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.white,
-  fontSize: '2em',
+  fontSize: '1.5em',
   marginTop: '-8vh',
   marginBottom: '1vw',
   marginLeft: '1vw',
