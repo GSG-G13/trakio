@@ -8,7 +8,7 @@ import {
   ListItemIcon,
   CardMedia,
 } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
+import { FaHome, FaTasks, FaUser } from 'react-icons/fa';
 import ReactLogo from '../../assets/logo.svg';
 import PermanentAppBar from '../AppBar';
 import {
@@ -31,11 +31,15 @@ const Sidebar = () => (
       </Typography>
       <Divider />
       <List>
-        {['Home', 'Tasks', 'Account'].map((text) => (
+        {[
+          { text: 'Home', icon: FaHome },
+          { text: 'Tasks', icon: FaTasks },
+          { text: 'Account', icon: FaUser },
+        ].map(({ text, icon: Icon }) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon sx={{ minWidth: '42px' }}>
-                <HomeIcon sx={{ fontSize: 40, color: 'custom.white' }} />
+              <ListItemIcon sx={{ minWidth: '32px', color: 'custom.white' }}>
+                <Icon />
               </ListItemIcon>
               <ListItemTextItem primary={text} />
             </ListItemButton>
@@ -49,7 +53,7 @@ const Sidebar = () => (
         </ProjectTextItem>
         {['project-A', 'Project1', 'Team 5'].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton sx={{ fontSize: '16px' }}>
               <ListItemTextItem primary={text} />
             </ListItemButton>
           </ListItem>

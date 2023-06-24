@@ -1,7 +1,7 @@
-import { PermanentDrawerLeft } from '../../components';
+import { Layout } from '../../components';
 
 const HomePage = () => (
-  <PermanentDrawerLeft />
+  <Layout />
 );
 
 export default HomePage;
