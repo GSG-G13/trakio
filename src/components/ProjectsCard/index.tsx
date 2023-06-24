@@ -27,7 +27,7 @@ const ProjectsCard = () => (
             Title Project
           </Typography>
           <WrapperDes variant="body2" color="text.secondary">
-            Brainstorming brings team members' diverse experience into play.
+            Brainstorming brings team members diverse experience into play.
           </WrapperDes>
         </CardContent>
         <WrappBtn>
@@ -35,7 +35,6 @@ const ProjectsCard = () => (
           <WrappBtnDone>done</WrappBtnDone>
         </WrappBtn>
       </Wrapper2>
-
     </Wrapper>
   </WrapperApp>
 );
