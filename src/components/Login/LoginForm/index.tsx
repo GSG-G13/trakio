@@ -4,9 +4,9 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
 import {
   EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage,
-  SigninButton, GooglePlusButton, LoginImage, EmailErrorMessage,
+  SigninButton, GooglePlusButton, EmailErrorMessage, LoginImage,
 } from './loginForm.styled';
-import { validationSchema } from '../../../helper/validation/schema';
+import validationSchema from '../../../helper/validation/yupSchema';
 
 interface LoginFormValues {
   email: string;
@@ -33,9 +33,6 @@ const LoginForm = () => {
             variant="standard"
             placeholder="Enter your email address"
             InputProps={{ disableUnderline: true }}
-            InputLabelProps={{
-              style: { color: 'white', marginLeft: '10px' },
-            }}
           />
           <EmailErrorMessage name="email" component="div" className="error-message" />
         </div>
@@ -47,9 +44,6 @@ const LoginForm = () => {
             label="Password"
             variant="standard"
             placeholder="Enter your password"
-            InputLabelProps={{
-              style: { color: 'white', marginLeft: '10px' },
-            }}
           />
           <InputAdornment position="end">
             <CustomIconButton onClick={() => setShowPassword(!showPassword)} edge="end">

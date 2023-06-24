@@ -34,7 +34,7 @@ export const FormContent = styled('div')(() => ({
 }));
 export const BodyContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
-  height: '54.6rem',
+  height: '100vh',
   top: '0px',
   right: '0px',
   backgroundColor: custom.purple,
@@ -42,7 +42,7 @@ export const BodyContainer = styled(Container)(({ theme: { palette: { custom } }
 export const CustomContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
   width: '46.875rem',
-  height: '54.6rem',
+  height: '100vh',
   left: '-3.7rem',
   top: '0rem',
   background: custom.background,
@@ -52,8 +52,8 @@ export const CustomContainer = styled(Container)(({ theme: { palette: { custom }
 
 export const DontHaveAcount = styled(Typography)(() => ({
   position: 'absolute',
-  top: '600px',
-  fontSize: '13px',
+  top: '585px',
+  fontSize: '11px',
   left: '-30px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -61,8 +61,8 @@ export const DontHaveAcount = styled(Typography)(() => ({
 }));
 export const SignupText = styled(Typography)(() => ({
   position: 'absolute',
-  top: '0px',
-  left: '160px',
-  fontSize: '14px',
+  top: '585px',
+  left: '107px',
+  fontSize: '12px',
   color: '#FFDA3C',
 }));

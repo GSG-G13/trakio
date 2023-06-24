@@ -5,9 +5,9 @@ import { Field, ErrorMessage } from 'formik';
 
 export const EmailErrorMessage = styled(ErrorMessage)(() => ({
   position: 'absolute',
-  top: '374px',
+  top: '370px',
   left: '70px',
-  right: '650px',
+  right: '575px',
   transform: 'translate(-50%, -50%)',
   color: 'red',
   fontSize: '10px',
@@ -15,9 +15,9 @@ export const EmailErrorMessage = styled(ErrorMessage)(() => ({
 
 export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
   position: 'absolute',
-  top: '460px',
-  left: '430px',
-  right: '650px',
+  top: '450px',
+  left: '392px',
+  right: '575px',
   transform: 'translate(-50%, -50%)',
   color: 'red',
   fontSize: '10px',
@@ -25,9 +25,9 @@ export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
 }));
 export const EmailInput = styled(Field)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
+  width: '380px',
+  height: '54px',
+  left: '12.3px',
   top: '300px',
   bottom: '20px',
   fontFamily: 'Montserrat',
@@ -41,16 +41,16 @@ export const EmailInput = styled(Field)(() => ({
   borderRadius: '8px',
   '::placeholder': {
     fontSize: '16px',
-
+    padding: '10px',
   },
 }));
 
 export const PasswordInput = styled(Field)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '385px',
+  width: '380px',
+  height: '54px',
+  left: '12.3px',
+  top: '380px',
   bottom: '20px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
@@ -63,24 +63,27 @@ export const PasswordInput = styled(Field)(() => ({
   borderRadius: '8px',
   '::placeholder': {
     fontSize: '16px',
+    padding: '10px',
+
   },
 }));
 export const CustomIconButton = styled(IconButton)(() => ({
   position: 'absolute',
-  left: '380px',
-  top: '396px',
+  left: '350px',
+  top: '380px',
+  color: '#818098',
 }));
 
 export const SigninButton = styled(LoadingButton)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '470px',
+  width: '380px',
+  height: '54px',
+  left: '12.3px',
+  top: '465px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
-  fontSize: '21px',
+  fontSize: '18px',
   lineHeight: '26px',
   textAlign: 'center',
   color: '#1E1F21',
@@ -88,14 +91,14 @@ export const SigninButton = styled(LoadingButton)(() => ({
 }));
 export const GooglePlusButton = styled(LoadingButton)(() => ({
   position: 'absolute',
-  width: '406px',
-  height: '60px',
-  left: '18.3px',
-  top: '545px',
+  width: '380px',
+  height: '54px',
+  left: '12.3px',
+  top: '528px',
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
-  fontSize: '21px',
+  fontSize: '18px',
   lineHeight: '26px',
   textAlign: 'center',
   color: '#1E1F21',
@@ -105,8 +108,8 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
 
 export const LoginImage = styled('img')(() => ({
   borderStyle: 'none',
-  width: '800px',
-  height: '800px',
+  width: '600px',
+  height: '600px',
   marginLeft: '450px',
-  marginTop: '-250px',
+  marginTop: '-210px',
 }));

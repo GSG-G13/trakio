@@ -24,14 +24,14 @@ const Login = () => (
       <FormContent />
       <LoginForm />
     </CustomContainer>
-    <DontHaveAcount variant="h5">
+    <DontHaveAcount>
       Don’t have an account?
       {' '}
-      <SignupText variant="h5">
-        {' '}
-        Signup
-      </SignupText>
     </DontHaveAcount>
+    <SignupText>
+      {' '}
+      Signup
+    </SignupText>
   </BodyContainer>
 );
 
