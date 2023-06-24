@@ -41,7 +41,6 @@ const SignupForm = () => {
           />
           <EmailErrorMessage name="username" component="div" className="error-message" />
         </div>
-
         <div>
           <EmailInput
             type="email"
@@ -50,7 +49,6 @@ const SignupForm = () => {
           />
           <EmailErrorMessage name="email" component="div" className="error-message" />
         </div>
-
         <div>
           <PhoneInput
             type="tel"
@@ -59,7 +57,6 @@ const SignupForm = () => {
           />
           <EmailErrorMessage name="phone" component="div" className="error-message" />
         </div>
-
         <div>
           <PasswordInput
             type={showPassword ? 'text' : 'password'}
@@ -73,7 +70,6 @@ const SignupForm = () => {
           </InputAdornment>
           <PasswordErrorMessage name="password" component="div" className="error-message" />
         </div>
-
         <SignupButton fullWidth size="large" type="submit" variant="contained">
           Sign Up
         </SignupButton>

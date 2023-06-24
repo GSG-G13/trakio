@@ -23,6 +23,7 @@ export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
   fontSize: '0.625rem',
   minWidth: '100%',
 }));
+
 export const UsernameInput = styled(Field)(() => ({
   position: 'absolute',
   width: '23.75rem',
@@ -45,6 +46,7 @@ export const UsernameInput = styled(Field)(() => ({
 
   },
 }));
+
 export const EmailInput = styled(Field)(() => ({
   position: 'absolute',
   width: '23.75rem',
@@ -88,6 +90,7 @@ export const PhoneInput = styled(Field)(() => ({
     padding: '0.625rem',
   },
 }));
+
 export const PasswordInput = styled(Field)(() => ({
   position: 'absolute',
   width: '23.75rem',
@@ -109,6 +112,7 @@ export const PasswordInput = styled(Field)(() => ({
     padding: '0.625rem',
   },
 }));
+
 export const CustomIconButton = styled(IconButton)(() => ({
   position: 'absolute',
   right: '2.5rem',
@@ -131,6 +135,7 @@ export const SignupButton = styled(LoadingButton)(() => ({
   color: '#1E1F21',
   textTransform: 'none',
 }));
+
 export const GooglePlusButton = styled(LoadingButton)(() => ({
   position: 'absolute',
   width: '23.75rem',

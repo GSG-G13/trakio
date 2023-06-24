@@ -14,6 +14,7 @@ export const CustomTypography1 = styled(Typography)(({ theme: { palette: { custo
   fontStyle: 'normal',
   fontWeight: '700',
 }));
+
 export const CustomTypography2 = styled(Typography)(({ theme: { palette: { custom } } }) => ({
   color: custom.white,
   position: 'absolute',
@@ -26,12 +27,14 @@ export const CustomTypography2 = styled(Typography)(({ theme: { palette: { custo
   fontWeight: '700',
   fontSize: '1.875rem',
 }));
+
 export const FormContent = styled('div')(() => ({
   maxWidth: '23.75rem',
   alignItems: 'center',
   marginLeft: '1.14375rem',
   marginTop: '17.555rem',
 }));
+
 export const BodyContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
   height: '100vh',
@@ -39,6 +42,7 @@ export const BodyContainer = styled(Container)(({ theme: { palette: { custom } }
   left: '0rem',
   backgroundColor: custom.purple,
 }));
+
 export const CustomContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
   width: '50.875rem',
@@ -59,6 +63,7 @@ export const DontHaveAcount = styled(Typography)(() => ({
   fontStyle: 'normal',
   color: '#777777',
 }));
+
 export const SigninText = styled(Typography)(() => ({
   position: 'absolute',
   top: '44.375rem',
