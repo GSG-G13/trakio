@@ -8,7 +8,10 @@ import {
   ListItemIcon,
   CardMedia,
 } from '@mui/material';
-import { FaHome, FaTasks, FaUser } from 'react-icons/fa';
+import HomeIcon from '@mui/icons-material/Home';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { NavLink } from 'react-router-dom';
 import ReactLogo from '../../assets/logo.svg';
 import PermanentAppBar from '../AppBar';
 import {
@@ -16,6 +19,26 @@ import {
   ListItemTextItem,
   ProjectTextItem,
 } from './sidebar.styled';
+
+const NavList = [
+  {
+    title: 'Home',
+    path: '/',
+    icon: <HomeIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
+  },
+  {
+    title: 'Tasks',
+    path: '/tasks',
+    icon: (
+      <FormatListNumberedIcon sx={{ fontSize: 24, color: 'custom.white' }} />
+    ),
+  },
+  {
+    title: 'Account',
+    path: '/account',
+    icon: <AccountCircleIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
+  },
+];
 
 const Sidebar = () => (
   <Box sx={{ display: 'flex' }}>
@@ -31,26 +54,22 @@ const Sidebar = () => (
       </Typography>
       <Divider />
       <List>
-        {[
-          { text: 'Home', icon: FaHome },
-          { text: 'Tasks', icon: FaTasks },
-          { text: 'Account', icon: FaUser },
-        ].map(({ text, icon: Icon }) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ minWidth: '32px', color: 'custom.white' }}>
-                <Icon />
-              </ListItemIcon>
-              <ListItemTextItem primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {NavList.map((nav) => (
+          <NavLink to={nav.path}>
+            <ListItem key={nav.title} disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ minWidth: '42px' }}>
+                  {nav.icon}
+                </ListItemIcon>
+                <ListItemTextItem primary={nav.title} />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
         ))}
       </List>
       <Divider />
       <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
-        <ProjectTextItem>
-          Projects
-        </ProjectTextItem>
+        <ProjectTextItem>Projects</ProjectTextItem>
         {['project-A', 'Project1', 'Team 5'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton sx={{ fontSize: '16px' }}>

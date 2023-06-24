@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import { LoginPage } from './pages';
-import theme from './theme';
+import router from './routes';
+import THEME from './theme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ThemeProvider theme={theme}>
-    <LoginPage />
+  <ThemeProvider theme={THEME}>
+    <RouterProvider router={router} />
   </ThemeProvider>,
 );
