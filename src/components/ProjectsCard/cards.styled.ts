@@ -47,21 +47,21 @@ export const WrapperApp = styled(CardContent)(({ theme: { palette: { custom } } 
 
   // width: '30vw',
 }));
-export const WrapperH1 = styled(Typography)(({ theme }) => ({
-  color: theme.palette.custom.white,
+export const WrapperH1 = styled(Typography)(({ theme: { palette: { custom } } }) => ({
+  color: custom.white,
   fontSize: '1.5em',
   marginTop: '-8vh',
   marginBottom: '1vw',
   marginLeft: '1vw',
 }));
-export const WrappBtnDone = styled(Button)(({ theme }) => ({
-  color: theme.palette.custom.green,
+export const WrappBtnDone = styled(Button)(({ theme: { palette: { custom } } }) => ({
+  color: custom.green,
 }));
-export const WrapperBtnUD = styled(Button)(({ theme }) => ({
-  color: theme.palette.custom.orange,
+export const WrapperBtnUD = styled(Button)(({ theme: { palette: { custom } } }) => ({
+  color: custom.orange,
 }));
-export const WrapperIc = styled(MdDashboard)(({ theme }) => ({
-  color: theme.palette.custom.white,
+export const WrapperIc = styled(MdDashboard)(({ theme: { palette: { custom } } }) => ({
+  color: custom.white,
   marginRight: '0.6vw',
 }));
 export const WrappBtn = styled(CardActions)(() => ({
