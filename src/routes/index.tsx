@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
-  HomePage, LoginPage, TaskBoard, AccountPage,
+  HomePage, LoginPage, TaskBoard, AccountPage, Calendar,
 } from '../pages';
 import { ProjectsCard, TaskTable } from '../components';
 import HomeLayout from '../layout';
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
           {
             path: '/tasks/board',
             element: <TaskBoard tasks={data} />,
+          },
+          {
+            path: '/tasks/calendar',
+            element: <Calendar tasks={data} />,
           },
         ],
       },
