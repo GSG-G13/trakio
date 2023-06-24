@@ -1,4 +1,4 @@
-interface task {
+export interface task {
   id?: number;
   title: string;
   description: string;
@@ -8,8 +8,11 @@ interface task {
   priority: string;
   color: string;
   section: string;
+  user_id: number;
+  name: string
 }
 
 export interface iTask {
-  task: task;
+  task?: task;
+  tasks?: task[];
 }
