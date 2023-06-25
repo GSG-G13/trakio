@@ -5,6 +5,7 @@ import {
 import { ProjectsCard, TaskTable } from '../components';
 import HomeLayout from '../layout';
 import data from '../fake';
+import AddProject from '../components/AddProject';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,16 @@ const router = createBrowserRouter([
       },
       {
         path: '/projects',
-        element: <ProjectsCard />,
+        children: [
+          {
+            index: true,
+            element: <ProjectsCard />,
+          },
+          {
+            path: '/projects/addProject',
+            element: <AddProject />,
+          },
+        ],
       },
       {
         path: '/tasks',

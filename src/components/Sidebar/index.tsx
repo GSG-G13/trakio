@@ -7,10 +7,12 @@ import {
   ListItemButton,
   ListItemIcon,
   CardMedia,
+  IconButton,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Add } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import ReactLogo from '../../assets/logo.svg';
 import PermanentAppBar from '../AppBar';
@@ -19,6 +21,7 @@ import {
   ListItemTextItem,
   ProjectTextItem,
 } from './sidebar.styled';
+import AddProject from '../AddProject';
 
 const NavList = [
   {
@@ -55,8 +58,8 @@ const Sidebar = () => (
       <Divider />
       <List>
         {NavList.map((nav) => (
-          <NavLink to={nav.path}>
-            <ListItem key={nav.title} disablePadding>
+          <NavLink to={nav.path} key={nav.title}>
+            <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon sx={{ minWidth: '42px' }}>
                   {nav.icon}
@@ -69,7 +72,16 @@ const Sidebar = () => (
       </List>
       <Divider />
       <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
-        <ProjectTextItem>Projects</ProjectTextItem>
+        <ProjectTextItem sx={{ color: 'custom.white' }}>
+          <NavLink to="/projects">
+            Projects
+            <NavLink to="/projects/addProject">
+              <IconButton onClick={AddProject} sx={{ marginLeft: '2rem' }}>
+                <Add sx={{ fontSize: 24, color: 'custom.white' }} />
+              </IconButton>
+            </NavLink>
+          </NavLink>
+        </ProjectTextItem>
         {['project-A', 'Project1', 'Team 5'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton sx={{ fontSize: '16px' }}>

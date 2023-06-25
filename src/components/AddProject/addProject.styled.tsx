@@ -1,8 +1,8 @@
 import { styled, TextareaAutosize, Box } from '@mui/material';
 
-const DesTextArea = styled(TextareaAutosize)(({ theme }) => ({
-  background: theme.palette.custom.divider,
-  color: theme.palette.custom.white,
+const DesTextArea = styled(TextareaAutosize)(({ theme: { palette: { custom } } }) => ({
+  background: custom.divider,
+  color: custom.white,
   marginTop: '1vw',
 }));
 const WrapBox = styled(Box)(() => ({

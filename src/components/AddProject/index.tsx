@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Modal } from '@mui/material';
-import { DesTextArea, WrapBox } from './addProject.styled';
+import { DesTextArea, WrapBox } from './addProject.styled.tsx';
 import THEME from '../../theme';
 import { AccountInput } from '..';
 import { WrappBtn } from '../AccountInput/acount.styled';
