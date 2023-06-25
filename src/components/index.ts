@@ -9,6 +9,7 @@ import StatisticsCard from './StatisticsCard';
 import DescriptionCard from './DescrioptionCard';
 import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
+import OverviewContent from './OverviewContent';
 
 export {
   TaskTable,
@@ -22,4 +23,5 @@ export {
   Login,
   WelcomeCard,
   Charts,
+  OverviewContent,
 };
