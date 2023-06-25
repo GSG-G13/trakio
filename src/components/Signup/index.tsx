@@ -14,7 +14,7 @@ const Sigup = () => (
         component="img"
         alt="Trackio"
         image={ReactLogo}
-        sx={{ marginTop: '46px', width: '150px', marginLeft: '-251px' }}
+        sx={{ marginTop: '46px', width: '150px', marginLeft: '60px' }}
       />
       <CustomContainer>
         <CustomTypography1 variant="h4" gutterBottom>

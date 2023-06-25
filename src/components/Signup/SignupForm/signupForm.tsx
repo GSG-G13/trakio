@@ -123,7 +123,7 @@ export const CustomIconButton = styled(IconButton)(() => ({
 export const SignupButton = styled(LoadingButton)(() => ({
   position: 'absolute',
   width: '23.75rem',
-  height: '3.375',
+  height: '3.375rem',
   right: '0.76875rem',
   top: '35.625rem',
   fontFamily: 'Montserrat',
@@ -154,9 +154,10 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
 }));
 
 export const SignupImage = styled('img')(() => ({
+  position: 'absolute',
   borderStyle: 'none',
   width: '37.5rem',
   height: '37.5rem',
-  marginLeft: '95px',
-  marginTop: '-250px',
+  left: '6.5rem',
+  top: '150px',
 }));
