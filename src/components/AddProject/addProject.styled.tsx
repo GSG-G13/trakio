@@ -1,8 +1,13 @@
-import { styled, TextareaAutosize } from '@mui/material';
+import { styled, TextareaAutosize, Box } from '@mui/material';
 
 const DesTextArea = styled(TextareaAutosize)(({ theme }) => ({
   background: theme.palette.custom.divider,
   color: theme.palette.custom.white,
   marginTop: '1vw',
 }));
-export default DesTextArea;
+const WrapBox = styled(Box)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '30vh',
+}));
+export { DesTextArea, WrapBox };
