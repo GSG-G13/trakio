@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PermanentAppBar from '../AppBar';
 import MainComponent from './layout.styled';
@@ -28,6 +29,7 @@ const Layout = () => (
         <DescriptionCard />
       </Box> */}
       {/* <Charts /> */}
+      <Outlet />
     </MainComponent>
   </Box>
 );
