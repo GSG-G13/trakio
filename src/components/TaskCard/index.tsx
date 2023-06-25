@@ -26,7 +26,7 @@ const TaskCard = ({ task }: iTask) => (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
       <Avatar sx={{ bgcolor: 'deepskyblue', width: 32, height: 32 }}>
-        {task?.name![0].toUpperCase()}
+        {task?.name?.[0].toUpperCase()}
       </Avatar>
 
       <Typography variant="h6" sx={{ color: 'white' }}>

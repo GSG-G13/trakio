@@ -1,20 +1,17 @@
+import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PermanentAppBar from '../AppBar';
 import MainComponent from './layout.styled';
 import Sidebar from '../Sidebar';
-import { AccountPage } from '../../pages';
-// import BasicCard from '../WelcomeCard';
-// import StatisticsCard from '../StatisticsCard';
-// import { TaskTable } from '../TaskTable/TaskTable';
 
-const PermanentDrawerLeft = () => (
+const Layout = () => (
   <Box sx={{ display: 'flex' }}>
     <PermanentAppBar />
     <Sidebar />
     <MainComponent component="main">
-      <AccountPage />
+      <Outlet />
     </MainComponent>
   </Box>
 );
 
-export default PermanentDrawerLeft;
+export default Layout;
