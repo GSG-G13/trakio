@@ -4,7 +4,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
 import {
   EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage, UsernameInput,
-  SignupButton, GooglePlusButton, EmailErrorMessage, PhoneInput,
+  SignupButton, GooglePlusButton, EmailErrorMessage,
+  PhoneInput, UsernameErrorMessage, PhoneErrorMessage,
 } from './signupForm';
 import { signupSchema } from '../../../helper/validation/schema';
 
@@ -36,10 +37,10 @@ const SignupForm = () => {
         <div>
           <UsernameInput
             type="text"
-            name="username"
+            name="name"
             placeholder="Enter your name"
           />
-          <EmailErrorMessage name="username" component="div" className="error-message" />
+          <UsernameErrorMessage name="name" component="div" className="error-message" />
         </div>
         <div>
           <EmailInput
@@ -55,7 +56,7 @@ const SignupForm = () => {
             name="phone"
             placeholder="Enter your phone number"
           />
-          <EmailErrorMessage name="phone" component="div" className="error-message" />
+          <PhoneErrorMessage name="phone" component="div" className="error-message" />
         </div>
         <div>
           <PasswordInput

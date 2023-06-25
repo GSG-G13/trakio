@@ -4,21 +4,35 @@ import { styled } from '@mui/material/styles';
 import { Field, ErrorMessage } from 'formik';
 
 export const EmailErrorMessage = styled(ErrorMessage)(() => ({
-  position: 'absolute',
-  top: '23.375rem',
-  left: '4.375rem',
-  right: '40.625rem',
-  transform: 'translate(-50%, -50%)',
+  position: 'relative',
+  top: '6.2rem',
+  left: '25rem',
   color: 'red',
   fontSize: '0.625rem',
 }));
 
 export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
-  position: 'absolute',
-  top: '28.75rem',
-  left: '26.875rem',
-  right: '40.625rem',
-  transform: 'translate(-50%, -50%)',
+  position: 'relative',
+  top: '15rem',
+  left: '25rem',
+  color: 'red',
+  fontSize: '0.625rem',
+  minWidth: '100%',
+}));
+
+export const UsernameErrorMessage = styled(ErrorMessage)(() => ({
+  position: 'relative',
+  top: '1.825rem',
+  left: '25rem',
+  color: 'red',
+  fontSize: '0.625rem',
+  minWidth: '100%',
+}));
+
+export const PhoneErrorMessage = styled(ErrorMessage)(() => ({
+  position: 'relative',
+  top: '10.5rem',
+  left: '25rem',
   color: 'red',
   fontSize: '0.625rem',
   minWidth: '100%',
