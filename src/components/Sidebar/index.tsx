@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box,
   Typography,
@@ -21,7 +22,7 @@ import {
   ListItemTextItem,
   ProjectTextItem,
 } from './sidebar.styled';
-import AddProject from '../AddProject';
+import AddProjectModal from '../AddProject';
 
 const NavList = [
   {
@@ -43,55 +44,61 @@ const NavList = [
   },
 ];
 
-const Sidebar = () => (
-  <Box sx={{ display: 'flex' }}>
-    <PermanentAppBar />
-    <DrawerItem variant="permanent" anchor="left">
-      <Typography>
-        <CardMedia
-          component="img"
-          alt="Trackio"
-          image={ReactLogo}
-          sx={{ marginTop: '15px', width: '70%', marginLeft: '9px' }}
-        />
-      </Typography>
-      <Divider />
-      <List>
-        {NavList.map((nav) => (
-          <NavLink to={nav.path} key={nav.title}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ minWidth: '42px' }}>
-                  {nav.icon}
-                </ListItemIcon>
-                <ListItemTextItem primary={nav.title} />
+const Sidebar = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <PermanentAppBar />
+      <DrawerItem variant="permanent" anchor="left">
+        <Typography>
+          <CardMedia
+            component="img"
+            alt="Trackio"
+            image={ReactLogo}
+            sx={{ marginTop: '15px', width: '70%', marginLeft: '9px' }}
+          />
+        </Typography>
+        <Divider />
+        <List>
+          {NavList.map((nav) => (
+            <NavLink to={nav.path} key={nav.title}>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon sx={{ minWidth: '42px' }}>
+                    {nav.icon}
+                  </ListItemIcon>
+                  <ListItemTextItem primary={nav.title} />
+                </ListItemButton>
+              </ListItem>
+            </NavLink>
+          ))}
+        </List>
+        <Divider />
+        <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
+          <ProjectTextItem sx={{ color: 'custom.white' }}>
+            <NavLink to="/projects">
+              Projects
+              <NavLink to="/projects/addProject">
+                <IconButton onClick={handleOpen} sx={{ marginLeft: '2rem' }}>
+                  <Add sx={{ fontSize: 24, color: 'custom.white' }} />
+                </IconButton>
+                <AddProjectModal open={open} handleClose={handleClose} />
+              </NavLink>
+            </NavLink>
+          </ProjectTextItem>
+          {['project-A', 'Project1', 'Team 5'].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton sx={{ fontSize: '16px' }}>
+                <ListItemTextItem primary={text} />
               </ListItemButton>
             </ListItem>
-          </NavLink>
-        ))}
-      </List>
-      <Divider />
-      <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
-        <ProjectTextItem sx={{ color: 'custom.white' }}>
-          <NavLink to="/projects">
-            Projects
-            <NavLink to="/projects/addProject">
-              <IconButton onClick={AddProject} sx={{ marginLeft: '2rem' }}>
-                <Add sx={{ fontSize: 24, color: 'custom.white' }} />
-              </IconButton>
-            </NavLink>
-          </NavLink>
-        </ProjectTextItem>
-        {['project-A', 'Project1', 'Team 5'].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton sx={{ fontSize: '16px' }}>
-              <ListItemTextItem primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </DrawerItem>
-  </Box>
-);
+          ))}
+        </List>
+      </DrawerItem>
+    </Box>
+  );
+};
 
 export default Sidebar;
