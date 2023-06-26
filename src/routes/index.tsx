@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
-  HomePage, LoginPage, TaskBoard, AccountPage, Calendar, SignupPage
+  HomePage, LoginPage, TaskBoard, AccountPage, Calendar, SignupPage,
 } from '../pages';
 import { ProjectsCard, TaskTable } from '../components';
 import HomeLayout from '../layout';
 import data from '../fake';
-import AddProject from '../components/AddProject';
+import Overview from '../pages/Overview';
 
 const router = createBrowserRouter([
   {
@@ -23,11 +23,11 @@ const router = createBrowserRouter([
             index: true,
             element: <ProjectsCard />,
           },
-          {
-            path: '/projects/addProject',
-            element: <AddProject />,
-          },
         ],
+      },
+      {
+        path: '/overview',
+        element: <Overview />,
       },
       {
         path: '/tasks',

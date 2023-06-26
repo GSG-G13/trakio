@@ -9,6 +9,7 @@ import StatisticsCard from './StatisticsCard';
 import DescriptionCard from './DescrioptionCard';
 import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
+import OverviewContent from './OverviewContent';
 import { SuccessAlert, ErrorAlert } from './Alerts';
 
 export {
@@ -23,6 +24,7 @@ export {
   Login,
   WelcomeCard,
   Charts,
+  OverviewContent,
   SuccessAlert,
   ErrorAlert,
 };
