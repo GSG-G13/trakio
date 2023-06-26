@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
+import axios from 'axios';
 import {
   EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage, UsernameInput,
   SignupButton, GooglePlusButton, EmailErrorMessage,
@@ -19,7 +20,13 @@ const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (values: SignupFormValues) => {
-    console.log(values);
+    axios.post('/api/signup', values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
