@@ -10,10 +10,13 @@ import {
   WrappBtn,
 } from './cards.styled';
 import { iProjects } from '../../interfaces';
+import { ErrorAlert } from '..';
 
 const ProjectsCard = () => {
   const [userProjects, setUserProjects] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [openError, setOpenError] = useState(false);
+  const [messageError, setMessageError] = useState('');
 
   useEffect(() => {
     axios.get('/api/projects')
@@ -21,7 +24,10 @@ const ProjectsCard = () => {
         setUserProjects(res.data.data);
         setLoading(false);
       })
-      .catch((error) => console.log((error)));
+      .catch((err) => {
+        setOpenError(true);
+        setMessageError(err.response.data.message);
+      });
   }, []);
 
   if (isLoading) {
@@ -30,6 +36,11 @@ const ProjectsCard = () => {
 
   return (
     <>
+      <ErrorAlert
+        open={openError}
+        message={messageError}
+        setOpen={setOpenError}
+      />
       {userProjects.map((project: iProjects) => (
         <Wrapper2>
           <CardContent>
