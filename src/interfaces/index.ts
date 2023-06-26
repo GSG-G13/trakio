@@ -1,3 +1,3 @@
-import { iTask } from './task';
+import { iTask, task } from './task';
 
-export default iTask;
+export type { iTask, task };
