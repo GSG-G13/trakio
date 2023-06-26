@@ -10,4 +10,5 @@ const AccountInput = ({ label }: {label: string}) => (
     <WrapInput />
   </Box>
 );
+
 export default AccountInput;

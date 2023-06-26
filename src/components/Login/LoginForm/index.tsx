@@ -14,7 +14,7 @@ import {
   EmailErrorMessage,
   LoginImage,
 } from './loginForm.styled';
-import validationSchema from '../../../helper/validation/yupSchema';
+import { validationSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
 
 interface LoginFormValues {
