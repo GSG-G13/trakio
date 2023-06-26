@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import {
   HomePage, LoginPage, TaskBoard, AccountPage, Calendar, SignupPage,
 } from '../pages';
-import { ProjectsCard, TaskTable } from '../components';
+import { ProjectsCards, TaskTable } from '../components';
 import HomeLayout from '../layout';
 import data from '../fake';
 import Overview from '../pages/Overview';
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ProjectsCard />,
+            element: <ProjectsCards />,
           },
         ],
       },
