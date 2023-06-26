@@ -21,13 +21,12 @@ const ProjectsCard = () => {
         setUserProjects(res.data.data);
         setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log((error)));
   }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(userProjects);
 
   return (
     <>
