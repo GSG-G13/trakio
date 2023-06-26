@@ -9,6 +9,7 @@ import StatisticsCard from './StatisticsCard';
 import DescriptionCard from './DescrioptionCard';
 import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
+import { SuccessAlert, ErrorAlert } from './Alerts';
 
 export {
   TaskTable,
@@ -22,4 +23,6 @@ export {
   Login,
   WelcomeCard,
   Charts,
+  SuccessAlert,
+  ErrorAlert,
 };
