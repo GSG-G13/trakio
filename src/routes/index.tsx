@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
-  HomePage, LoginPage, TaskBoard, AccountPage, Calendar, SignupPage
+  HomePage, LoginPage, TaskBoard, AccountPage, Calendar, SignupPage,
 } from '../pages';
 import { ProjectsCard, TaskTable } from '../components';
 import HomeLayout from '../layout';
