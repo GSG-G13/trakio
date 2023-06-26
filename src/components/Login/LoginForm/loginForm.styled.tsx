@@ -12,7 +12,6 @@ export const EmailErrorMessage = styled(ErrorMessage)(() => ({
   color: 'red',
   fontSize: '10px',
 }));
-
 export const PasswordErrorMessage = styled(ErrorMessage)(() => ({
   position: 'absolute',
   top: '450px',
@@ -44,7 +43,6 @@ export const EmailInput = styled(Field)(() => ({
     padding: '10px',
   },
 }));
-
 export const PasswordInput = styled(Field)(() => ({
   position: 'absolute',
   width: '380px',
@@ -64,7 +62,6 @@ export const PasswordInput = styled(Field)(() => ({
   '::placeholder': {
     fontSize: '16px',
     padding: '10px',
-
   },
 }));
 export const CustomIconButton = styled(IconButton)(() => ({
@@ -73,7 +70,6 @@ export const CustomIconButton = styled(IconButton)(() => ({
   top: '380px',
   color: '#818098',
 }));
-
 export const SigninButton = styled(LoadingButton)(() => ({
   position: 'absolute',
   width: '380px',
