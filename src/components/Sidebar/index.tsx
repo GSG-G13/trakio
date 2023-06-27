@@ -32,7 +32,7 @@ const NavList = [
   },
   {
     title: 'Tasks',
-    path: '/tasks',
+    path: '/mytask',
     icon: (
       <FormatListNumberedIcon sx={{ fontSize: 24, color: 'custom.white' }} />
     ),
@@ -78,7 +78,7 @@ const Sidebar = () => {
         <Divider />
         <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
           <ProjectTextItem sx={{ color: 'custom.white' }}>
-            <NavLink to="/projects">
+            <NavLink to="/myproject">
               Projects
               <NavLink to="/projects/addProject">
                 <IconButton onClick={handleOpen} sx={{ marginLeft: '2rem' }}>
