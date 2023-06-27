@@ -16,7 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Add } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import ReactLogo from '../../assets/logo.svg';
-import PermanentAppBar from '../AppBar';
+// import PermanentAppBar from '../AppBar';
 import {
   DrawerItem,
   ListItemTextItem,
@@ -50,7 +50,7 @@ const Sidebar = () => {
   const handleClose = () => setOpen(false);
   return (
     <Box sx={{ display: 'flex' }}>
-      <PermanentAppBar />
+      {/* <PermanentAppBar /> */}
       <DrawerItem variant="permanent" anchor="left">
         <Typography>
           <CardMedia
