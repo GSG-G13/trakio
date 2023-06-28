@@ -15,7 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Add } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import ReactLogo from '../../assets/logo.svg';
 import PermanentAppBar from '../AppBar';
 import {
@@ -49,6 +49,7 @@ const NavList = [
 
 const Sidebar = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const navigator = useNavigate();
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [open, setOpen] = useState(false);
@@ -66,6 +67,10 @@ const Sidebar = () => {
         setMessageError(error.response.data.message);
       });
   }, []);
+
+  const handleViewMore = () => {
+    navigator('/myproject');
+  };
 
   return (
     <>
@@ -122,7 +127,7 @@ const Sidebar = () => {
             ))}
             {projects.length > 5 && (
               <ListItem disablePadding>
-                <ListItemButton sx={{ fontSize: '16px' }}>
+                <ListItemButton sx={{ fontSize: '16px' }} onClick={handleViewMore}>
                   <ListItemTextItem primary="View More" />
                 </ListItemButton>
               </ListItem>
