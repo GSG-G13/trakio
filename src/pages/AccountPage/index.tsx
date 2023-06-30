@@ -28,7 +28,13 @@ const AccountPage = () => {
   }, []);
   return (
     <Box>
-      <Typography color={THEME.palette.custom.white} sx={{ fontWeight: 'bold', fontSize: '2vw', marginBottom: '2vw' }}>
+      <Typography sx={{
+        color: THEME.palette.custom.white,
+        fontWeight: 'bold',
+        fontSize: '2vw',
+        marginBottom: '2vw',
+      }}
+      >
         Edit Profile Information
       </Typography>
       <Grid container spacing={3} sx={{ marginBottom: '2vw' }}>
@@ -48,7 +54,7 @@ const AccountPage = () => {
         </Grid>
       </Grid>
       <Box>
-        <Typography color={THEME.palette.custom.white}>
+        <Typography sx={{ color: THEME.palette.custom.white }}>
           <Typography sx={{ marginBottom: '1vw' }}>
             Delete Your Account
           </Typography>
