@@ -1,7 +1,7 @@
 import {
   Paper, Typography, Box, Avatar,
 } from '@mui/material';
-import iTask from '../../interfaces';
+import { iTask } from '../../interfaces';
 
 const TaskCard = ({ task }: iTask) => (
   <Paper
