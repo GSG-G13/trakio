@@ -21,6 +21,7 @@ export const Wrapper2 = styled(CardContent)(({ theme: { palette: { custom } } })
   background: custom.divider,
   borderRadius: 10,
   color: custom.white,
+  minWidth: '300px',
   maxWidth: '330px',
 }));
 export const WrapperPN = styled(Typography)(({ theme: { palette: { custom, primary } } }) => ({
@@ -38,7 +39,9 @@ export const WrapperPN = styled(Typography)(({ theme: { palette: { custom, prima
 }));
 export const WrapperDes = styled(Typography)(({ theme: { palette: { custom } } }) => ({
   color: custom.gray,
-  // fontSize: '1vw',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 }));
 export const WrapperApp = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
   background: custom.background,
