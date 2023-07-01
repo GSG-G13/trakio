@@ -1,7 +1,10 @@
+import { Box } from '@mui/material';
 import OverviewContent from '../../components/OverviewContent';
 
 const Overview = () => (
-  <OverviewContent />
+  <Box marginTop={5}>
+    <OverviewContent />
+  </Box>
 );
 
 export default Overview;
