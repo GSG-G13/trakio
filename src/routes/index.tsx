@@ -1,11 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
-  HomePage, LoginPage, TaskBoard, AccountPage, Calendar, SignupPage,
+  HomePage,
+  LoginPage,
+  TaskBoard,
+  AccountPage,
+  Calendar,
+  SignupPage,
+  Overview,
 } from '../pages';
-import { ProjectsCards, TaskTable } from '../components';
+import { ProjectsCards, TaskTable, ProjectsCard } from '../components';
+
 import HomeLayout from '../layout';
-import data from '../fake';
-import Overview from '../pages/Overview';
 
 const router = createBrowserRouter([
   {
@@ -30,25 +35,50 @@ const router = createBrowserRouter([
         element: <Overview />,
       },
       {
-        path: '/tasks',
+        path: '/mytask',
         children: [
           {
             index: true,
             element: <TaskTable />,
           },
           {
-            path: '/tasks/board',
-            element: <TaskBoard tasks={data} />,
+            path: '/mytask/board',
+            element: <TaskBoard />,
           },
           {
-            path: '/tasks/calendar',
-            element: <Calendar tasks={data} />,
+            path: '/mytask/calendar',
+            element: <Calendar />,
           },
         ],
       },
       {
         path: '/account',
         element: <AccountPage />,
+      },
+      {
+        path: '/myproject',
+        element: <ProjectsCard />,
+      },
+      {
+        path: '/project/:id',
+        children: [
+          {
+            index: true,
+            element: <Overview />,
+          },
+          {
+            path: '/project/:id/list',
+            element: <TaskTable />,
+          },
+          {
+            path: '/project/:id/board',
+            element: <TaskBoard />,
+          },
+          {
+            path: '/project/:id/calendar',
+            element: <Calendar />,
+          },
+        ],
       },
     ],
   },

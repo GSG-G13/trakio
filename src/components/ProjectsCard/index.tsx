@@ -1,4 +1,4 @@
-import ProjectsCard from './Card';
+import ProjectsCard from './ProjectCard';
 import {
   Wrapper,
   WrapperApp,
@@ -18,4 +18,4 @@ const ProjectsCards = () => (
   </WrapperApp>
 );
 
-export default ProjectsCards;
+export { ProjectsCards, ProjectsCard };
