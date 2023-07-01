@@ -18,7 +18,6 @@ const ProjectTabBar = () => {
         setProject(res.data.data[0]);
       });
   }, [id]);
-  console.log(project);
 
   return (
     <Grid container paddingY={5}>
