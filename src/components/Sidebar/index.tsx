@@ -17,7 +17,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Add } from '@mui/icons-material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import ReactLogo from '../../assets/logo.svg';
-import PermanentAppBar from '../AppBar';
+// import PermanentAppBar from '../AppBar';
 import {
   DrawerItem,
   ListItemTextItem,
@@ -80,7 +80,6 @@ const Sidebar = () => {
         setOpen={setOpenError}
       />
       <Box sx={{ display: 'flex' }}>
-        <PermanentAppBar />
         <DrawerItem variant="permanent" anchor="left">
           <Typography>
             <CardMedia
@@ -93,7 +92,7 @@ const Sidebar = () => {
           <Divider />
           <List>
             {NavList.map((nav) => (
-              <NavLink to={nav.path} key={nav.title}>
+              <NavLink to={nav.path} key={nav.title} style={{ textDecoration: 'none' }}>
                 <ListItem disablePadding>
                   <ListItemButton>
                     <ListItemIcon sx={{ minWidth: '42px' }}>
@@ -119,11 +118,13 @@ const Sidebar = () => {
               </NavLink>
             </ProjectTextItem>
             {projects.slice(0, 5).map((project) => (
-              <ListItem key={project.project_id} disablePadding>
-                <ListItemButton sx={{ fontSize: '16px' }}>
-                  <ListItemTextItem primary={project.title} />
-                </ListItemButton>
-              </ListItem>
+              <NavLink to={`/project/${project.project_id}`} style={{ textDecoration: 'none' }}>
+                <ListItem key={project.project_id} disablePadding>
+                  <ListItemButton sx={{ fontSize: '16px' }}>
+                    <ListItemTextItem primary={project.title} />
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
             ))}
             {projects.length > 5 && (
               <ListItem disablePadding>

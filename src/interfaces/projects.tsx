@@ -10,4 +10,8 @@ interface Props {
   userProjets :iProjects[];
 }
 
-export type { iProjects, Props };
+interface Project {
+  project_id?: string;
+  title?: string;
+}
+export type { iProjects, Props, Project };
