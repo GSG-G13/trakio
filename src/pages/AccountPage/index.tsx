@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { AccountInput, ErrorAlert } from '../../components';
-import THEME from '../../theme';
 import { WrappBtn } from '../../components/AccountInput/acount.styled';
 
 const AccountPage = () => {
@@ -28,7 +27,7 @@ const AccountPage = () => {
         setOpen={setOpenError}
       />
       <Box>
-        <Typography color={THEME.palette.custom.white} sx={{ fontWeight: 'bold', fontSize: '2vw', marginBottom: '2vw' }}>
+        <Typography color="custom.white" sx={{ fontWeight: 'bold', fontSize: '2vw', marginBottom: '2vw' }}>
           Edit Profile Information
         </Typography>
         <Grid container spacing={3} sx={{ marginBottom: '2vw' }}>
@@ -46,7 +45,7 @@ const AccountPage = () => {
           </Grid>
         </Grid>
         <Box>
-          <Typography color={THEME.palette.custom.white}>
+          <Typography color="custom.white">
             <Typography sx={{ marginBottom: '1vw' }}>
               Delete Your Account
             </Typography>
