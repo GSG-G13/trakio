@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { Box, Grid, Typography } from '@mui/material';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { AccountInput } from '../../components';
 import THEME from '../../theme';
 import { WrappBtn } from '../../components/AccountInput/acount.styled';
@@ -13,23 +13,20 @@ interface AccountData {
 }
 
 const AccountPage = () => {
-  const [name, setName] = useState<string>('');
+  const [name, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
 
+  const token = Cookies.get('token');
   useEffect(() => {
-    const token = Cookies.get('token');
     if (token) {
-      const decodedToken = jwt.decode(token) as AccountData;
-      if (decodedToken) {
-        // eslint-disable-next-line no-shadow
-        const { name, email, phone } = decodedToken;
-        setName(name);
-        setEmail(email);
-        setPhone(phone);
-      }
+      // eslint-disable-next-line no-shadow
+      const { name, email, phone } = JSON.parse(atob(token)) as AccountData;
+      setUsername(name);
+      setEmail(email);
+      setPhone(phone);
     }
-  }, []);
+  }, [token]);
   return (
     <Box>
       <Typography sx={{
