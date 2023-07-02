@@ -9,6 +9,11 @@ interface Props {
   handleClose : ()=>void;
 }
 
+interface addProject {
+  title: string,
+  description: string,
+}
+
 const AddProjectModal = ({ open, handleClose }:Props) => (
   <Box>
     <Modal

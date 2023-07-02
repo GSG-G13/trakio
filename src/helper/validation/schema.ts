@@ -29,3 +29,8 @@ export const signupSchema = Yup.object().shape({
     .max(50, 'Password must be less than 50 characters')
     .required('Password is required'),
 });
+
+export const addProjectSchema = Yup.object().shape({
+  title: Yup.string().min(3).max(250).required(),
+  description: Yup.string().min(10).max(600).required(),
+});
