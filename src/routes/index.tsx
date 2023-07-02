@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { Box } from '@mui/material';
 import {
   HomePage,
   LoginPage,
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomeLayout />,
+    errorElement: <Box>Error 404</Box>,
     children: [
       {
         index: true,
