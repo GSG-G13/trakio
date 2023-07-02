@@ -1,4 +1,4 @@
-import AccountInput from './AccountInput';
+import { AccountInput, ProjectInput } from './AccountInput';
 import Login from './Login';
 import TaskTable from './TaskTable/TaskTable';
 import TaskRow from './TaskTable/TaskRow';
@@ -27,4 +27,5 @@ export {
   OverviewContent,
   SuccessAlert,
   ErrorAlert,
+  ProjectInput,
 };

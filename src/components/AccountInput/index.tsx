@@ -10,5 +10,13 @@ const AccountInput = ({ label, value }: {label: string, value: string}) => (
     <WrapInput value={value} />
   </Box>
 );
+const ProjectInput = ({ label }: {label: string}) => (
+  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Typography color={THEME.palette.custom.white} sx={{ marginBottom: '1vw' }}>
+      {label}
+    </Typography>
+    <WrapInput />
+  </Box>
+);
 
-export default AccountInput;
+export { AccountInput, ProjectInput };

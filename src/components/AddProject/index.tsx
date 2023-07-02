@@ -1,8 +1,8 @@
 import { Box, Typography, Modal } from '@mui/material';
 import { DesTextArea, WrapBox } from './addProject.styled.tsx';
 import THEME from '../../theme';
-import { AccountInput } from '..';
 import { WrappBtn } from '../AccountInput/acount.styled';
+import { ProjectInput } from '../index.ts';
 
 interface Props {
   open: boolean;
@@ -19,7 +19,7 @@ const AddProjectModal = ({ open, handleClose }:Props) => (
     >
       <WrapBox>
         <Box>
-          <AccountInput label="Title" />
+          <ProjectInput label="Title" />
           <Typography sx={{ marginTop: '1vw', color: THEME.palette.custom.white }}>
             Description
             <br />
