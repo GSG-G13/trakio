@@ -3,18 +3,16 @@ import { Box } from '@mui/material';
 // import PermanentAppBar from '../AppBar';
 import MainComponent from './layout.styled';
 import Sidebar from '../Sidebar';
-import { ProjectTabBar, TaskTabBar } from '..';
+import { TabBar } from '..';
 
 const Layout = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* <PermanentAppBar /> */}
       <Sidebar />
       <MainComponent component="main">
-        {location.pathname.split('/')[1] === 'mytask' && <TaskTabBar />}
-        {location.pathname.split('/')[1] === 'project' && <ProjectTabBar />}
+        {(pathname.split('/')[1] === 'mytask' || pathname.split('/')[1] === 'project') && <TabBar />}
         <Outlet />
       </MainComponent>
     </Box>

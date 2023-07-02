@@ -13,6 +13,7 @@ import OverviewContent from './OverviewContent';
 import { SuccessAlert, ErrorAlert } from './Alerts';
 import TaskTabBar from './TaskTabBar';
 import ProjectTabBar from './ProjectTabBar';
+import TabBar from './TabBar';
 
 export {
   TaskTable,
@@ -31,4 +32,5 @@ export {
   ErrorAlert,
   TaskTabBar,
   ProjectTabBar,
+  TabBar,
 };
