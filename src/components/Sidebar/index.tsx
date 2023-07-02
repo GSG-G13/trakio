@@ -83,15 +83,15 @@ const Sidebar = () => {
               p: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem',
             }}
           >
-            <ProjectTextItem sx={{ color: 'custom.white' }}>
-              <NavLink to="/myproject">
+            <ProjectTextItem sx={{ display: 'flex', justifyContent: 'space-between', color: 'custom.white' }}>
+              <Typography sx={{ color: 'custom.white', fontSize: '18px' }}>
                 Projects
-                <NavLink to="/projects/addProject">
-                  <IconButton onClick={handleOpen} sx={{ marginLeft: '2rem' }}>
-                    <Add sx={{ fontSize: 24, color: 'custom.white' }} />
-                  </IconButton>
-                  <AddProjectModal open={open} handleClose={handleClose} />
-                </NavLink>
+              </Typography>
+              <NavLink to="/projects/addProject">
+                <IconButton onClick={handleOpen} sx={{ marginLeft: '2rem' }}>
+                  <Add sx={{ fontSize: 24, color: 'custom.white' }} />
+                </IconButton>
+                <AddProjectModal open={open} handleClose={handleClose} />
               </NavLink>
             </ProjectTextItem>
             {projects.slice(0, 3).map((project) => (
@@ -103,7 +103,7 @@ const Sidebar = () => {
                 </ListItem>
               </NavLink>
             ))}
-            {projects.length > 3 && (
+            {projects.length > 4 && (
               <ListItem disablePadding>
                 <ListItemButton sx={{ fontSize: '16px' }} onClick={handleViewMore}>
                   <ListItemTextItem primary="View More" />
@@ -111,10 +111,11 @@ const Sidebar = () => {
               </ListItem>
             )}
           </List>
-          <Box sx={{ mb: 2, mx: 1 }}>
-            <Typography sx={{ color: 'custom.fontGray' }}>
+          <Divider sx={{ bgcolor: 'custom.white', opacity: '.2' }} />
+          <Box sx={{ mb: 2, mx: 3, mt: 2 }}>
+            {/* <Typography sx={{ color: 'custom.white', fontSize: '18px' }}>
               Others
-            </Typography>
+            </Typography> */}
             <NavItem path="/logout" title="Logout" icon={<MdLogout />} />
           </Box>
         </DrawerItem>

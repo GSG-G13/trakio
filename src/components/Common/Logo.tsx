@@ -10,6 +10,13 @@ const Logo = (({ sx }: any) => (
         width: 40, height: 40, cursor: 'pointer', ...sx,
       }}
     />
+    {/* <Box
+      component="img"
+      src="../../../public/assets/logoo.png"
+      sx={{
+        width: 130, height: 35, cursor: 'pointer', ...sx, marginLeft: '-1px',
+      }}
+    /> */}
   </Link>
 ));
 

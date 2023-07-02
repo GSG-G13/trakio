@@ -17,7 +17,7 @@ const NAV_LIST = [
     ),
   }, {
     title: 'Projects',
-    path: '/myprojects',
+    path: '/myproject',
     icon: (
       <MdDashboard style={{ fontSize: 24 }} sx={{ color: 'custom.white' }} />
     ),
