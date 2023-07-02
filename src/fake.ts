@@ -134,7 +134,7 @@ const data = [
 const account = {
   displayName: 'Nada Abuzaid',
   email: 'nada@gmail.com',
-  photoURL: '/assets/avatars/avatar_default.jpg',
+  photoURL: '../public/assets/avatars/avatar_default.jpg',
   role: 'programmer',
 };
 

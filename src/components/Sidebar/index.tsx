@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   Box,
-  Typography,
   Divider,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
-  CardMedia,
   IconButton,
+  Typography,
 } from '@mui/material';
 import { Add } from '@mui/icons-material';
+import { MdLogout } from 'react-icons/md';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import PermanentAppBar from '../AppBar';
 import {
@@ -23,9 +22,8 @@ import AddProjectModal from '../AddProject';
 import { ErrorAlert } from '..';
 import { iProjects } from '../../interfaces';
 import { NAV_LIST } from '../../constants';
-// import { Logo, NavItem } from '../Common';
-// import UserCard from '../UserCard';
-import ReactLogo from '../../../public/assets/logo.svg';
+import { Logo, NavItem } from '../Common';
+import UserCard from '../UserCard';
 
 const Sidebar = () => {
   const [projects, setProjects] = useState<iProjects[]>([]);
@@ -61,31 +59,30 @@ const Sidebar = () => {
       />
       <Box sx={{ display: 'flex' }}>
         <DrawerItem variant="permanent" anchor="left">
-          <Typography>
-            <CardMedia
-              component="img"
-              alt="Trackio"
-              image={ReactLogo}
-              sx={{ marginTop: '15px', width: '70%', marginLeft: '9px' }}
-            />
-          </Typography>
-          <Divider />
-          <List>
-            {NAV_LIST.map((nav) => (
-              <NavLink to={nav.path} key={nav.title} style={{ textDecoration: 'none' }}>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon sx={{ minWidth: '42px' }}>
-                      {nav.icon}
-                    </ListItemIcon>
-                    <ListItemTextItem primary={nav.title} />
-                  </ListItemButton>
-                </ListItem>
-              </NavLink>
+          <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
+            <Logo />
+          </Box>
+          <Box sx={{ mb: 2, mx: 2.5 }}>
+            <UserCard />
+          </Box>
+          <Divider sx={{ bgcolor: 'custom.white', opacity: '.2' }} />
+          <List
+            disablePadding
+            sx={{
+              p: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem',
+            }}
+          >
+            {NAV_LIST.map(({ title, path, icon }: any) => (
+              <NavItem key={title} path={path} title={title} icon={icon} />
             ))}
           </List>
-          <Divider />
-          <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
+          <Divider sx={{ bgcolor: 'custom.white', opacity: '.2' }} />
+          <List
+            disablePadding
+            sx={{
+              p: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem',
+            }}
+          >
             <ProjectTextItem sx={{ color: 'custom.white' }}>
               <NavLink to="/myproject">
                 Projects
@@ -97,7 +94,7 @@ const Sidebar = () => {
                 </NavLink>
               </NavLink>
             </ProjectTextItem>
-            {projects.slice(0, 5).map((project) => (
+            {projects.slice(0, 3).map((project) => (
               <NavLink to={`/project/${project.project_id}`} style={{ textDecoration: 'none' }}>
                 <ListItem key={project.project_id} disablePadding>
                   <ListItemButton sx={{ fontSize: '16px' }}>
@@ -106,7 +103,7 @@ const Sidebar = () => {
                 </ListItem>
               </NavLink>
             ))}
-            {projects.length > 5 && (
+            {projects.length > 3 && (
               <ListItem disablePadding>
                 <ListItemButton sx={{ fontSize: '16px' }} onClick={handleViewMore}>
                   <ListItemTextItem primary="View More" />
@@ -114,6 +111,12 @@ const Sidebar = () => {
               </ListItem>
             )}
           </List>
+          <Box sx={{ mb: 2, mx: 1 }}>
+            <Typography sx={{ color: 'custom.fontGray' }}>
+              Others
+            </Typography>
+            <NavItem path="/logout" title="Logout" icon={<MdLogout />} />
+          </Box>
         </DrawerItem>
       </Box>
     </>
