@@ -25,7 +25,7 @@ import {
 } from './sidebar.styled';
 import AddProjectModal from '../AddProject';
 import { ErrorAlert } from '..';
-import { Project } from '../../interfaces';
+import { iProjects } from '../../interfaces';
 
 const NavList = [
   {
@@ -48,7 +48,7 @@ const NavList = [
 ];
 
 const Sidebar = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<iProjects[]>([]);
   const navigator = useNavigate();
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
