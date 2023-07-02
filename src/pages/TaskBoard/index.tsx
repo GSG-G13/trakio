@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Grid, Box, Typography, Skeleton, Paper,
-} from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Lottie from 'react-lottie';
@@ -9,6 +7,7 @@ import { TaskCard } from '../../components';
 import { task } from '../../interfaces/task';
 import { ISection } from '../../interfaces';
 import empty from '../../lotties/empty.json';
+import TaskSkeleton from './TaskSkeleton';
 
 const TaskBoard = () => {
   const navigate = useNavigate();
@@ -23,10 +22,12 @@ const TaskBoard = () => {
     : '/api/tasks';
 
   useEffect(() => {
+    setLoading(true);
+
     axios.get('/api/sections').then((res) => {
       setSections(res.data.data);
     });
-    setLoading(true);
+
     axios
       .get(endpoint)
       .then((res) => {
@@ -69,44 +70,13 @@ const TaskBoard = () => {
                     backgroundColor: 'transparent',
                   },
                   '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: '#323239',
+                    backgroundColor: 'custom.gray',
                     borderRadius: '1rem',
                   },
                 }}
               >
                 {loading ? (
-                  <Paper
-                    sx={{
-                      backgroundColor: '#2E2E30',
-                      height: '180px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-around',
-                      padding: '12px',
-                      borderRadius: 3,
-                    }}
-                  >
-                    <Skeleton
-                      variant="rectangular"
-                      animation="wave"
-                      width="50px"
-                      sx={{ borderRadius: 1 }}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      animation="wave"
-                      width="100%"
-                      height="20px"
-                      sx={{ borderRadius: 1 }}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      animation="wave"
-                      width="100%"
-                      height="60px"
-                      sx={{ borderRadius: 1 }}
-                    />
-                  </Paper>
+                  <TaskSkeleton />
                 ) : (
                   tasks
                     ?.filter((item: task) => item.section === section.section)
