@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 const MainComponent = styled(Box)(() => ({
   marginLeft: '3.4rem',
-  marginTop: '10rem',
+  // marginTop: '10rem',
   flexGrow: 1,
 }));
 

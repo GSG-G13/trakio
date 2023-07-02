@@ -11,6 +11,9 @@ import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
 import OverviewContent from './OverviewContent';
 import { SuccessAlert, ErrorAlert } from './Alerts';
+import TaskTabBar from './TaskTabBar';
+import ProjectTabBar from './ProjectTabBar';
+import TabBar from './TabBar';
 
 export {
   TaskTable,
@@ -27,4 +30,7 @@ export {
   OverviewContent,
   SuccessAlert,
   ErrorAlert,
+  TaskTabBar,
+  ProjectTabBar,
+  TabBar,
 };

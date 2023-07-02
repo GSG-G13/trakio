@@ -8,7 +8,7 @@ import {
 
 const HomePage = () => (
   <>
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', marginTop: '5rem' }}>
       <Box>
         <WelcomeCard />
         <Box sx={{ display: 'flex', gap: '.75rem', width: '48.75rem' }}>
