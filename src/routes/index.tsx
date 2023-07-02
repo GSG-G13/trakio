@@ -8,7 +8,7 @@ import {
   SignupPage,
   Overview,
 } from '../pages';
-import { ProjectsCards, TaskTable, ProjectsCard } from '../components';
+import { ProjectsCards, TaskTable } from '../components';
 
 import HomeLayout from '../layout';
 
@@ -20,19 +20,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
-      },
-      {
-        path: '/projects',
-        children: [
-          {
-            index: true,
-            element: <ProjectsCards />,
-          },
-        ],
-      },
-      {
-        path: '/overview',
-        element: <Overview />,
       },
       {
         path: '/mytask',
@@ -57,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/myproject',
-        element: <ProjectsCard />,
+        element: <ProjectsCards />,
       },
       {
         path: '/project/:id',
