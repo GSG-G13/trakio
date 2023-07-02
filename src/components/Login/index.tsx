@@ -4,7 +4,7 @@ import {
   BodyContainer, CustomContainer, CustomTypography1,
   CustomTypography2, FormContent, DontHaveAcount, SignupText,
 } from './login.styled';
-import ReactLogo from '../../assets/logo.svg';
+import ReactLogo from '../../../public/assets/logo.svg';
 
 const Login = () => (
   <BodyContainer>

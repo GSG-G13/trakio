@@ -1,18 +1,13 @@
 import { Drawer, ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import drawerWidth from '../../constants';
+import { DRAWER_WIDTH } from '../../constants';
 
 export const DrawerItem = styled(Drawer)(({ theme: { palette: { secondary } } }) => ({
-  width: drawerWidth,
+  width: DRAWER_WIDTH,
   flexShrink: 0,
   '& .MuiDrawer-paper': {
-    width: drawerWidth,
+    width: DRAWER_WIDTH,
     boxSizing: 'border-box',
-    borderRadius: '35px',
-    border: '1px solid transparent',
-    margin: '32px',
-    overflowY: 'initial',
-    height: '92%',
     background: secondary.main,
   },
 }));

@@ -11,12 +11,8 @@ import {
   CardMedia,
   IconButton,
 } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Add } from '@mui/icons-material';
 import { NavLink, useNavigate } from 'react-router-dom';
-import ReactLogo from '../../assets/logo.svg';
 // import PermanentAppBar from '../AppBar';
 import {
   DrawerItem,
@@ -26,26 +22,10 @@ import {
 import AddProjectModal from '../AddProject';
 import { ErrorAlert } from '..';
 import { iProjects } from '../../interfaces';
-
-const NavList = [
-  {
-    title: 'Home',
-    path: '/',
-    icon: <HomeIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
-  },
-  {
-    title: 'Tasks',
-    path: '/mytask',
-    icon: (
-      <FormatListNumberedIcon sx={{ fontSize: 24, color: 'custom.white' }} />
-    ),
-  },
-  {
-    title: 'Account',
-    path: '/account',
-    icon: <AccountCircleIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
-  },
-];
+import { NAV_LIST } from '../../constants';
+// import { Logo, NavItem } from '../Common';
+// import UserCard from '../UserCard';
+import ReactLogo from '../../../public/assets/logo.svg';
 
 const Sidebar = () => {
   const [projects, setProjects] = useState<iProjects[]>([]);
@@ -91,7 +71,7 @@ const Sidebar = () => {
           </Typography>
           <Divider />
           <List>
-            {NavList.map((nav) => (
+            {NAV_LIST.map((nav) => (
               <NavLink to={nav.path} key={nav.title} style={{ textDecoration: 'none' }}>
                 <ListItem disablePadding>
                   <ListItemButton>
