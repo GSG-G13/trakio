@@ -9,7 +9,8 @@ import {
   SignupPage,
   Overview,
 } from '../pages';
-import { ProjectsCard, TaskTable } from '../components';
+import { ProjectsCards, TaskTable } from '../components';
+
 import HomeLayout from '../layout';
 
 const router = createBrowserRouter([
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/myproject',
-        element: <ProjectsCard />,
+        element: <ProjectsCards />,
       },
       {
         path: '/project/:id',
