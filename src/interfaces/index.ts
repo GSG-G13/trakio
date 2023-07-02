@@ -1,7 +1,7 @@
 import { iTask, task } from './task';
-import iProjects from './projects';
+import { iProjects, Props } from './projects';
 import iProjectTasks from './projectTasks';
 
 export type {
-  iTask, iProjects, iProjectTasks, task,
+  iTask, iProjects, iProjectTasks, task, Props,
 };

@@ -1,5 +1,5 @@
 import {
-  CardContent, Typography, Skeleton,
+  CardContent, Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import {
 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert } from '..';
+import Loader from './Loader';
 
 const ProjectsCard = () => {
   const [userProjects, setUserProjects] = useState<iProjects[]>([]);
@@ -30,16 +31,11 @@ const ProjectsCard = () => {
         const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`/api/project/${project.project_id}/task`)
           .then((task) => task.data.data));
 
-        Promise.all(fetchProjectTasks)
-          .then((tasks) => {
-            setProjectTasks(tasks);
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            setOpenError(true);
-            setMessageError(error.response.data.message);
-            setIsLoading(false);
-          });
+        return Promise.all(fetchProjectTasks);
+      })
+      .then((tasks) => {
+        setProjectTasks(tasks);
+        setIsLoading(false);
       })
       .catch((error) => {
         setOpenError(true);
@@ -49,26 +45,9 @@ const ProjectsCard = () => {
   }, []);
 
   if (isLoading) {
-    const skeletonCards = Array.from({ length: userProjects.length }, (_, index) => (
-      <Wrapper2 key={index}>
-        <CardContent>
-          <Skeleton variant="text" width="50%" height={24} animation="wave" />
-          <Skeleton variant="text" width="100%" height={58} animation="wave" />
-        </CardContent>
-        <WrappBtn>
-          <WrapperBtnUD>
-            <Skeleton variant="text" width="30%" height={16} animation="wave" />
-          </WrapperBtnUD>
-          <WrappBtnDone>
-            <Skeleton variant="text" width="30%" height={16} animation="wave" />
-          </WrappBtnDone>
-        </WrappBtn>
-      </Wrapper2>
-    ));
-
     return (
       <Wrapper>
-        {skeletonCards}
+        <Loader userProjets={userProjects} />
       </Wrapper>
     );
   }

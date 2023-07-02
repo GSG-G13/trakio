@@ -6,4 +6,8 @@ interface iProjects {
   role: string,
 }
 
-export default iProjects;
+interface Props {
+  userProjets :iProjects[];
+}
+
+export type { iProjects, Props };
