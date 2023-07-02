@@ -10,6 +10,7 @@ const Logo = (({ sx }: any) => (
         width: 40, height: 40, cursor: 'pointer', ...sx,
       }}
     />
+    {/* //!this comment is just for deciding if we need the logo or not then i will remove it */}
     {/* <Box
       component="img"
       src="../../../public/assets/logoo.png"
