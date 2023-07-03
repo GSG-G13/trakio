@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import myImage from '../../assets/description.svg';
+import myImage from '/assets/description.svg';
 import {
   DescriptionCardBox, DescriptionImageCard, CardImage, ContentCard,
 } from './description.styled';

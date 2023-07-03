@@ -118,7 +118,7 @@ const LoginForm = () => {
             Sign in with Google
           </GooglePlusButton>
 
-          <LoginImage src="src/assets/todo.svg" alt="login" />
+          <LoginImage src="/assets/todo.svg" alt="login" />
         </Form>
       </Formik>
     </>
