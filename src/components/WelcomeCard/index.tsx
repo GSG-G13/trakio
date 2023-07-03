@@ -27,7 +27,7 @@ const WelcomeCard = () => {
         </CardContent>
         <CardActions>
           <CardButton onClick={handleOpen} variant="contained">
-            Today&apos;s Scedule
+            Add Project
           </CardButton>
           <AddProjectModal open={open} handleClose={handleClose} />
         </CardActions>

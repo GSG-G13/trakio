@@ -1,8 +1,11 @@
 import {
+  Box,
   CardContent, Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Lottie from 'react-lottie';
+import empty from '../../lotties/empty.json';
 import {
   WrappBtnDone,
   Wrapper2,
@@ -59,8 +62,33 @@ const ProjectsCard = () => {
         message={messageError}
         setOpen={setOpenError}
       />
-      {userProjects.map((project: iProjects, index: number) => {
-        const todoTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section === 'To-Do')?.length;
+      {!userProjects.length && !isLoading ? (
+        <Box
+          width="65vw"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography fontSize={24} fontWeight={700} mb={4} color="custom.gray">
+            No Projects
+          </Typography>
+          <Lottie
+            height={500}
+            width={500}
+            options={{
+              animationData: empty,
+              loop: true,
+              autoplay: true,
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+              },
+            }}
+          />
+        </Box>
+      ) : userProjects.map((project: iProjects, index: number) => {
+        const todoTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section !== 'Done')?.length;
         const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
         return (
           <Wrapper2 key={project.project_id}>
