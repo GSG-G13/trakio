@@ -3,7 +3,7 @@ import {
   CardActions,
   CardContent,
 } from '@mui/material';
-import myImage from '../../assets/welcome.svg';
+import myImage from '/assets/welcome.svg';
 import {
   BasicCardBox, CardText, ContentCard, CardTitle, CardButton, ImageCard, CardImage,
 } from './card.styled';

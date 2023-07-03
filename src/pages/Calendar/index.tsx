@@ -1,25 +1,34 @@
+import { useState, useEffect } from 'react';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import FullCalender from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { Box } from '@mui/material';
-import THEME from '../../theme';
-import iTask from '../../interfaces';
+import axios from 'axios';
+import { task } from '../../interfaces';
 
-const Calendar = ({ tasks }: iTask) => {
-  const colors: string[] = ['#FF0000',
-    '#00FF00',
-    '#0000FF',
-    '#FF00FF',
-    '#00FFFF',
-    '#800080',
-    '#FFA500',
-    '#008000',
-    '#800000',
-    '#FFC0CB',
-    '#000080'];
+const Calendar = () => {
+  const [tasks, setTasks] = useState<task[]>([]);
+  const navigator = useNavigate();
+  const { pathname } = useLocation();
+  const { id } = useParams();
+  const endpoint = pathname.includes('project')
+    ? `/api/project/${id}/task`
+    : '/api/tasks';
+
+  useEffect(() => {
+    axios
+      .get(endpoint)
+      .then((res) => {
+        setTasks(res.data.data);
+      })
+      .catch((err) => {
+        navigator('/', { state: { error: err.response.data.message } });
+      });
+  }, [pathname]);
 
   return (
-    <Box color={THEME.palette.custom.gray}>
+    <Box color="custom.white">
       <FullCalender
         plugins={[dayGridPlugin, timeGridPlugin]}
         initialView="dayGridMonth"
@@ -28,14 +37,13 @@ const Calendar = ({ tasks }: iTask) => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay',
         }}
-        events={
-          tasks?.map((task) => ({
-            title: task.title,
-            start: task.created_at,
-            end: task.due_date,
-            color: colors[Math.floor(Math.random() * colors.length)],
-          }))
-        }
+        events={tasks?.map((item) => ({
+          title: `Assignee: ${item.name} | Title: ${item.title}`,
+          description: item.name,
+          start: item.created_at,
+          end: item.due_date,
+          color: item.color,
+        }))}
       />
     </Box>
   );
