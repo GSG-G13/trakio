@@ -49,7 +49,7 @@ export const WrapperDes = styled(Typography)(({ theme: { palette: { custom } } }
 
 export const WrapperApp = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
   background: custom.background,
-  marginTop: '-2rem',
+  marginTop: '5rem',
   marginLeft: '-2rem',
 }));
 
@@ -57,7 +57,7 @@ export const WrapperH1 = styled(Typography)(({ theme: { palette: { custom } } })
   color: custom.white,
   fontSize: '1.5em',
   marginTop: '-8vh',
-  marginBottom: '1vw',
+  marginBottom: '2rem',
   marginLeft: '1vw',
 }));
 
