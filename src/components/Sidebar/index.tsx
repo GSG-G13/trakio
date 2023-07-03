@@ -44,7 +44,7 @@ const Sidebar = () => {
       .then((data) => {
         setOpenSuccess(true);
         setMessageSuccess(data.data.message);
-        navigate('/login');
+        navigate('/login', { state: { success: 'Logout Successfully' } });
       })
       .catch((error) => {
         setOpenError(true);
@@ -95,6 +95,7 @@ const Sidebar = () => {
             </ProjectTextItem>
             {projects.map(({ title, project_id }) => (
               <NavItem
+                key={project_id}
                 path={`/project/${project_id}`}
                 title={title}
               />
