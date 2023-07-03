@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   Box,
@@ -12,16 +13,19 @@ import {
   DrawerItem,
   ProjectTextItem,
 } from './sidebar.styled';
-import { ErrorAlert } from '..';
+import { ErrorAlert, SuccessAlert } from '..';
 import { iProjects } from '../../interfaces';
 import { NAV_LIST } from '../../constants';
 import { Logo, NavItem } from '../Common';
 import UserCard from '../UserCard';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<iProjects[]>([]);
+  const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
+  const [messageSuccess, setMessageSuccess] = useState('');
 
   useEffect(() => {
     axios
@@ -35,8 +39,26 @@ const Sidebar = () => {
       });
   }, []);
 
+  const handleLogout = () => {
+    axios.get('/api/logout')
+      .then((data) => {
+        setOpenSuccess(true);
+        setMessageSuccess(data.data.message);
+        navigate('/login');
+      })
+      .catch((error) => {
+        setOpenError(true);
+        setMessageError(error.response.data.message);
+      });
+  };
+
   return (
     <>
+      <SuccessAlert
+        open={openSuccess}
+        message={messageSuccess}
+        setOpen={setOpenSuccess}
+      />
       <ErrorAlert
         open={openError}
         message={messageError}
@@ -83,7 +105,7 @@ const Sidebar = () => {
             <Typography sx={{ color: 'custom.fontGray', fontSize: '16px' }}>
               Others
             </Typography>
-            <NavItem path="/logout" title="Logout" icon={<MdLogout />} />
+            <NavItem path="/logout" title="Logout" icon={<MdLogout />} onClick={handleLogout} />
           </Box>
         </DrawerItem>
       </Box>
