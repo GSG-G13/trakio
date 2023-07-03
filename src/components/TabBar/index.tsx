@@ -44,7 +44,7 @@ const TabBar = () => {
               width: '100%',
             }}
           >
-            <Typography variant="h6">{title}</Typography>
+            <Typography variant="h6">{title?.split(' ')[0]}</Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               {tabs.map((tab, index) => (
                 <NavLink

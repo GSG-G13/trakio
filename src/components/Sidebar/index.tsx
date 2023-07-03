@@ -74,7 +74,7 @@ const Sidebar = () => {
             {projects.map(({ title, project_id }) => (
               <NavItem
                 path={`/project/${project_id}`}
-                title={title}
+                title={title.split(' ')[0]}
               />
             ))}
           </List>
