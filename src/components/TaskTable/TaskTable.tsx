@@ -11,10 +11,12 @@ import {
   Box,
 } from '@mui/material';
 import axios from 'axios';
+import Lottie from 'react-lottie';
 import { TaskRow } from '../index';
 import { task } from '../../interfaces';
 import Theme from '../../theme';
 import TaskRowSkeleton from './TaskRowSkeleton';
+import empty from '../../lotties/empty.json';
 
 const TaskTable = () => {
   const [tasks, setTasks] = useState<task[]>([]);
@@ -47,7 +49,32 @@ const TaskTable = () => {
       });
   }, [pathname]);
 
-  return (
+  return !tasks.length && !loading ? (
+    <Box
+      width="100%"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Typography fontSize={24} fontWeight={700} mb={4} color="custom.gray">
+        No Tasks
+      </Typography>
+      <Lottie
+        height={500}
+        width={500}
+        options={{
+          animationData: empty,
+          loop: true,
+          autoplay: true,
+          rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+          },
+        }}
+      />
+    </Box>
+  ) : (
     <TableContainer
       component={Box}
       bgcolor="transparent"
@@ -85,9 +112,11 @@ const TaskTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {loading ? <TaskRowSkeleton /> : tasks.map((item) => (
-            <TaskRow key={item.id} data={item} />
-          ))}
+          {loading ? (
+            <TaskRowSkeleton />
+          ) : (
+            tasks.map((item) => <TaskRow key={item.id} data={item} />)
+          )}
         </TableBody>
       </Table>
     </TableContainer>
