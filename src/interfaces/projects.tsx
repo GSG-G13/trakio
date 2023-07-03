@@ -10,8 +10,18 @@ interface Props {
   userProjets :iProjects[];
 }
 
+interface Props2 {
+  open: boolean;
+  handleClose : ()=>void;
+}
+
 interface Project {
   project_id?: string;
   title?: string;
 }
-export type { iProjects, Props, Project };
+export type {
+  iProjects,
+  Props,
+  Props2,
+  Project,
+};
