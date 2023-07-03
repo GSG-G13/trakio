@@ -1,5 +1,6 @@
 import React from 'react';
-import { createTheme } from '@mui/material/styles';
+import { alpha, createTheme } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
 
   interface ICustom {
     background: React.CSSProperties['color'];
@@ -14,6 +15,7 @@ import { createTheme } from '@mui/material/styles';
     darkFont: React.CSSProperties['color'];
     editIcon: React.CSSProperties['color'];
     deleteIcon: React.CSSProperties['color'];
+    selected: React.CSSProperties['color'];
 }
 declare module '@mui/material/styles' {
   interface PaletteOptions {
@@ -45,6 +47,7 @@ const THEME = createTheme({
       editIcon: '#3E7BFA',
       deleteIcon: '#FF3333',
       darkFont: '#455A64',
+      selected: alpha(grey[500], 0.12),
     },
   },
 

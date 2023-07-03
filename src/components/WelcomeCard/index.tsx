@@ -3,7 +3,7 @@ import {
   CardActions,
   CardContent,
 } from '@mui/material';
-import myImage from '../../assets/welcome.svg';
+import myImage from '/assets/welcome.svg';
 import {
   BasicCardBox, CardText, ContentCard, CardTitle, CardButton, ImageCard, CardImage,
 } from './card.styled';
@@ -27,7 +27,7 @@ const WelcomeCard = () => {
         </CardContent>
         <CardActions>
           <CardButton onClick={handleOpen} variant="contained">
-            Today&apos;s Scedule
+            Add Project
           </CardButton>
           <AddProjectModal open={open} handleClose={handleClose} />
         </CardActions>

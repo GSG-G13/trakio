@@ -1,5 +1,4 @@
 const data = [
-
   {
     id: 3,
     title: 'hello',
@@ -132,4 +131,11 @@ const data = [
   },
 ];
 
-export default data;
+const account = {
+  displayName: 'Nada Abuzaid',
+  email: 'nada@gmail.com',
+  photoURL: '/assets/avatars/avatar_default.jpg',
+  role: 'programmer',
+};
+
+export { data, account };
