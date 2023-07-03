@@ -11,7 +11,7 @@ import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
 import { SuccessAlert, ErrorAlert } from './Alerts';
 import TabBar from './TabBar';
-import { TitleAndDesc, OverviewTaskCard } from './OverviewContent';
+import { TitleAndDesc, OverviewTaskCard, Member } from './OverviewContent';
 
 export {
   TaskTable,
@@ -31,4 +31,5 @@ export {
   TabBar,
   TitleAndDesc,
   OverviewTaskCard,
+  Member,
 };
