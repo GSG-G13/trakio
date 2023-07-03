@@ -1,42 +1,35 @@
-import { useState } from 'react';
-import { Box, Typography, Modal } from '@mui/material';
+import {
+  Button, Modal, Box, Typography, TextField,
+} from '@mui/material';
 import axios from 'axios';
-import { Form, Formik } from 'formik';
-import { DesTextArea, WrapBox } from './addProject.styled.tsx';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
+import { useState } from 'react';
+import { ErrorAlert, SuccessAlert } from '..';
 import THEME from '../../theme';
-import { AccountInput, ErrorAlert, SuccessAlert } from '..';
-import { WrappBtn } from '../AccountInput/acount.styled';
-import { addProjectSchema } from '../../helper/validation/schema.ts';
+import { addProjectSchema } from '../../helper/validation/schema';
+import { Props2 } from '../../interfaces';
 
-interface Props {
-  open: boolean;
-  handleClose : ()=>void;
-}
-
-interface addProject {
-  title: string,
-  description: string,
-}
-
-const AddProjectModal = ({ open, handleClose }:Props) => {
+const AddProjectModal = ({ open, handleClose }:Props2) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
 
-  const handleAddProject = (values: addProject) => {
+  const handleSubmit = (values: any) => {
     axios
       .post('/api/project', values)
       .then((res) => {
-        console.log(res.data);
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
       })
       .catch((err) => {
         setOpenError(true);
         setMessageError(err.response.data.message);
-      });
+      }); handleClose();
   };
+
   return (
     <Box>
       <SuccessAlert
@@ -49,36 +42,58 @@ const AddProjectModal = ({ open, handleClose }:Props) => {
         message={messageError}
         setOpen={setOpenError}
       />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Formik
-          initialValues={{
-            title: '',
-            description: '',
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'custom.background',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 5,
           }}
-          validationSchema={addProjectSchema}
-          onSubmit={handleAddProject}
         >
-          <Form>
-            <WrapBox>
-              <Box>
-                <AccountInput label="Title" />
-                <Typography sx={{ marginTop: '1vw', color: THEME.palette.custom.white }}>
-                  Description
-                  <br />
-                  <DesTextArea name="description" cols={67} minRows={8} maxRows={15} sx={{ resize: 'none' }} />
-                </Typography>
-                <WrappBtn type="submit" sx={{ marginTop: '1vw' }}>
-                  Add
-                </WrappBtn>
-              </Box>
-            </WrapBox>
-          </Form>
-        </Formik>
+          <Typography variant="h6" mb={2} color="custom.white">
+            Add Project
+          </Typography>
+
+          <Formik
+            initialValues={{ title: '', description: '' }}
+            validationSchema={addProjectSchema}
+            onSubmit={handleSubmit}
+          >
+            <Form>
+              <Field
+                as={TextField}
+                name="title"
+                label="Title"
+                fullWidth
+                required
+                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+              />
+              <ErrorMessage name="title" component="div" color="custom.white" />
+
+              <Field
+                as={TextField}
+                name="description"
+                label="Description"
+                fullWidth
+                multiline
+                rows={4}
+                required
+                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+              />
+              <ErrorMessage name="description" component="div" color={THEME.palette.custom.white} />
+
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </Form>
+          </Formik>
+        </Box>
       </Modal>
     </Box>
   );
