@@ -28,10 +28,13 @@ export const StyledNavItemIcon = styled(ListItemIcon)({
   justifyContent: 'center',
 });
 
-export const NavItem = ({ title, path, icon }: {title: string, path:string, icon?: ReactNode}) => (
+export const NavItem = ({
+  title, path, icon, onClick,
+}: {title: string, path:string, icon?: ReactNode, onClick?: ()=> void}) => (
   <StyledNavItem
     component={NavLink}
     to={path}
+    onClick={onClick}
     sx={{
       '&.active': {
         color: 'custom.white',
