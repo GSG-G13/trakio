@@ -8,6 +8,7 @@ import {
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { MdOutlineEdit } from 'react-icons/md';
 import { task } from '../../interfaces';
+import THEME from '../../theme';
 
 const TaskRow = ({ data }: {data: task}) => (
   <TableRow>
@@ -65,7 +66,7 @@ const TaskRow = ({ data }: {data: task}) => (
       <IconButton>
         <Box bgcolor="rgba(62, 123, 250, 0.2)" borderRadius={2} padding={1}>
           <MdOutlineEdit
-            style={{ fontSize: 16, color: 'custom.editIcon' }}
+            style={{ fontSize: 16, color: THEME.palette.custom.editIcon }}
           />
         </Box>
       </IconButton>
@@ -73,7 +74,7 @@ const TaskRow = ({ data }: {data: task}) => (
       <IconButton>
         <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
           <RiDeleteBinLine
-            style={{ color: 'custom.deleteIcon', fontSize: 16 }}
+            style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
           />
         </Box>
       </IconButton>
