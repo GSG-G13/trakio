@@ -7,7 +7,7 @@ const AccountInput = ({ label }: {label: string}) => (
     <Typography color={THEME.palette.custom.white} sx={{ marginBottom: '1vw' }}>
       {label}
     </Typography>
-    <WrapInput />
+    <WrapInput type="title" name="title" />
   </Box>
 );
 
