@@ -28,7 +28,6 @@ export const StyledNavItemIcon = styled(ListItemIcon)({
   justifyContent: 'center',
 });
 
-// eslint-disable-next-line react/require-default-props
 export const NavItem = ({ title, path, icon }: {title: string, path:string, icon?: ReactNode}) => (
   <StyledNavItem
     component={NavLink}
@@ -44,7 +43,7 @@ export const NavItem = ({ title, path, icon }: {title: string, path:string, icon
   >
     {icon ? <StyledNavItemIcon>{icon && icon}</StyledNavItemIcon> : (
       <StyledNavItemIcon>
-        <MdDashboard style={{ fontSize: 22, color: 'custom.white' }} />
+        <MdDashboard style={{ fontSize: 18, color: 'custom.white' }} />
       </StyledNavItemIcon>
     )}
     <ListItemText disableTypography primary={title} />

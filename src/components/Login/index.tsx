@@ -1,10 +1,10 @@
 import { CardMedia } from '@mui/material';
+import ReactLogo from '/assets/logo.svg';
 import LoginForm from './LoginForm';
 import {
   BodyContainer, CustomContainer, CustomTypography1,
   CustomTypography2, FormContent, DontHaveAcount, SignupText,
 } from './login.styled';
-import ReactLogo from '../../../public/assets/logo.svg';
 
 const Login = () => (
   <BodyContainer>
@@ -26,10 +26,8 @@ const Login = () => (
     </CustomContainer>
     <DontHaveAcount>
       Don’t have an account?
-      {' '}
     </DontHaveAcount>
     <SignupText>
-      {' '}
       Signup
     </SignupText>
   </BodyContainer>
