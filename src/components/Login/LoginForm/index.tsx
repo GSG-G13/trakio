@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   EmailInput,
   PasswordInput,
@@ -21,20 +21,20 @@ interface LoginFormValues {
   email: string;
   password: string;
 }
+
 const LoginForm = () => {
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
-  const [messageSuccess, setMessageSuccess] = useState('');
   const [messageError, setMessageError] = useState('');
   const navigator = useNavigate();
 
   const handleSubmit = (values: LoginFormValues) => {
     axios
       .post('/api/login', values)
-      .then((res) => {
+      .then(() => {
         setOpenSuccess(true);
-        setMessageSuccess(res.data.message);
         if (!openSuccess) navigator('/');
       })
       .catch((err) => {
@@ -43,13 +43,21 @@ const LoginForm = () => {
       });
   };
 
+  useEffect(() => {
+    if (location.state && location.state.success && location.state.success.length) {
+      setOpenSuccess(true);
+    }
+  }, []);
+
   return (
     <>
-      <SuccessAlert
-        open={openSuccess}
-        message={messageSuccess}
-        setOpen={setOpenSuccess}
-      />
+      {location.state && location.state.success && (
+        <SuccessAlert
+          open={openSuccess}
+          message={location.state.success}
+          setOpen={setOpenSuccess}
+        />
+      )}
       <ErrorAlert
         open={openError}
         message={messageError}
@@ -68,7 +76,7 @@ const LoginForm = () => {
               label="Email address"
               variant="standard"
               placeholder="Enter your email address"
-              InputProps={{ disableUnderline: true }}
+              inputprops={{ disableUnderline: true }}
             />
             <EmailErrorMessage
               name="email"
