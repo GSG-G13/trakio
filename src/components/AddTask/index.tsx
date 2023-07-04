@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Modal,
@@ -6,7 +6,6 @@ import {
   Typography,
   TextField,
   InputLabel,
-  MenuItem,
   FormControl,
   Checkbox,
   Autocomplete,
@@ -20,31 +19,47 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import { top100Films } from '../../fake';
 import THEME from '../../theme';
 import { Props2 } from '../../interfaces';
+import { PRIORITIES } from '../../constants';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const AddTaskModal = ({ open, handleClose }: Props2) => {
-  const [section, setSection] = useState('');
-  const [priority, setPriority] = useState('');
+  const [sections, setSections] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const { pathname } = useLocation();
+  const projectId = pathname.split('/')[2];
 
-  const handleSectionChange = (event: SelectChangeEvent) => {
-    setSection(event.target.value);
+  const initailValues = {
+    title: '',
+    description: '',
+    projectId,
+    sectionId: '',
+    dueDate: new Date(Date.now()).toString(),
+    priorityId: '',
+    userId: 1,
   };
 
-  const handlePriorityChange = (event: SelectChangeEvent) => {
-    setPriority(event.target.value);
+  const handleSubmit = (values:any) => {
+    axios.post(`/api/project/${values.projectId}/task`, values)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
   };
-  const handleSubmit = () => {
-    const projectId = 12;
-    axios.post(`/api/project/${projectId}/task`)
-      .then((data) => console.log(data));
-  };
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get('/api/sections').then((values) => {
+      setLoading(false);
+      setSections(values.data.data);
+    }).catch(() => {
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <Box>
@@ -66,7 +81,10 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
             Add Task
           </Typography>
 
-          <Formik initialValues={{ title: '', description: '' }} onSubmit={handleSubmit}>
+          <Formik
+            initialValues={initailValues}
+            onSubmit={handleSubmit}
+          >
             <Form>
               <Field
                 as={TextField}
@@ -91,27 +109,29 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               <ErrorMessage name="description" component="div" color={THEME.palette.custom.white} />
               <FormControl sx={{ m: 1, minWidth: '46%' }} size="small">
                 <InputLabel id="demo-select-small-label">Section</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-small"
-                  value={section}
-                  label="Section"
-                  onChange={handleSectionChange}
-                >
-                  <MenuItem value={4}>Done</MenuItem>
-                </Select>
+                <Field as="select" name="sectionId">
+                  <option value="Select Section" disabled>
+                    Select Section
+                  </option>
+                  {!isLoading && sections.map(({ section, id }) => (
+                    <option value={id} key={id}>
+                      {section}
+                    </option>
+                  ))}
+                </Field>
               </FormControl>
               <FormControl sx={{ m: 1, minWidth: '46%' }} size="small">
                 <InputLabel id="demo-select-small-label">Priority</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-small"
-                  value={priority}
-                  label="priority"
-                  onChange={handlePriorityChange}
-                >
-                  <MenuItem value={1}>High</MenuItem>
-                </Select>
+                <Field as="select" name="priorityId">
+                  <option value="Select Priority" disabled>
+                    Select Priority
+                  </option>
+                  {!isLoading && PRIORITIES.map(({ priority, id }) => (
+                    <option value={id} key={id}>
+                      {priority}
+                    </option>
+                  ))}
+                </Field>
               </FormControl>
               <Autocomplete
                 multiple
