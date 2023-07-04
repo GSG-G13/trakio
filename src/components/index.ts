@@ -12,6 +12,7 @@ import Charts from './Charts';
 import OverviewContent from './OverviewContent';
 import { SuccessAlert, ErrorAlert } from './Alerts';
 import TabBar from './TabBar';
+import FloatingButton from './FloatingButton';
 
 export {
   TaskTable,
@@ -30,4 +31,5 @@ export {
   SuccessAlert,
   ErrorAlert,
   TabBar,
+  FloatingButton,
 };
