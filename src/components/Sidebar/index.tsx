@@ -1,103 +1,116 @@
-import { useState } from 'react';
+/* eslint-disable camelcase */
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   Box,
-  Typography,
   Divider,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  CardMedia,
-  IconButton,
+  Typography,
 } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Add } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom';
-import ReactLogo from '../../assets/logo.svg';
-import PermanentAppBar from '../AppBar';
+import { MdLogout } from 'react-icons/md';
 import {
   DrawerItem,
-  ListItemTextItem,
   ProjectTextItem,
 } from './sidebar.styled';
-import AddProjectModal from '../AddProject';
-
-const NavList = [
-  {
-    title: 'Home',
-    path: '/',
-    icon: <HomeIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
-  },
-  {
-    title: 'Tasks',
-    path: '/mytask',
-    icon: (
-      <FormatListNumberedIcon sx={{ fontSize: 24, color: 'custom.white' }} />
-    ),
-  },
-  {
-    title: 'Account',
-    path: '/account',
-    icon: <AccountCircleIcon sx={{ fontSize: 24, color: 'custom.white' }} />,
-  },
-];
+import { ErrorAlert, SuccessAlert } from '..';
+import { iProjects } from '../../interfaces';
+import { NAV_LIST } from '../../constants';
+import { Logo, NavItem } from '../Common';
+import UserCard from '../UserCard';
 
 const Sidebar = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+  const [projects, setProjects] = useState<iProjects[]>([]);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [messageError, setMessageError] = useState('');
+  const [messageSuccess, setMessageSuccess] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('/api/projects')
+      .then((response) => {
+        setProjects(response.data.data);
+      })
+      .catch((error) => {
+        setOpenError(true);
+        setMessageError(error.response.data.message);
+      });
+  }, []);
+
+  const handleLogout = () => {
+    axios.get('/api/logout')
+      .then((data) => {
+        setOpenSuccess(true);
+        setMessageSuccess(data.data.message);
+        navigate('/login', { state: { success: 'Logout Successfully' } });
+      })
+      .catch((error) => {
+        setOpenError(true);
+        setMessageError(error.response.data.message);
+      });
+  };
+
   return (
-    <Box sx={{ display: 'flex' }}>
-      <PermanentAppBar />
-      <DrawerItem variant="permanent" anchor="left">
-        <Typography>
-          <CardMedia
-            component="img"
-            alt="Trackio"
-            image={ReactLogo}
-            sx={{ marginTop: '15px', width: '70%', marginLeft: '9px' }}
-          />
-        </Typography>
-        <Divider />
-        <List>
-          {NavList.map((nav) => (
-            <NavLink to={nav.path} key={nav.title}>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon sx={{ minWidth: '42px' }}>
-                    {nav.icon}
-                  </ListItemIcon>
-                  <ListItemTextItem primary={nav.title} />
-                </ListItemButton>
-              </ListItem>
-            </NavLink>
-          ))}
-        </List>
-        <Divider />
-        <List sx={{ fontSize: '1.1rem', paddingLeft: '0.4rem' }}>
-          <ProjectTextItem sx={{ color: 'custom.white' }}>
-            <NavLink to="/myproject">
-              Projects
-              <NavLink to="/projects/addProject">
-                <IconButton onClick={handleOpen} sx={{ marginLeft: '2rem' }}>
-                  <Add sx={{ fontSize: 24, color: 'custom.white' }} />
-                </IconButton>
-                <AddProjectModal open={open} handleClose={handleClose} />
-              </NavLink>
-            </NavLink>
-          </ProjectTextItem>
-          {['project-A', 'Project1', 'Team 5'].map((text) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton sx={{ fontSize: '16px' }}>
-                <ListItemTextItem primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </DrawerItem>
-    </Box>
+    <>
+      <SuccessAlert
+        open={openSuccess}
+        message={messageSuccess}
+        setOpen={setOpenSuccess}
+      />
+      <ErrorAlert
+        open={openError}
+        message={messageError}
+        setOpen={setOpenError}
+      />
+      <Box sx={{ display: 'flex' }}>
+        <DrawerItem variant="permanent" anchor="left">
+          <Box sx={{ px: 2.5, py: 2, display: 'inline-flex' }}>
+            <Logo />
+          </Box>
+          <Box sx={{ mb: 2, mx: 2.5 }}>
+            <UserCard />
+          </Box>
+          <List
+            disablePadding
+            sx={{
+              p: 1, display: 'flex', flexDirection: 'column', gap: '0.6rem',
+            }}
+          >
+            {NAV_LIST.map(({ title, path, icon }: any) => (
+              <NavItem key={title} path={path} title={title} icon={icon} />
+            ))}
+          </List>
+          <List
+            disablePadding
+            sx={{
+              p: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem',
+            }}
+          >
+            <ProjectTextItem sx={{ display: 'flex', justifyContent: 'space-between', color: 'custom.white' }}>
+              <Typography sx={{ color: 'custom.fontGray', fontSize: '16px' }}>
+                Projects
+              </Typography>
+            </ProjectTextItem>
+            {projects.map(({ title, project_id }) => (
+              <NavItem
+                key={project_id}
+                path={`/project/${project_id}`}
+                title={title.split(' ')[0]}
+              />
+            ))}
+          </List>
+          <Divider sx={{ bgcolor: 'custom.white', opacity: '.2' }} />
+          <Box sx={{ mb: 2, mx: 3, mt: 2 }}>
+            <Typography sx={{ color: 'custom.fontGray', fontSize: '16px' }}>
+              Others
+            </Typography>
+            <NavItem path="/logout" title="Logout" icon={<MdLogout />} onClick={handleLogout} />
+          </Box>
+        </DrawerItem>
+      </Box>
+    </>
   );
 };
 

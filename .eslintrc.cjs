@@ -18,7 +18,14 @@ module.exports = {
     'linebreak-style': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
+    'react-hooks/exhaustive-deps': 'off',
     indent: ['error', 2],
-    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+    'react/function-component-definition': [
+      2,
+      { namedComponents: 'arrow-function' },
+    ],
+    'react/jsx-props-no-spreading': 'off',
+    'import/no-absolute-path': 'off',
+    'react/require-default-props': 'off',
   },
 };

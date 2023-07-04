@@ -17,12 +17,15 @@ export const Wrapper = styled(Card)(({ theme: { palette: { custom } } }) => ({
   padding: '0.8vw',
   marginLeft: '1vw',
 }));
+
 export const Wrapper2 = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
   background: custom.divider,
   borderRadius: 10,
   color: custom.white,
+  minWidth: '300px',
   maxWidth: '330px',
 }));
+
 export const WrapperPN = styled(Typography)(({ theme: { palette: { custom, primary } } }) => ({
   background: primary.main,
   color: custom.darkFont,
@@ -36,35 +39,42 @@ export const WrapperPN = styled(Typography)(({ theme: { palette: { custom, prima
   textAlign: 'center',
   fontWeight: 'bold',
 }));
+
 export const WrapperDes = styled(Typography)(({ theme: { palette: { custom } } }) => ({
   color: custom.gray,
-  // fontSize: '1vw',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 }));
+
 export const WrapperApp = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
   background: custom.background,
-  marginTop: '-2rem',
+  marginTop: '5rem',
   marginLeft: '-2rem',
-
-  // width: '30vw',
 }));
+
 export const WrapperH1 = styled(Typography)(({ theme: { palette: { custom } } }) => ({
   color: custom.white,
   fontSize: '1.5em',
   marginTop: '-8vh',
-  marginBottom: '1vw',
+  marginBottom: '2rem',
   marginLeft: '1vw',
 }));
+
 export const WrappBtnDone = styled(Button)(({ theme: { palette: { custom } } }) => ({
   color: custom.green,
 }));
+
 export const WrapperBtnUD = styled(Button)(({ theme: { palette: { custom } } }) => ({
   color: custom.orange,
 }));
+
 export const WrapperIc = styled(MdDashboard)(({ theme: { palette: { custom } } }) => ({
   color: custom.white,
   marginRight: '0.6vw',
 }));
-export const WrappBtn = styled(CardActions)(() => ({
+
+export const WrappBtn = styled(CardActions)({
   display: 'flex',
   justifyContent: 'flex-end',
-}));
+});

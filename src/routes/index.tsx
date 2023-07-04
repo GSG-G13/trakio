@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { Box } from '@mui/material';
 import {
   HomePage,
   LoginPage,
@@ -8,13 +9,15 @@ import {
   SignupPage,
   Overview,
 } from '../pages';
-import { ProjectsCard, TaskTable } from '../components';
+import { ProjectsCards, TaskTable } from '../components';
+
 import HomeLayout from '../layout';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomeLayout />,
+    errorElement: <Box>Error 404</Box>,
     children: [
       {
         index: true,
@@ -43,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/myproject',
-        element: <ProjectsCard />,
+        element: <ProjectsCards />,
       },
       {
         path: '/project/:id',
