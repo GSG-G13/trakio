@@ -1,50 +1,51 @@
-import { useState, useEffect } from 'react';
-import { Grid, Box, Typography } from '@mui/material';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Lottie from 'react-lottie';
-import { TaskCard } from '../../components';
-import { task } from '../../interfaces/task';
-import { ISection } from '../../interfaces';
-import empty from '../../lotties/empty.json';
-import TaskSkeleton from './TaskSkeleton';
+// import { useState, useEffect } from 'react';
+// import { Grid, Box, Typography } from '@mui/material';
+// import { useLocation, useParams, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import Lottie from 'react-lottie';
+// import { TaskCard } from '../../components';
+// import { task } from '../../interfaces/task';
+// import { ISection } from '../../interfaces';
+// import empty from '../../lotties/empty.json';
+// import TaskSkeleton from './TaskSkeleton';
 import EditTaskForm from '../../components/UpdateTask';
 
-const TaskBoard = () => {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const [tasks, setTasks] = useState<task[]>([]);
-  const [sections, setSections] = useState<ISection[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [emptyList, setEmptyList] = useState<boolean>(false);
-  const { id } = useParams();
-  const endpoint = pathname.includes('project')
-    ? `/api/project/${id}/task`
-    : '/api/tasks';
+const TaskBoard = () =>
+// const navigate = useNavigate();
+// const { pathname } = useLocation();
+// // const [tasks, setTasks] = useState<task[]>([]);
+// // const [sections, setSections] = useState<ISection[]>([]);
+// // const [loading, setLoading] = useState<boolean>(false);
+// // const [emptyList, setEmptyList] = useState<boolean>(false);
+// const { id } = useParams();
+// const endpoint = pathname.includes('project')
+//   ? `/api/project/${id}/task`
+//   : '/api/tasks';
 
-  useEffect(() => {
-    setLoading(true);
+// useEffect(() => {
+//   setLoading(true);
 
-    axios.get('/api/sections').then((res) => {
-      setSections(res.data.data);
-    });
+//   axios.get('/api/sections').then((res) => {
+//     setSections(res.data.data);
+//   });
 
-    axios
-      .get(endpoint)
-      .then((res) => {
-        setLoading(false);
-        setTasks(res.data.data);
-        if (!res.data.data.length) {
-          setEmptyList(true);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        navigate('/', { state: { error: err.response.data.message } });
-      });
-  }, [pathname]);
+//   axios
+//     .get(endpoint)
+//     .then((res) => {
+//       setLoading(false);
+//       setTasks(res.data.data);
+//       if (!res.data.data.length) {
+//         setEmptyList(true);
+//       }
+//     })
+//     .catch((err) => {
+//       setLoading(false);
+//       navigate('/', { state: { error: err.response.data.message } });
+//     });
+// }, [pathname]);
 
-  return (
+  // eslint-disable-next-line implicit-arrow-linebreak
+  (
     <>
       <EditTaskForm />
       {/* <Grid container spacing={2}>
@@ -120,6 +121,4 @@ const TaskBoard = () => {
       </Grid> */}
     </>
   );
-};
-
 export default TaskBoard;
