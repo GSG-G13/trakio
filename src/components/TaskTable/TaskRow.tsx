@@ -14,20 +14,20 @@ const TaskRow = ({ task }: iTask) => (
   <TableRow>
     <TableCell>
       <Typography variant="h6" color={Theme.palette.custom.white}>
-        {task.title.toUpperCase()}
+        {task?.title.toUpperCase()}
       </Typography>
     </TableCell>
 
     <TableCell align="right">
       <Typography variant="body1" color={Theme.palette.custom.fontGray}>
-        {task.project}
+        {task?.project}
       </Typography>
     </TableCell>
 
     <TableCell align="right">
       <Box
         component="div"
-        bgcolor={task.color}
+        bgcolor={task?.color}
         sx={{ padding: 1, borderRadius: 1.5, display: 'inline-block' }}
       >
         <Typography
@@ -35,7 +35,7 @@ const TaskRow = ({ task }: iTask) => (
           fontWeight={700}
           color={Theme.palette.custom.white}
         >
-          {task.priority.toUpperCase()}
+          {task?.priority.toUpperCase()}
         </Typography>
       </Box>
     </TableCell>
@@ -46,13 +46,13 @@ const TaskRow = ({ task }: iTask) => (
         color={Theme.palette.custom.white}
         fontWeight={700}
       >
-        {task.section}
+        {task?.section}
       </Typography>
     </TableCell>
 
     <TableCell align="right">
       <Typography variant="body1" color={Theme.palette.custom.fontGray}>
-        {task.due_date.split('T')[0]}
+        {task?.due_date.split('T')[0]}
       </Typography>
     </TableCell>
 
