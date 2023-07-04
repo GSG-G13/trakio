@@ -97,7 +97,7 @@ const Sidebar = () => {
               <NavItem
                 key={project_id}
                 path={`/project/${project_id}`}
-                title={title}
+                title={title.split(' ')[0]}
               />
             ))}
           </List>

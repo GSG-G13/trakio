@@ -20,7 +20,7 @@ const TaskRow = ({ data }: {data: task}) => (
 
     <TableCell align="center">
       <Typography fontSize={12} color="custom.fontGray">
-        {data.project}
+        {data.project.split(' ')[0]}
       </Typography>
     </TableCell>
 

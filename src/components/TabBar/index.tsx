@@ -12,7 +12,7 @@ const TabBar = () => {
   const tabs = isProjectTab ? TAPS_ARRAY : TAPS_ARRAY.splice(1, 4);
   const { id } = useParams();
   const [project, setProject] = useState<IProjectDetails>({});
-  const title = isProjectTab ? project.title : 'My Tasks';
+  const title = isProjectTab ? project.title : 'My-Tasks';
   const endpoint: string = isProjectTab ? `project/${id}` : 'mytask';
 
   useEffect(() => {
@@ -44,12 +44,12 @@ const TabBar = () => {
               width: '100%',
             }}
           >
-            <Typography variant="h6">{title}</Typography>
+            <Typography variant="h6">{title?.split(' ')[0]}</Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               {tabs.map((tab, index) => (
                 <NavLink
                   to={index === 0 ? endpoint : `/${endpoint}/${tab.toLowerCase()}`}
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: 'none', marginRight: '8px' }}
                   key={tab}
                   end
                 >
