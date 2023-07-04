@@ -73,7 +73,7 @@ const TaskCard = ({ task }: iTask) => (
         variant="h6"
         sx={{ color: 'primary.main' }}
       >
-        {task?.project}
+        {task?.project.split(' ')[0]}
       </Typography>
     </Box>
   </Paper>
