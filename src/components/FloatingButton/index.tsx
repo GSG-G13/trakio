@@ -2,7 +2,10 @@ import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
-const FloatingButton = () => (
+interface Props {
+  onClick : () => void;
+}
+const FloatingButton = ({ onClick }: Props) => (
   <Box sx={{
     '& > :not(style)': { m: 1 },
     position: 'fixed',
@@ -11,7 +14,7 @@ const FloatingButton = () => (
     zIndex: 9999,
   }}
   >
-    <Fab color="primary" aria-label="add">
+    <Fab onClick={onClick} color="primary" aria-label="add">
       <AddIcon />
     </Fab>
   </Box>
