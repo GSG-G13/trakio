@@ -1,89 +1,44 @@
-import { TaskBox, Label } from './updateTask';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { TextField } from '@mui/material';
+import {
+  TaskBox, Label, Date, Section, Textarea,
+} from './updateTask';
 
 const EditTaskForm = () => (
   <TaskBox>
     <Label sx={{ marginTop: '100px', fontSize: '20px', fontWeight: '600' }}> Task Title </Label>
     <Label sx={{ marginTop: '50px' }}> Assignee </Label>
+    <AccountCircleIcon sx={{
+      position: 'absolute', fontSize: 24, color: 'custom.white', top: '174px', left: '270px',
+    }}
+    />
     <Label> Due Date </Label>
+    <Date type="date" />
     <Label> Project </Label>
+    <Label sx={{
+      position: 'absolute', top: '240px', left: '210px', fontSize: '14px',
+    }}
+    >
+      Project Name
+    </Label>
     <Label> Section </Label>
+    <Section
+      disablePortal
+      id="combo-box-demo"
+      options={['To-Do', 'Doing', 'Reviewing', 'Done']}
+      renderInput={(params:any) => <TextField {...params} label="Add to section" />}
+    />
     <Label> Priority </Label>
+    <Section
+      disablePortal
+      sx={{ top: '400px' }}
+      id="combo-box-demo"
+      options={['To-Do', 'Doing', 'Reviewing', 'Done']}
+      renderInput={(params:any) => <TextField {...params} label="Add Priority " />}
+    />
     <Label> Description </Label>
-    {/* <TextField label="Title" />
-    <TextField label="Description" />
-    <TextField label="Project ID" />
-    <TextField label="Priority ID" />
-    <TextField label="Section ID" />
-    <TextField label="User ID" />
-    <Button variant="contained">Update Task</Button> */}
+    <Textarea />
   </TaskBox>
 );
-//   const [task, setTask] = useState({});
-//   const [title, setTitle] = useState('');
-//   const [description, setDescription] = useState('');
-//   const [projectId, setProjectId] = useState('');
-//   const [priorityId, setPriorityId] = useState('');
-//   const [sectionId, setSectionId] = useState('');
-//   const [userId, setUserId] = useState('');
-
-//   useEffect(() => {
-//     fetchTaskData(taskId)
-//       .then((data) => {
-//         setTask(data);
-//         setTitle(data.title);
-//         setDescription(data.description);
-//         setProjectId(data.projectId);
-//         setPriorityId(data.priorityId);
-//         setSectionId(data.sectionId);
-//         setUserId(data.userId);
-//       })
-//       .catch((error) => {
-//         console.error('Error fetching task data', error);
-//       });
-//   }, [taskId]);
-
-//   const handleTitleChange = (event) => {
-//     setTitle(event.target.value);
-//   };
-
-//   const handleDescriptionChange = (event) => {
-//     setDescription(event.target.value);
-//   };
-
-//   const handleProjectIdChange = (event) => {
-//     setProjectId(event.target.value);
-//   };
-
-//   const handlePriorityIdChange = (event) => {
-//     setPriorityId(event.target.value);
-//   };
-
-//   const handleSectionIdChange = (event) => {
-//     setSectionId(event.target.value);
-//   };
-
-//   const handleUserIdChange = (event) => {
-//     setUserId(event.target.value);
-//   };
-
-//   const handleFormSubmit = () => {
-//     const editedTask = {
-//       id: taskId,
-//       title: title,
-//       description: description,
-//       projectId: projectId,
-//       priorityId: priorityId,
-//       sectionId: sectionId,
-//       userId: userId,
-//     };
-
-//     updateTaskData(editedTask)
-//       .then((result) => {
-//         console.log('Task updated successfully', result);
-//       })
-//       .catch((error) => {
-//         console.error('Error updating task', error);
-//       });
-//   };
 
 export default EditTaskForm;
