@@ -40,7 +40,7 @@ const Overview = () => {
       <Grid item xs={4}>
         <Lottie
           height={180}
-          width={320}
+          width={300}
           options={{
             animationData: presenation,
             loop: true,
