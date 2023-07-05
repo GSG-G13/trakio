@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import Cookie from 'js-cookie';
+import { useNavigate, Link } from 'react-router-dom';
 import { CardMedia } from '@mui/material';
 import ReactLogo from '/assets/logo.svg';
-import { Link } from 'react-router-dom';
+
 import LoginForm from './LoginForm';
 import {
   BodyContainer,
@@ -12,29 +15,39 @@ import {
   SignupText,
 } from './login.styled';
 
-const Login = () => (
-  <BodyContainer>
-    <CardMedia
-      component="img"
-      alt="Trackio"
-      image={ReactLogo}
-      sx={{ marginTop: '46px', width: '150px', marginLeft: '-251px' }}
-    />
-    <CustomContainer>
-      <CustomTypography1 variant="h4" gutterBottom>
-        Start For Free
-      </CustomTypography1>
-      <CustomTypography2 variant="h3" gutterBottom>
-        Let’s Go !!
-      </CustomTypography2>
-      <FormContent />
-      <LoginForm />
-    </CustomContainer>
-    <DontHaveAcount>Don’t have an account?</DontHaveAcount>
-    <Link to="/signup">
-      <SignupText>Signup</SignupText>
-    </Link>
-  </BodyContainer>
-);
+const Login = () => {
+  const token = Cookie.get('token');
+  const navigator = useNavigate();
+  useEffect(() => {
+    if (token) {
+      navigator('/');
+    }
+  });
+
+  return (
+    <BodyContainer>
+      <CardMedia
+        component="img"
+        alt="Trackio"
+        image={ReactLogo}
+        sx={{ marginTop: '46px', width: '150px', marginLeft: '-251px' }}
+      />
+      <CustomContainer>
+        <CustomTypography1 variant="h4" gutterBottom>
+          Start For Free
+        </CustomTypography1>
+        <CustomTypography2 variant="h3" gutterBottom>
+          Let’s Go !!
+        </CustomTypography2>
+        <FormContent />
+        <LoginForm />
+      </CustomContainer>
+      <DontHaveAcount>Don’t have an account?</DontHaveAcount>
+      <Link to="/signup">
+        <SignupText>Signup</SignupText>
+      </Link>
+    </BodyContainer>
+  );
+};
 
 export default Login;

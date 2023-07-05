@@ -17,14 +17,14 @@ const Layout = () => {
     if (!token) {
       navigator('/login');
     }
-  }, [pathname]);
+  }, [pathname, token]);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <Sidebar />
       <MainComponent component="main">
         {(pathname.split('/')[1] === 'mytask'
-          || pathname.split('/')[1] === 'project') && <TabBar />}
+        || pathname.split('/')[1] === 'project') && <TabBar />}
         <Outlet />
       </MainComponent>
     </Box>
