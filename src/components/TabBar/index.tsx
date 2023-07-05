@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
   Avatar, Box, Grid, Typography,
 } from '@mui/material';
+import userContext from '../../UserContext/context';
 import { IProjectDetails } from '../../interfaces';
 
 const TabBar = () => {
@@ -14,6 +15,7 @@ const TabBar = () => {
   const [project, setProject] = useState<IProjectDetails>({});
   const title = isProjectTab ? project.title : 'My-Tasks';
   const endpoint: string = isProjectTab ? `project/${id}` : 'mytask';
+  const user = useContext(userContext);
 
   useEffect(() => {
     if (isProjectTab) {
@@ -33,7 +35,7 @@ const TabBar = () => {
               width: 36, height: 36, padding: '8px', backgroundColor: 'custom.green',
             }}
           >
-            KH
+            {user?.user?.name.slice(0, 2).toUpperCase()}
           </Avatar>
           <Box
             marginLeft={2}
