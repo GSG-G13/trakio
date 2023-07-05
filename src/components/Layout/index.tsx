@@ -1,19 +1,20 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 // import PermanentAppBar from '../AppBar';
+import Cookie from 'js-cookie';
 import MainComponent from './layout.styled';
 import Sidebar from '../Sidebar';
 import { TabBar } from '..';
-import userContext from '../../UserContext/context';
 
 const Layout = () => {
   const { pathname } = useLocation();
   const navigator = useNavigate();
-  const user = useContext(userContext);
+
+  const token = Cookie.get('token');
 
   useEffect(() => {
-    if (!user?.user) {
+    if (!token) {
       navigator('/login');
     }
   }, [pathname]);
