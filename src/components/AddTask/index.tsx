@@ -7,11 +7,8 @@ import {
   TextField,
   InputLabel,
   FormControl,
-  Checkbox,
   Autocomplete,
 } from '@mui/material';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -20,15 +17,12 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '..';
-import { top100Films } from '../../fake';
 import THEME from '../../theme';
-import { Props2 } from '../../interfaces';
+import { IMember, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
-
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+import IIntialValues from '../../interfaces/initialValues';
 
 const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -37,20 +31,19 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const { pathname } = useLocation();
-  const projectId = pathname.split('/')[2];
-
+  const [members, setMembers] = useState<IMember[]>([]);
+  const projectId = useParams().id;
   const initailValues = {
     title: '',
     description: '',
-    projectId,
+    projectId: Number(projectId),
     sectionId: 1,
     dueDate: new Date(Date.now()).toString(),
     priorityId: 1,
     userId: 1,
-  };
+  } as IIntialValues;
 
-  const handleSubmit = (values:any) => {
+  const handleSubmit = (values:IIntialValues) => {
     axios.post(`/api/project/${values.projectId}/task`, values)
       .then((response) => {
         setOpenSuccess(true);
@@ -61,6 +54,11 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
         setMessageError(error.response.data.message);
       });
   };
+
+  useEffect(() => {
+    axios.get(`/api/project/${projectId}/members`)
+      .then((response) => setMembers(response.data.data));
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -114,7 +112,15 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   label="Title"
                   fullWidth
                   required
-                  sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+                  sx={{
+                    marginBottom: '1rem',
+                    color: 'custom.gray',
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'primary.main',
+                      },
+                    },
+                  }}
                 />
                 <ErrorMessage name="title" component="div" color="custom.white" />
 
@@ -126,7 +132,15 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   multiline
                   rows={4}
                   required
-                  sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+                  sx={{
+                    marginBottom: '1rem',
+                    color: 'custom.gray',
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'primary.main',
+                      },
+                    },
+                  }}
                 />
                 <ErrorMessage name="description" component="div" color={THEME.palette.custom.white} />
                 <FormControl sx={{ m: 1, minWidth: '46%' }} size="small">
@@ -156,25 +170,25 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   </Field>
                 </FormControl>
                 <Autocomplete
-                  multiple
-                  id="checkboxes-tags-demo"
-                  options={top100Films}
-                  disableCloseOnSelect
-                  getOptionLabel={(option) => option.title}
-                  renderOption={(props, option, { selected }) => (
-                    <li {...props}>
-                      <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option.title}
-                    </li>
+                  id="member-select"
+                  sx={{ width: 300 }}
+                  options={members}
+                  autoHighlight
+                  getOptionLabel={(option) => option.email}
+                  renderOption={(props, option) => (
+                    <Box component="li" {...props}>
+                      {option.email}
+                    </Box>
                   )}
-                  style={{ width: '100%' }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Checkboxes" placeholder="Favorites" />
+                    <TextField
+                      {...params}
+                      label="Choose a member"
+                      inputProps={{
+                        ...params.inputProps,
+                        autoComplete: 'new-password',
+                      }}
+                    />
                   )}
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
