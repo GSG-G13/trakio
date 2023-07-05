@@ -6,7 +6,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Box } from '@mui/material';
 import axios from 'axios';
 import { task } from '../../interfaces';
-import EditTaskForm from '../../components/UpdateTask';
 
 const Calendar = () => {
   const [tasks, setTasks] = useState<task[]>([]);
@@ -29,27 +28,24 @@ const Calendar = () => {
   }, [pathname]);
 
   return (
-    <>
-      <Box color="custom.white">
-        <FullCalender
-          plugins={[dayGridPlugin, timeGridPlugin]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay',
-          }}
-          events={tasks?.map((item) => ({
-            title: `Assignee: ${item.name} | Title: ${item.title}`,
-            description: item.name,
-            start: item.created_at,
-            end: item.due_date,
-            color: item.color,
-          }))}
-        />
-      </Box>
-      <EditTaskForm />
-    </>
+    <Box color="custom.white">
+      <FullCalender
+        plugins={[dayGridPlugin, timeGridPlugin]}
+        initialView="dayGridMonth"
+        headerToolbar={{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        }}
+        events={tasks?.map((item) => ({
+          title: `Assignee: ${item.name} | Title: ${item.title}`,
+          description: item.name,
+          start: item.created_at,
+          end: item.due_date,
+          color: item.color,
+        }))}
+      />
+    </Box>
   );
 };
 
