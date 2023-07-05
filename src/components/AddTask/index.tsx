@@ -18,8 +18,10 @@ import {
 } from 'formik';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import {
+  TaskBox, Label, Date, Section, Textarea,
+} from './addTask.styled';
 import { ErrorAlert, SuccessAlert } from '..';
-import THEME from '../../theme';
 import { IMember, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
 import IIntialValues from '../../interfaces/initialValues';
@@ -33,12 +35,13 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [isLoading, setLoading] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);
   const projectId = useParams().id;
+
   const initailValues = {
     title: '',
     description: '',
     projectId: Number(projectId),
     sectionId: 1,
-    dueDate: new Date(Date.now()).toString(),
+    dueDate: '2023-03-02',
     priorityId: 1,
     userId: 1,
   } as IIntialValues;
@@ -82,7 +85,162 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
         message={messageError}
         setOpen={setOpenError}
       />
-      <Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <TaskBox>
+          <Formik
+            initialValues={initailValues}
+            onSubmit={handleSubmit}
+          >
+            <form style={{
+              display: 'flex', flexDirection: 'column', gap: '.5rem', justifyContent: 'center',
+            }}
+            >
+              <Label sx={{ fontSize: '20px', fontWeight: '600', marginBottom: '2rem' }}> Add Task </Label>
+              <Box sx={{
+                display: 'flex', height: '3rem', gap: '1rem', alignItems: 'center',
+              }}
+              >
+                <Label> Project </Label>
+                <Label>
+                  Project Name
+                </Label>
+              </Box>
+              <Box sx={{
+                display: 'flex', height: '3rem', gap: '1rem', alignItems: 'center',
+              }}
+              >
+                <Label> Assignee </Label>
+                <Section
+                  id="member-select"
+                  options={members}
+                  sx={{ width: '65.5%' }}
+                  autoHighlight
+                  getOptionLabel={(option) => option.email}
+                  renderOption={(props, option) => (
+                    <Box component="li" {...props}>
+                      {option.email}
+                    </Box>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Choose a member"
+                      inputProps={{
+                        ...params.inputProps,
+                        autoComplete: 'new-password',
+                      }}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'custom.white',
+                          },
+                        },
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+              <Box sx={{
+                display: 'flex', height: '3rem', gap: '1rem', alignItems: 'center',
+              }}
+              >
+                <Label> Due Date </Label>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={['DatePicker']}>
+                    <DatePicker label="Basic date picker" />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </Box>
+              <Box sx={{
+                display: 'flex', height: '3rem', gap: '1.1rem', alignItems: 'center',
+              }}
+              >
+                <Label> Section </Label>
+                <Section
+                  id="section-select"
+                  options={sections}
+                  sx={{ width: '67.2%' }}
+                  autoHighlight
+                  getOptionLabel={(option) => option.section}
+                  renderOption={(props, option) => (
+                    <Box component="li" {...props}>
+                      {option.section}
+                    </Box>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Select Section"
+                      inputProps={{
+                        ...params.inputProps,
+                        autoComplete: 'new-password',
+                      }}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'custom.white',
+                          },
+                        },
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+              <Box sx={{
+                display: 'flex', height: '3rem', gap: '1.2rem', alignItems: 'center',
+              }}
+              >
+                <Label> Priority </Label>
+                <Section
+                  id="priority-select"
+                  options={PRIORITIES}
+                  autoHighlight
+                  getOptionLabel={(option) => option.priority}
+                  sx={{ width: '67.5%' }}
+                  renderOption={(props, option) => (
+                    <Box component="li" {...props}>
+                      {option.priority}
+                    </Box>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Select Priority"
+                      inputProps={{
+                        ...params.inputProps,
+                        autoComplete: 'new-password',
+                      }}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'custom.white',
+                          },
+                        },
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+              <Label> Description </Label>
+              <Textarea
+                name="description"
+                label="Description"
+                multiline
+                rows={3}
+                required
+                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+              />
+              <Button type="submit" variant="contained" sx={{ marginTop: 0, width: '30%' }}>
+                Submit
+              </Button>
+            </form>
+          </Formik>
+        </TaskBox>
+      </Modal>
+      {/* <Box>
         <Modal open={open} onClose={handleClose}>
           <Box
             sx={{
@@ -117,7 +275,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                     color: 'custom.gray',
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'primary.main',
+                        borderColor: 'custom.white',
                       },
                     },
                   }}
@@ -137,7 +295,10 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                     color: 'custom.gray',
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'primary.main',
+                        borderColor: 'custom.white',
+                      },
+                      '& hover': {
+                        borderColor: 'custom.white',
                       },
                     },
                   }}
@@ -171,7 +332,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 </FormControl>
                 <Autocomplete
                   id="member-select"
-                  sx={{ width: 300 }}
+                  sx={{ width: '100%' }}
                   options={members}
                   autoHighlight
                   getOptionLabel={(option) => option.email}
@@ -188,6 +349,13 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                         ...params.inputProps,
                         autoComplete: 'new-password',
                       }}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'custom.white',
+                          },
+                        },
+                      }}
                     />
                   )}
                 />
@@ -203,7 +371,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
             </Formik>
           </Box>
         </Modal>
-      </Box>
+      </Box> */}
     </>
 
   );
