@@ -8,8 +8,13 @@ import {
   IMember, IProjectDetails, ISection, task,
 } from '../../interfaces';
 import presenation from '../../lotties/presentation.json';
+import { WrappBtn } from '../../components/AccountInput/acount.styled';
+import AddMemberModal from '../../components/AddMember';
 
 const Overview = () => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
   const { id } = useParams();
   const [project, setProject] = useState<IProjectDetails>({});
   const [sections, setSections] = useState<ISection[]>([]);
@@ -59,7 +64,7 @@ const Overview = () => {
           }
         />
       ))}
-      <Grid item xs={12}>
+      <Grid item xs={10}>
         <Typography
           color="primary.main"
           fontSize={22}
@@ -69,6 +74,8 @@ const Overview = () => {
           Project Roles
         </Typography>
       </Grid>
+      <WrappBtn onClick={handleOpen} sx={{ height: '2.5rem', marginTop: '2.5rem' }}>Add Members</WrappBtn>
+      <AddMemberModal open={open} handleClose={handleClose} />
       {members.map((item) => (
         <Member member={item} />
       ))}
