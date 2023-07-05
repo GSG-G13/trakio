@@ -1,8 +1,14 @@
 import { CardMedia } from '@mui/material';
+import { Link } from 'react-router-dom';
 import SignupForm from './SignupForm';
 import {
-  BodyContainer, CustomContainer, CustomTypography1,
-  CustomTypography2, FormContent, DontHaveAcount, SigninText,
+  BodyContainer,
+  CustomContainer,
+  CustomTypography1,
+  CustomTypography2,
+  FormContent,
+  DontHaveAcount,
+  SigninText,
 } from './signup.styled';
 import ReactLogo from '/assets/logo.svg';
 import { SignupImage } from './SignupForm/signupForm';
@@ -26,14 +32,12 @@ const Sigup = () => (
         <FormContent />
         <SignupForm />
       </CustomContainer>
-      <DontHaveAcount>
-        Already have an account ?
-      </DontHaveAcount>
-      <SigninText>
-        Sign in
-      </SigninText>
+      <DontHaveAcount>Already have an account ?</DontHaveAcount>
+      <Link to="/login">
+        <SigninText>Sign in</SigninText>
+      </Link>
     </BodyContainer>
-    <SignupImage src="src/assets/todo.svg" alt="login" />
+    <SignupImage src="public/assets/todo.svg" alt="login" />
   </>
 );
 

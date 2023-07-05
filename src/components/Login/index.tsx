@@ -1,9 +1,15 @@
 import { CardMedia } from '@mui/material';
 import ReactLogo from '/assets/logo.svg';
+import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import {
-  BodyContainer, CustomContainer, CustomTypography1,
-  CustomTypography2, FormContent, DontHaveAcount, SignupText,
+  BodyContainer,
+  CustomContainer,
+  CustomTypography1,
+  CustomTypography2,
+  FormContent,
+  DontHaveAcount,
+  SignupText,
 } from './login.styled';
 
 const Login = () => (
@@ -24,12 +30,10 @@ const Login = () => (
       <FormContent />
       <LoginForm />
     </CustomContainer>
-    <DontHaveAcount>
-      Don’t have an account?
-    </DontHaveAcount>
-    <SignupText>
-      Signup
-    </SignupText>
+    <DontHaveAcount>Don’t have an account?</DontHaveAcount>
+    <Link to="/signup">
+      <SignupText>Signup</SignupText>
+    </Link>
   </BodyContainer>
 );
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Formik, Form } from 'formik';
@@ -11,6 +11,7 @@ import {
 } from './signupForm';
 import { signupSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
+import userContext from '../../../UserContext/context';
 
 interface SignupFormValues {
   email: string;
@@ -24,6 +25,7 @@ const SignupForm = () => {
   const [openError, setOpenError] = useState(false);
   const [messageSuccess, setMessageSuccess] = useState('');
   const [messageError, setMessageError] = useState('');
+  const { setUserData } = useContext(userContext);
   const navigator = useNavigate();
 
   const handleSubmit = (values: SignupFormValues) => {
@@ -32,6 +34,7 @@ const SignupForm = () => {
       .then((res) => {
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
+        setUserData(res.data.data[0]);
         if (!openSuccess) navigator('/');
       })
       .catch((err) => {
