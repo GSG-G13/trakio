@@ -75,7 +75,7 @@ const TaskRow = ({ data }: {data: task}) => {
           </Box>
         </IconButton>
 
-        <EditTaskForm open={open} handleClose={handleClose} />
+        <EditTaskForm open={open} handleClose={handleClose} data={data} />
 
         <IconButton>
           <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>

@@ -74,10 +74,14 @@ export const Date = styled('input')(({ theme: { palette: { custom } } }) => ({
   color: custom.white,
 }));
 
-export const Textarea = styled(TextareaAutosize)(() => ({
+export const Textarea = styled(TextareaAutosize)(({ theme: { palette: { custom } } }) => ({
   marginLeft: '60px',
+  paddingLeft: '7px',
+  paddingTop: '7px',
   marginTop: '20px',
+  color: custom.white,
   minWidth: '400px',
   minHeight: '80px',
+  fontFamily: 'Montserrat',
   backgroundColor: '#232426',
 }));
