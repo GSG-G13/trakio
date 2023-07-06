@@ -61,6 +61,7 @@ const Overview = () => {
         {sections.map((item) => (
           <OverviewTaskCard
             section={item}
+            key={item.section}
             tasks={
               tasks.filter((taskItem) => taskItem.section === item.section).length
             }
@@ -77,7 +78,7 @@ const Overview = () => {
           </Typography>
         </Grid>
         {members.map((item) => (
-          <Member member={item} />
+          <Member member={item} key={item.id} />
         ))}
       </Grid>
       <FloatingButton onClick={handleOpen} />
