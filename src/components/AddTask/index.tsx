@@ -69,6 +69,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
     });
   }, []);
 
+  if (isLoading) <Box>Loading...</Box>;
   return (
     <>
       <SuccessAlert
