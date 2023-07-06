@@ -10,7 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {
-  Formik, Field, ErrorMessage, Form,
+  Formik, Field, Form,
 } from 'formik';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -307,7 +307,6 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   />
                 </Box>
               </Box>
-              <ErrorMessage name="title" component="div" color="custom.white" />
               <Label> Description </Label>
               <Field
                 value={formData.description}
@@ -323,7 +322,6 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 required
                 sx={{ marginBottom: '1rem', color: 'custom.gray' }}
               />
-              <ErrorMessage name="description" component="div" color="custom.white" />
               <Button type="submit" variant="contained" sx={{ marginTop: 0, width: '30%' }}>
                 Submit
               </Button>
