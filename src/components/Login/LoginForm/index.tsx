@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -16,6 +16,7 @@ import {
 } from './loginForm.styled';
 import { validationSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
+import userContext from '../../../UserContext/context';
 
 interface LoginFormValues {
   email: string;
@@ -29,22 +30,28 @@ const LoginForm = () => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const navigator = useNavigate();
+  const { setUserData } = useContext(userContext);
 
   const handleSubmit = (values: LoginFormValues) => {
     axios
       .post('/api/login', values)
-      .then(() => {
+      .then((res) => {
         setOpenSuccess(true);
+        setUserData(res.data.data[0]);
         if (!openSuccess) navigator('/');
       })
       .catch((err) => {
         setOpenError(true);
-        setMessageError(err.response.data.message);
+        if (err) setMessageError(err.response.data.message);
       });
   };
 
   useEffect(() => {
-    if (location.state && location.state.success && location.state.success.length) {
+    if (
+      location.state
+      && location.state.success
+      && location.state.success.length
+    ) {
       setOpenSuccess(true);
     }
   }, []);
