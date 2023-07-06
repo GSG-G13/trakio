@@ -20,7 +20,6 @@ import {
 import { ErrorAlert, SuccessAlert } from '..';
 import { IMember, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
-import IIntialValues from '../../interfaces/initialValues';
 
 const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -31,19 +30,64 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [isLoading, setLoading] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);
   const projectId = useParams().id;
-
-  const initailValues = {
+  const [formData, setFormData] = useState({
     title: '',
-    description: '',
-    projectId: Number(projectId),
-    sectionId: 1,
+    userId: 1,
+    projectId,
     dueDate: '2023-03-02',
+    sectionId: 1,
     priorityId: 1,
-    userId: 2,
-  } as IIntialValues;
+    description: '',
+  });
 
-  const handleSubmit = (values:IIntialValues) => {
-    axios.post(`/api/project/${values.projectId}/task`, values)
+  const handleChange = (event:any) => {
+    const { id, value } = event.target;
+    if (id === 'section') {
+      const selectedSection = sections.filter((section:any) => section.section === value);
+      const sectionId = selectedSection ? selectedSection[0].id : null;
+      setFormData((prevFormData:any) => ({
+        ...prevFormData,
+        sectionId,
+      }));
+    } else if (id === 'priority') {
+      const selectedPriority = PRIORITIES.find((priority) => priority.priority === value);
+      const priorityId = selectedPriority ? selectedPriority.id : null;
+      setFormData((prevFormData:any) => ({
+        ...prevFormData,
+        priorityId,
+      }));
+    } else if (id === 'description') {
+      setFormData((prevFormData:any) => ({
+        ...prevFormData,
+        description: value,
+      }));
+    } else if (id === 'dueDate') {
+      setFormData((prevFormData:any) => ({
+        ...prevFormData,
+        dueDate: value,
+      }));
+    } else if (id === 'member') {
+      const selectedmember = members.filter((member:any) => member.email === value);
+      const memberId = selectedmember ? selectedmember[0].id : null;
+      setFormData((prevFormData:any) => ({
+        ...prevFormData,
+        userId: memberId,
+      }));
+    } else if (id === 'title') {
+      setFormData((prevFormData:any) => ({
+        ...prevFormData,
+        title: value,
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [id]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = () => {
+    axios.post(`/api/project/${formData.projectId}/task`, formData)
       .then((response) => {
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
@@ -88,7 +132,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
       >
         <TaskBox>
           <Formik
-            initialValues={initailValues}
+            initialValues={formData}
             onSubmit={handleSubmit}
           >
             <Form
@@ -112,12 +156,15 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               >
                 <Label>Assignee</Label>
                 <Section
-                  id="member-select"
+                  id="member"
                   options={members}
+                  onSelect={(event) => {
+                    handleChange(event);
+                  }}
                   sx={{ width: '65.5%' }}
                   autoHighlight
-                  getOptionLabel={(option) => option.email}
-                  renderOption={(props, option) => (
+                  getOptionLabel={(option:any) => option.email}
+                  renderOption={(props, option:any) => (
                     <Box component="li" {...props}>
                       {option.email}
                     </Box>
@@ -158,12 +205,15 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               >
                 <Label> Section </Label>
                 <Section
-                  id="section-select"
+                  id="section"
                   options={sections}
                   sx={{ width: '67.2%' }}
                   autoHighlight
-                  getOptionLabel={(option) => option.section}
-                  renderOption={(props, option) => (
+                  onSelect={(event) => {
+                    handleChange(event);
+                  }}
+                  getOptionLabel={(option:any) => option.section}
+                  renderOption={(props, option:any) => (
                     <Box component="li" {...props}>
                       {option.section}
                     </Box>
@@ -193,12 +243,15 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               >
                 <Label> Priority </Label>
                 <Section
-                  id="priority-select"
+                  id="priority"
                   options={PRIORITIES}
                   autoHighlight
-                  getOptionLabel={(option) => option.priority}
+                  onSelect={(event) => {
+                    handleChange(event);
+                  }}
+                  getOptionLabel={(option:any) => option.priority}
                   sx={{ width: '67.5%' }}
-                  renderOption={(props, option) => (
+                  renderOption={(props, option:any) => (
                     <Box component="li" {...props}>
                       {option.priority}
                     </Box>
@@ -232,6 +285,11 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 >
                   <Label> Title </Label>
                   <Field
+                    value={formData.title}
+                    onChange={(event:any) => {
+                      handleChange(event);
+                    }}
+                    id="title"
                     as={TextField}
                     name="title"
                     label="Title"
@@ -252,8 +310,13 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               <ErrorMessage name="title" component="div" color="custom.white" />
               <Label> Description </Label>
               <Field
-                as={Textarea}
+                value={formData.description}
+                onChange={(event:any) => {
+                  handleChange(event);
+                }}
                 name="description"
+                id="description"
+                as={Textarea}
                 label="Description"
                 multiline
                 rows={3}

@@ -5,6 +5,7 @@ export interface task {
   created_at: string;
   due_date: string;
   project: string;
+  project_id: number;
   priority: string;
   color: string;
   section: string;

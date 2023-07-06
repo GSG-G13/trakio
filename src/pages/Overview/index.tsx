@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
@@ -81,10 +82,36 @@ const Overview = () => {
           <Member member={item} key={item.id} />
         ))}
       </Grid>
+<<<<<<< HEAD
       <FloatingButton onClick={handleOpen} />
       <AddTaskModal open={open} handleClose={handleClose} />
     </>
 
+=======
+      {sections.map((item, index) => (
+        <OverviewTaskCard
+          section={item}
+          key={index}
+          tasks={
+            tasks.filter((taskItem) => taskItem.section === item.section).length
+          }
+        />
+      ))}
+      <Grid item xs={12}>
+        <Typography
+          color="primary.main"
+          fontSize={22}
+          fontWeight={700}
+          paddingY={2}
+        >
+          Project Roles
+        </Typography>
+      </Grid>
+      {members.map((item, index) => (
+        <Member member={item} key={index} />
+      ))}
+    </Grid>
+>>>>>>> main
   );
 };
 

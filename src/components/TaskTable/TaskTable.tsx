@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import {
@@ -99,7 +100,7 @@ const TaskTable = () => {
         <TableHead>
           <TableRow>
             {COLS.map((col, index) => (
-              <TableCell>
+              <TableCell key={index}>
                 <Typography
                   fontSize={12}
                   align={index !== 0 ? 'center' : 'left'}
