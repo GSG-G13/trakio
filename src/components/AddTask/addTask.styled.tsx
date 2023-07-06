@@ -4,7 +4,7 @@ import {
 
 export const TaskBox = styled(Box)(() => ({
   width: '500px',
-  height: '85vh',
+  height: '75vh',
   position: 'absolute',
   transition: 'width 2s, height 2s, transform 2s',
   bottom: 0,

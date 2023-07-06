@@ -67,7 +67,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
         dueDate: value,
       }));
     } else if (id === 'member') {
-      const selectedmember = members.filter((member:any) => member.email === value);
+      const selectedmember = members.filter((member:IMember) => member.email === value);
       const memberId = selectedmember ? selectedmember[0].id : null;
       setFormData((prevFormData:any) => ({
         ...prevFormData,
@@ -140,9 +140,9 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 display: 'flex', flexDirection: 'column', gap: '.5rem', justifyContent: 'center',
               }}
             >
-              <Label sx={{ fontSize: '20px', fontWeight: '600', marginBottom: '2rem' }}> Add Task </Label>
+              <Label sx={{ fontSize: '20px', fontWeight: '600', marginBottom: '1rem' }}> Add Task </Label>
               <Box sx={{
-                display: 'flex', height: '3rem', gap: '1rem', alignItems: 'center',
+                display: 'flex', height: '2rem', gap: '1rem', alignItems: 'center',
               }}
               >
                 <Label>Project </Label>
@@ -177,10 +177,12 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                         ...params.inputProps,
                         autoComplete: 'new-password',
                       }}
+                      size="small"
                       sx={{
                         '& .MuiOutlinedInput-root': {
                           '& fieldset': {
                             borderColor: 'custom.white',
+                            padding: '2px',
                           },
                         },
                       }}
@@ -195,9 +197,24 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 <Label> Due Date </Label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DatePicker']}>
-                    <DatePicker label="Basic date picker" />
+                    <DatePicker
+                      label="Basic date picker"
+                      slotProps={{ textField: { size: 'small' } }}
+                      sx={{
+                        width: '67.2%',
+                        '& .MuiInputBase-root': {
+                          '& fieldset': {
+                            borderColor: '#fff',
+                          },
+                          '&:hover fieldset': {
+                            borderColor: '#fff', // Change border color on hover
+                          },
+                        },
+                      }}
+                    />
                   </DemoContainer>
                 </LocalizationProvider>
+
               </Box>
               <Box sx={{
                 display: 'flex', height: '3rem', gap: '1.1rem', alignItems: 'center',
@@ -207,7 +224,9 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 <Section
                   id="section"
                   options={sections}
-                  sx={{ width: '67.2%' }}
+                  sx={{
+                    width: '67.2%',
+                  }}
                   autoHighlight
                   onSelect={(event) => {
                     handleChange(event);
@@ -226,6 +245,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                         ...params.inputProps,
                         autoComplete: 'new-password',
                       }}
+                      size="small"
                       sx={{
                         '& .MuiOutlinedInput-root': {
                           '& fieldset': {
@@ -250,7 +270,9 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                     handleChange(event);
                   }}
                   getOptionLabel={(option:any) => option.priority}
-                  sx={{ width: '67.5%' }}
+                  sx={{
+                    width: '67.5%',
+                  }}
                   renderOption={(props, option:any) => (
                     <Box component="li" {...props}>
                       {option.priority}
@@ -271,6 +293,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                           },
                         },
                       }}
+                      size="small"
                     />
                   )}
                 />
@@ -280,7 +303,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               }}
               >
                 <Box sx={{
-                  display: 'flex', height: '3rem', gap: '1.2rem', alignItems: 'center',
+                  display: 'flex', height: '3rem', gap: '2.5rem', width: '82%',
                 }}
                 >
                   <Label> Title </Label>
@@ -289,13 +312,20 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                     onChange={(event:any) => {
                       handleChange(event);
                     }}
+                    inputProps={{
+                      style: {
+                        padding: 7,
+                      },
+                    }}
                     id="title"
                     as={TextField}
                     name="title"
                     label="Title"
+                    size="small"
                     fullWidth
                     required
                     sx={{
+                      width: '100%',
                       marginBottom: '1rem',
                       color: 'custom.gray',
                       '& .MuiOutlinedInput-root': {
@@ -318,7 +348,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 as={Textarea}
                 label="Description"
                 multiline
-                rows={3}
+                rows={2}
                 required
                 sx={{ marginBottom: '1rem', color: 'custom.gray' }}
               />
