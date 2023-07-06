@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
 import Lottie from 'react-lottie';
 import { Member, OverviewTaskCard, TitleAndDesc } from '../../components';
@@ -16,10 +16,13 @@ const Overview = () => {
   const [sections, setSections] = useState<ISection[]>([]);
   const [tasks, setTasks] = useState<task[]>([]);
   const [members, setMembers] = useState<IMember[]>([]);
+  const navigator = useNavigate();
 
   useEffect(() => {
     axios.get(`/api/project/${id}`).then((res) => {
       setProject(res.data.data[0]);
+    }).catch((err) => {
+      navigator('/', { state: { error: err.response.data.message } });
     });
 
     axios.get('/api/sections').then((res) => {
@@ -28,10 +31,14 @@ const Overview = () => {
 
     axios.get(`/api/project/${id}/task`).then((res) => {
       setTasks(res.data.data);
+    }).catch((err) => {
+      navigator('/', { state: { error: err.response.data.message } });
     });
 
     axios.get(`/api/project/${id}/members`).then((res) => {
       setMembers(res.data.data);
+    }).catch((err) => {
+      navigator('/', { state: { error: err.response.data.message } });
     });
   }, [id]);
 
