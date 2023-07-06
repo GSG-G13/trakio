@@ -46,7 +46,7 @@ const TaskBoard = () => {
     <Grid container spacing={2}>
       {!emptyList ? (
         sections.map((section) => (
-          <Grid item xs={3}>
+          <Grid item xs={3} key={section.id}>
             <Box>
               <Typography
                 variant="subtitle1"

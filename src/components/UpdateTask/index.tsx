@@ -34,10 +34,10 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
     sectionId: 1,
     priorityId: 1,
     description: data.description,
-    taskId: data.id,
   });
 
-  const handleChange = ({ id, value }:any) => {
+  const handleChange = (event:any) => {
+    const { id, value } = event.target;
     if (id === 'section') {
       const selectedSection = sections.filter((section) => section.section === value);
       const sectionId = selectedSection ? selectedSection[0].id : null;
@@ -71,7 +71,7 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
   };
 
   const handleSubmit = () => {
-    axios.put(`/api/project/${formData.projectId}/task`, formData)
+    axios.put(`/api/project/${formData.projectId}/task?taskId=${data.id}`, formData)
       .then((response) => {
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
@@ -128,11 +128,8 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
               <Label> Due Date </Label>
               <Date
                 type="date"
-                defaultValue={data.due_date.split('T')[0]}
                 value={formData.dueDate}
-                onChange={(event) => {
-                  handleChange(event);
-                }}
+                onChange={(event) => handleChange(event)}
                 name="dueDate"
                 id="dueDate"
               />

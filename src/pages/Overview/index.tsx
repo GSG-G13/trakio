@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -51,9 +52,10 @@ const Overview = () => {
           }}
         />
       </Grid>
-      {sections.map((item) => (
+      {sections.map((item, index) => (
         <OverviewTaskCard
           section={item}
+          key={index}
           tasks={
             tasks.filter((taskItem) => taskItem.section === item.section).length
           }
@@ -69,8 +71,8 @@ const Overview = () => {
           Project Roles
         </Typography>
       </Grid>
-      {members.map((item) => (
-        <Member member={item} />
+      {members.map((item, index) => (
+        <Member member={item} key={index} />
       ))}
     </Grid>
   );
