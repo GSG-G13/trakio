@@ -1,11 +1,13 @@
 import {
-  Box,
+  Box, IconButton,
   CardContent, Typography,
 } from '@mui/material';
+import { RiDeleteBinLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
 import empty from '../../lotties/empty.json';
+import THEME from '../../theme';
 import {
   WrappBtnDone,
   Wrapper2,
@@ -25,6 +27,19 @@ const ProjectsCard = () => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleDeleteProject = (projectId:any) => {
+    axios
+      .delete(`/api/project/${projectId}`)
+      .then(() => {
+        const updatedProjects = userProjects.filter((project) => project.project_id !== projectId);
+        setUserProjects(updatedProjects);
+      })
+      .catch((error) => {
+        setOpenError(true);
+        setMessageError(error.response.data.message);
+      });
+  };
 
   useEffect(() => {
     axios.get('/api/projects')
@@ -102,6 +117,13 @@ const ProjectsCard = () => {
               </WrapperDes>
             </CardContent>
             <WrappBtn>
+              <IconButton onClick={() => handleDeleteProject(project.project_id)}>
+                <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
+                  <RiDeleteBinLine
+                    style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
+                  />
+                </Box>
+              </IconButton>
               <WrapperBtnUD>
                 {`${todoTasks} Todo`}
               </WrapperBtnUD>
