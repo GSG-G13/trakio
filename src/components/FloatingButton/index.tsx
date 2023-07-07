@@ -11,7 +11,7 @@ const FloatingButton = ({ onClick }: Props) => (
     position: 'fixed',
     bottom: '20px',
     right: '20px',
-    zIndex: 9999,
+    zIndex: 1,
   }}
   >
     <Fab onClick={onClick} color="primary" aria-label="add">

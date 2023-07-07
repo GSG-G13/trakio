@@ -18,7 +18,7 @@ import {
   InputBox, ProjectTitleBox, TitleField, TextFieldInput,
 } from './addTask.styled';
 import { ErrorAlert, SuccessAlert } from '..';
-import { IMember, Props2, iTask } from '../../interfaces';
+import { IMember, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
 import IIntialValues from '../../interfaces/initialValues';
 
