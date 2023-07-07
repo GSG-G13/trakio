@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 import Lottie from 'react-lottie';
+import AddIcon from '@mui/icons-material/Add';
 import { Member, OverviewTaskCard, TitleAndDesc } from '../../components';
 import {
   IMember, IProjectDetails, ISection, task,
 } from '../../interfaces';
 import presenation from '../../lotties/presentation.json';
-import { WrappBtn } from '../../components/AccountInput/acount.styled';
 import AddMemberModal from '../../components/AddMember';
 
 const Overview = () => {
@@ -20,7 +20,6 @@ const Overview = () => {
   const [sections, setSections] = useState<ISection[]>([]);
   const [tasks, setTasks] = useState<task[]>([]);
   const [members, setMembers] = useState<IMember[]>([]);
-
   useEffect(() => {
     axios.get(`/api/project/${id}`).then((res) => {
       setProject(res.data.data[0]);
@@ -37,7 +36,7 @@ const Overview = () => {
     axios.get(`/api/project/${id}/members`).then((res) => {
       setMembers(res.data.data);
     });
-  }, [id]);
+  }, [id, open]);
 
   return (
     <Grid container marginBottom={5} spacing={2}>
@@ -59,6 +58,7 @@ const Overview = () => {
       {sections.map((item) => (
         <OverviewTaskCard
           section={item}
+          key={item.id}
           tasks={
             tasks.filter((taskItem) => taskItem.section === item.section).length
           }
@@ -74,10 +74,14 @@ const Overview = () => {
           Project Roles
         </Typography>
       </Grid>
-      <WrappBtn onClick={handleOpen} sx={{ height: '2.5rem', marginTop: '2.5rem' }}>Add Members</WrappBtn>
+      <Grid marginTop={2} item xs={2}>
+        <Button variant="outlined" onClick={handleOpen} endIcon={<AddIcon />}>
+          Add Members
+        </Button>
+      </Grid>
       <AddMemberModal open={open} handleClose={handleClose} />
       {members.map((item) => (
-        <Member member={item} />
+        <Member member={item} key={item.id} />
       ))}
     </Grid>
   );
