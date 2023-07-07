@@ -1,51 +1,50 @@
 import {
   Box, styled, Typography, Autocomplete, TextField,
 } from '@mui/material';
+import { Field } from 'formik';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export const TaskBox = styled(Box)(() => ({
   width: '500px',
-  height: '75vh',
+  height: '100vh',
   position: 'absolute',
-  transition: 'width 2s, height 2s, transform 2s',
   bottom: 0,
   right: 0,
-  paddingTop: '2rem',
-  paddingLeft: '2rem',
+  paddingLeft: '3rem',
   background: '#232426',
-  borderRadius: '24px 0px 0px 0px',
 }));
 
 export const Section = styled(Autocomplete)(({ theme: { palette: { custom } } }) => ({
-  borderColor: custom.white,
+  borderColor: custom.fontGray,
   width: '50%',
   '& .MuiOutlinedInput-root': {
     '&:hover fieldset': {
-      borderColor: custom.white,
+      borderColor: custom.fontGray,
     },
     '& fieldset': {
-      borderColor: custom.white,
+      borderColor: custom.fontGray,
     },
     '&.Mui-focused fieldset': {
-      borderColor: custom.white,
+      borderColor: custom.fontGray,
     },
     '& input': {
-      color: custom.white,
+      color: custom.fontGray,
       fontSize: '12px',
       fontWeight: 'normal',
     },
     '& .MuiSvgIcon-root': {
-      fill: custom.white,
+      fill: custom.fontGray,
     },
   },
   '& .MuiInputLabel-root': {
-    color: custom.white,
+    color: custom.fontGray,
     fontSize: '12px',
     fontWeight: 'normal',
   },
   '&:focus': {
-    borderColor: custom.white,
+    borderColor: custom.fontGray,
     '& .MuiSvgIcon-root': {
-      fill: custom.white,
+      fill: custom.fontGray,
     },
   },
 }));
@@ -54,7 +53,6 @@ export const Label = styled(Typography)(({ theme: { palette: { custom } } }) => 
   color: custom.white,
   fontFamily: 'Montserrat',
   fontWeight: '300',
-  lineHeight: '20px',
   fontSize: '15px',
 }));
 
@@ -62,7 +60,7 @@ export const Date = styled('input')(({ theme: { palette: { custom } } }) => ({
   backgroundColor: '#232426',
   border: 'none',
   fontFamily: 'Montserrat',
-  color: custom.white,
+  color: custom.fontGray,
 }));
 
 export const Textarea = styled(TextField)(({ theme: { palette: { custom } } }) => ({
@@ -70,32 +68,92 @@ export const Textarea = styled(TextField)(({ theme: { palette: { custom } } }) =
   backgroundColor: '#232426',
   '& .MuiOutlinedInput-root': {
     '&:hover fieldset': {
-      borderColor: custom.white,
+      borderColor: custom.fontGray,
     },
     '& fieldset': {
-      borderColor: custom.white,
+      borderColor: custom.fontGray,
     },
     '&.Mui-focused fieldset': {
-      borderColor: custom.white,
+      borderColor: custom.fontGray,
     },
     '& input': {
-      color: custom.white,
+      color: custom.fontGray,
       fontSize: '12px',
       fontWeight: 'normal',
     },
     '& .MuiSvgIcon-root': {
-      fill: custom.white,
+      fill: custom.fontGray,
     },
   },
   '& .MuiInputLabel-root': {
-    color: custom.white,
+    color: custom.fontGray,
     fontSize: '12px',
     fontWeight: 'normal',
   },
   '&:focus': {
-    borderColor: custom.white,
+    borderColor: custom.fontGray,
     '& .MuiSvgIcon-root': {
-      fill: custom.white,
+      fill: custom.fontGray,
+    },
+  },
+}));
+
+export const Title = styled(Label)(({ theme: { palette: { custom } } }) => ({
+  fontSize: '20px',
+  fontWeight: '600',
+  marginTop: '2rem',
+  marginBottom: '1rem',
+  color: custom.white,
+}));
+
+export const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
+  '& .MuiInputBase-root': {
+    border: '1px solid white',
+    color: theme.palette.custom.fontGray,
+  },
+  '& .MuiInputLabel-root': {
+    color: theme.palette.custom.fontGray,
+    fontFamily: 'Montserrat',
+    fontWeight: '300',
+    fontSize: '12px',
+  },
+  '& .MuiIconButton-root': {
+    color: theme.palette.custom.fontGray,
+  },
+}));
+
+export const InputBox = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+});
+
+export const ProjectTitleBox = styled(Box)({
+  display: 'flex',
+  gap: '1rem',
+  alignItems: 'center',
+});
+
+export const TitleField = styled(Field)(({ theme: { palette: { custom } } }) => ({
+  width: '90%',
+  color: custom.gray,
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: custom.fontGray,
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: custom.fontGray,
+    fontFamily: 'Montserrat',
+    fontWeight: '300',
+    fontSize: '12px',
+  },
+}));
+
+export const TextFieldInput = styled(TextField)(({ theme: { palette: { custom } } }) => ({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: custom.white,
     },
   },
 }));
