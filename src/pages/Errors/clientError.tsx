@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   TextContainer,
   AstronautContainer, Image, BigBox,
-} from './client.styled';
+} from './error';
 import { WrappBtn } from '../../components/AccountInput/acount.styled';
 
 const ClientError = () => (

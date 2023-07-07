@@ -11,7 +11,7 @@ import {
 import { ProjectsCards, TaskTable } from '../components';
 
 import HomeLayout from '../layout';
-import ClientError from '../pages/ClientError404';
+import ClientError from '../pages/Errors/clientError';
 
 const router = createBrowserRouter([
   {
