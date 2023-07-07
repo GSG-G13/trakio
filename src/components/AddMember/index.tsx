@@ -53,95 +53,107 @@ const AddMemberModal = ({ open, handleClose }: Props2) => {
         <Typography variant="h6" mb={2} color="custom.white">
           Add Members
         </Typography>
-        <Stack>
-          <Autocomplete
-            value={selected}
-            onChange={handleChange}
-            multiple
-            id="tags-outlined"
-            options={allUsers}
-            getOptionLabel={(option) => option.name}
-            renderOption={(props, option) => (
-              <Box
-                bgcolor="custom.background"
-                padding={1}
-                display="flex"
-                flexDirection="row"
-                {...props}
-              >
-                <Avatar>{option.name[0].toUpperCase()}</Avatar>
-                <Box marginLeft={1} display="flex" flexDirection="column">
-                  <Typography color="custom.gray" fontWeight="bold" fontSize={14}>
-                    {option.name}
-                  </Typography>
-                  <Typography color="custom.gray" fontSize={11}>
-                    {option.email}
-                  </Typography>
+        <Box display="flex" alignItems="center">
+          <Stack width="80%">
+            <Autocomplete
+              value={selected}
+              onChange={handleChange}
+              multiple
+              id="tags-outlined"
+              options={allUsers}
+              getOptionLabel={(option) => option.name}
+              renderOption={(props, option) => (
+                <Box
+                  bgcolor="custom.background"
+                  padding={1}
+                  display="flex"
+                  flexDirection="row"
+                  {...props}
+                >
+                  <Avatar>{option.name[0].toUpperCase()}</Avatar>
+                  <Box marginLeft={1} display="flex" flexDirection="column">
+                    <Typography
+                      color="custom.gray"
+                      fontWeight="bold"
+                      fontSize={14}
+                    >
+                      {option.name}
+                    </Typography>
+                    <Typography color="custom.gray" fontSize={11}>
+                      {option.email}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            )}
-            filterSelectedOptions
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: 'custom.white',
+              )}
+              filterSelectedOptions
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: 'custom.white',
+                  },
+                  '& fieldset': {
+                    borderColor: 'custom.white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'custom.white',
+                  },
+                  '& input': {
+                    color: 'custom.white',
+                    fontSize: '12px',
+                    fontWeight: 'normal',
+                  },
+                  '& .MuiSvgIcon-root': {
+                    fill: 'custom.white',
+                    color: 'custom.white',
+                  },
                 },
-                '& fieldset': {
-                  borderColor: 'custom.white',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'custom.white',
-                },
-                '& input': {
-                  color: 'custom.white',
+                '& .MuiInputLabel-root': {
+                  color: 'custom.gray',
                   fontSize: '12px',
                   fontWeight: 'normal',
                 },
-                '& .MuiSvgIcon-root': {
-                  fill: 'custom.white',
+                '& .MuiChip-label': {
                   color: 'custom.white',
+                  background: 'primary.main',
                 },
-              },
-              '& .MuiInputLabel-root': {
-                color: 'custom.gray',
-                fontSize: '12px',
-                fontWeight: 'normal',
-              },
-              '& .MuiChip-label': {
-                color: 'custom.white',
-                background: 'primary.main',
-              },
-              '& .MuiChip-filled': {
-                backgroundColor: 'custom.gray',
-              },
-              '&:focus': {
-                borderColor: 'custom.white',
-                '& .MuiSvgIcon-root': {
-                  fill: 'custom.white',
+                '& .MuiChip-filled': {
+                  backgroundColor: 'custom.gray',
                 },
-              },
+                '&:focus': {
+                  borderColor: 'custom.white',
+                  '& .MuiSvgIcon-root': {
+                    fill: 'custom.white',
+                  },
+                },
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Add Members" />
+              )}
+            />
+          </Stack>
+          <Button
+            sx={{ marginLeft: '1rem', height: '48px' }}
+            variant="contained"
+            onClick={() => {
+              axios
+                .post(`/api/project/${id}/members`, {
+                  users: selected.map((value) => value.id),
+                })
+                .then(() => {
+                  setSelected([]);
+                  handleClose();
+                });
             }}
-            renderInput={(params) => (
-              <TextField {...params} label="Add Members" />
-            )}
-          />
-        </Stack>
-        <Button
-          sx={{ marginTop: '1rem' }}
-          variant="contained"
-          onClick={() => {
-            axios
-              .post(`/api/project/${id}/members`, {
-                users: selected.map((value) => value.id),
-              })
-              .then(() => {
-                setSelected([]);
-                handleClose();
-              });
-          }}
-        >
-          Add
-        </Button>
+          >
+            <Typography
+              fontSize={16}
+              fontWeight="bold"
+              color="custom.background"
+            >
+              Add
+            </Typography>
+          </Button>
+        </Box>
       </Box>
     </Modal>
   );
