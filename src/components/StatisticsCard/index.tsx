@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { StatisticsBox, StatisticsContent } from './statistics.styed';
 import { task } from '../../interfaces';
 import { ErrorAlert } from '..';
+import { ServerError } from '../../pages/Errors';
 
 const StatisticsCard = () => {
   const [completedTasks, setCompletedTasks] = useState<task[]>([]);
@@ -19,6 +20,7 @@ const StatisticsCard = () => {
         setCompletedTasks(filteredTasks);
       })
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
       });

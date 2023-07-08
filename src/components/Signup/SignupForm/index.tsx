@@ -12,6 +12,7 @@ import {
 import { signupSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
 import userContext from '../../../UserContext/context';
+import { ServerError } from '../../../pages/Errors';
 
 interface SignupFormValues {
   email: string;
@@ -38,6 +39,7 @@ const SignupForm = () => {
         if (!openSuccess) navigator('/');
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(err.response.data.message);
       });

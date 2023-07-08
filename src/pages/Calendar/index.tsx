@@ -6,6 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Box } from '@mui/material';
 import axios from 'axios';
 import { task } from '../../interfaces';
+import { ServerError } from '../Errors';
 
 const Calendar = () => {
   const [tasks, setTasks] = useState<task[]>([]);
@@ -23,6 +24,7 @@ const Calendar = () => {
         setTasks(res.data.data);
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         navigator('/', { state: { error: err.response.data.message } });
       });
   }, [pathname]);

@@ -17,6 +17,7 @@ import {
 import { validationSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
 import userContext from '../../../UserContext/context';
+import { ServerError } from '../../../pages/Errors';
 
 interface LoginFormValues {
   email: string;
@@ -41,6 +42,7 @@ const LoginForm = () => {
         if (!openSuccess) navigator('/');
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         setOpenError(true);
         if (err) setMessageError(err.response.data.message);
       });

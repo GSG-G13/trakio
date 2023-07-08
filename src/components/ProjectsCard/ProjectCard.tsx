@@ -20,6 +20,7 @@ import {
 import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert } from '..';
 import Loader from './Loader';
+import { ServerError } from '../../pages/Errors';
 
 const ProjectsCard = () => {
   const [userProjects, setUserProjects] = useState<iProjects[]>([]);
@@ -36,6 +37,7 @@ const ProjectsCard = () => {
         setUserProjects(updatedProjects);
       })
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
@@ -56,6 +58,7 @@ const ProjectsCard = () => {
         setIsLoading(false);
       })
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
         setIsLoading(false);

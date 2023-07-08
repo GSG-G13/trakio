@@ -11,6 +11,7 @@ import {
 } from '../../interfaces';
 import presenation from '../../lotties/presentation.json';
 import AddMemberModal from '../../components/AddMember';
+import { ServerError } from '../Errors';
 
 const Overview = () => {
   const [open, setOpen] = useState(false);
@@ -32,6 +33,7 @@ const Overview = () => {
         setManager(res.data.manager);
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         navigator('/', { state: { error: err.response.data.message } });
       });
 
@@ -45,6 +47,7 @@ const Overview = () => {
         setTasks(res.data.data);
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         navigator('/', { state: { error: err.response.data.message } });
       });
 
@@ -54,6 +57,7 @@ const Overview = () => {
         setMembers(res.data.data);
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         navigator('/', { state: { error: err.response.data.message } });
       });
   }, [id, open]);
