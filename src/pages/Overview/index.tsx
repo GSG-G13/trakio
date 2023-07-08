@@ -17,8 +17,11 @@ import AddMemberModal from '../../components/AddMember';
 
 const Overview = () => {
   const [open, setOpen] = useState(false);
+  const [openTask, setOpenTask] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+  const handleCloseTask = () => setOpenTask(false);
+  const handleOpenTask = () => setOpenTask(true);
   const { id } = useParams();
   const [project, setProject] = useState<IProjectDetails>({});
   const [manager, setManager] = useState<boolean>(false);
@@ -110,8 +113,8 @@ const Overview = () => {
           <Member member={item} key={item.id} />
         ))}
       </Grid>
-      <FloatingButton onClick={handleOpen} />
-      <AddTaskModal open={open} handleClose={handleClose} />
+      <FloatingButton onClick={handleOpenTask} />
+      <AddTaskModal open={openTask} handleClose={handleCloseTask} />
     </>
 
   );
