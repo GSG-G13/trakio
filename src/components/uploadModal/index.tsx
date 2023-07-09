@@ -45,7 +45,7 @@ const UploadModal = ({
     secretAccessKey: VITE_SECRET_ACCESS_KEY,
   };
 
-  const handleChange = () => {
+  const handleChange = (file) => {
     setFile(file);
   };
 
