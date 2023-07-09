@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {
   Box,
   CardContent, Typography, LinearProgress, styled,
@@ -12,7 +13,7 @@ import {
   Wrapper2,
 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
-import { ErrorAlert } from '..';
+import { ErrorAlert, ConfirmDialog } from '..';
 import Loader from './Loader';
 import LongMenu from './Menu';
 
@@ -47,7 +48,9 @@ export const Wrapper2Progress = styled(Box)`
 const ProjectsCard = () => {
   const [userProjects, setUserProjects] = useState<iProjects[]>([]);
   const [projectTasks, setProjectTasks] = useState<iProjectTasks[]>([]);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
+  const [projectId, setProjectId] = useState<number>();
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const handleDeleteProject = (projectId:any) => {
@@ -61,6 +64,10 @@ const ProjectsCard = () => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
+  };
+  const handleConfirmDelete = (projectId:any) => {
+    setConfirmOpen(false);
+    handleDeleteProject(projectId);
   };
 
   useEffect(() => {
@@ -128,6 +135,28 @@ const ProjectsCard = () => {
         const allTasks = projectTasks[index].length;
         const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
         return (
+<<<<<<< HEAD
+          <Wrapper2 key={project.project_id}>
+            <CardContent>
+              <WrapperPN>{project.role}</WrapperPN>
+              <Typography gutterBottom variant="h6" component="div">
+                {project.title}
+              </Typography>
+              <WrapperDes variant="body2" color="text.secondary">
+                {project.description}
+              </WrapperDes>
+            </CardContent>
+            <WrappBtn>
+              <IconButton onClick={() => {
+                setProjectId(project.project_id);
+                return setConfirmOpen(true);
+              }}
+              >
+                <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
+                  <RiDeleteBinLine
+                    style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
+                  />
+=======
           <WrapCards>
             <Wrapper2 key={project.project_id}>
               <CardContent sx={{ flex: 1, padding: '0' }}>
@@ -147,6 +176,7 @@ const ProjectsCard = () => {
                     {project.title}
                   </Typography>
                   <LongMenu handleDeleteProject={handleDeleteProject} id={project.project_id} />
+>>>>>>> main
                 </Box>
                 <WrapperDes variant="body2" color="text.secondary">
                   {project.description}
@@ -161,6 +191,16 @@ const ProjectsCard = () => {
           </WrapCards>
         );
       })}
+      <ConfirmDialog
+        title="Delete Task"
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={() => {
+          handleConfirmDelete(projectId);
+        }}
+      >
+        Are you sure you want to delete this project?
+      </ConfirmDialog>
     </>
   );
 };

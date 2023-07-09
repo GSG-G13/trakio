@@ -33,10 +33,10 @@ const HomePage = () => {
         <Box>
           <WelcomeCard />
           <Box sx={{ display: 'flex', gap: '.75rem', width: '48.75rem' }}>
-            <StatisticsCard />
-            <StatisticsCard />
-            <StatisticsCard />
-            <StatisticsCard />
+            <StatisticsCard section="To-Do" />
+            <StatisticsCard section="Doing" />
+            <StatisticsCard section="Reviewing" />
+            <StatisticsCard section="Done" />
           </Box>
         </Box>
         <DescriptionCard />

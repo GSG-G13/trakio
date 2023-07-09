@@ -9,7 +9,7 @@ import StatisticsCard from './StatisticsCard';
 import DescriptionCard from './DescrioptionCard';
 import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
-import { SuccessAlert, ErrorAlert } from './Alerts';
+import { SuccessAlert, ErrorAlert, ConfirmDialog } from './Alerts';
 import TabBar from './TabBar';
 import FloatingButton from './FloatingButton';
 import { TitleAndDesc, OverviewTaskCard, Member } from './OverviewContent';
@@ -36,5 +36,6 @@ export {
   TitleAndDesc,
   OverviewTaskCard,
   Member,
+  ConfirmDialog,
   UploadModal,
 };

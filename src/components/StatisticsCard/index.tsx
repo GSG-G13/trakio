@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
@@ -5,8 +6,8 @@ import { StatisticsBox, StatisticsContent } from './statistics.styed';
 import { task } from '../../interfaces';
 import { ErrorAlert } from '..';
 
-const StatisticsCard = () => {
-  const [completedTasks, setCompletedTasks] = useState<task[]>([]);
+const StatisticsCard = ({ section }:any) => {
+  const [tasks, setTasks] = useState<task[]>([]);
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
 
@@ -15,8 +16,8 @@ const StatisticsCard = () => {
       .get('/api/tasks')
       .then((response) => {
         const tasks: task[] = response.data.data;
-        const filteredTasks = tasks.filter((Task: task) => Task.section === 'Done');
-        setCompletedTasks(filteredTasks);
+        const filteredTasks = tasks.filter((task: task) => task.section === section);
+        setTasks(filteredTasks);
       })
       .catch((error) => {
         setOpenError(true);
@@ -34,10 +35,13 @@ const StatisticsCard = () => {
       <StatisticsBox>
         <StatisticsContent>
           <Typography>
-            Completed Tasks
+            {section}
+            {' '}
+            Tasks
+            {' '}
           </Typography>
           <Typography>
-            {completedTasks.length}
+            {tasks.length}
           </Typography>
         </StatisticsContent>
       </StatisticsBox>

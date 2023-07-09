@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { AccountInput, ErrorAlert } from '../../components';
+import { AccountInput, ErrorAlert, ConfirmDialog } from '../../components';
 import { WrappBtn } from '../../components/AccountInput/acount.styled';
 import userContext from '../../UserContext/context';
 
@@ -10,6 +10,7 @@ const AccountPage = () => {
   const navigator = useNavigate();
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const user = useContext(userContext);
 
   const handleDeleteAccount = () => {
@@ -20,6 +21,10 @@ const AccountPage = () => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
+  };
+  const handleConfirmDelete = () => {
+    setConfirmOpen(false);
+    handleDeleteAccount();
   };
 
   return (
@@ -52,12 +57,20 @@ const AccountPage = () => {
         </Grid>
         <Box>
           <Typography sx={{ color: 'custom.white' }}>
-            <WrappBtn onClick={handleDeleteAccount}>
+            <WrappBtn onClick={() => setConfirmOpen(true)}>
               Delete Account
             </WrappBtn>
           </Typography>
         </Box>
       </Box>
+      <ConfirmDialog
+        title="Delete Task"
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={handleConfirmDelete}
+      >
+        Are you sure you want to delete your account?
+      </ConfirmDialog>
     </>
   );
 };
