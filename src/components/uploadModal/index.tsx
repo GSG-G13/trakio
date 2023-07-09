@@ -28,7 +28,7 @@ const UploadModal = ({
   taskId: number;
 }) => {
   const fileTypes = ['JPG', 'PNG', 'GIF', 'PDF', 'TXT'];
-  const [file, setFile] = useState<File | null>(null);
+  const [uploadedFile, setFile] = useState<File | null>(null);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openError, setOpenError] = useState(false);
@@ -39,22 +39,22 @@ const UploadModal = ({
 
   const config = {
     bucketName: 'trackio',
-    dirName: `${id}` /* optional */,
+    dirName: `${id}`,
     region: 'eu-central-1',
     accessKeyId: VITE_ACCESS_KEY,
     secretAccessKey: VITE_SECRET_ACCESS_KEY,
   };
 
-  const handleChange = () => {
+  const handleChange = (file: File) => {
     setFile(file);
   };
 
   const handleUpload = () => {
     setLoading(true);
-    return S3FileUpload.uploadFile(file, config)
-      .then((data) => axios.post(`/api/project/${id}/attachments?taskId=${taskId}`, {
+    return S3FileUpload.uploadFile(uploadedFile, config)
+      .then((data: any) => axios.post(`/api/project/${id}/attachments?taskId=${taskId}`, {
         attachS3: data.location,
-        attachmentName: file?.name,
+        attachmentName: uploadedFile?.name,
       }))
       .then((res: AxiosResponse) => {
         setLoading(false);
@@ -126,11 +126,11 @@ const UploadModal = ({
                 </Typography>
               </Box>
             </FileUploader>
-            {file && (
+            {uploadedFile && (
               <Box margin={1} display="flex" alignItems="center">
                 <CheckCircleIcon sx={{ fontSize: 12, color: 'custom.green' }} />
                 <Typography marginLeft={1} fontSize={12} color="custom.green">
-                  {file.name}
+                  {uploadedFile.name}
                 </Typography>
               </Box>
             )}
