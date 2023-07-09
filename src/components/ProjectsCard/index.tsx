@@ -1,6 +1,6 @@
 import ProjectsCard from './ProjectCard';
 import {
-  Wrapper,
+  WrapCards,
   WrapperApp,
   WrapperH1,
   WrapperIc,
@@ -12,9 +12,9 @@ const ProjectsCards = () => (
       <WrapperIc />
       My Projects
     </WrapperH1>
-    <Wrapper>
+    <WrapCards>
       <ProjectsCard />
-    </Wrapper>
+    </WrapCards>
   </WrapperApp>
 );
 
