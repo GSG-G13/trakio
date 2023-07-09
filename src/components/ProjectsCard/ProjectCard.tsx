@@ -135,28 +135,6 @@ const ProjectsCard = () => {
         const allTasks = projectTasks[index].length;
         const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
         return (
-<<<<<<< HEAD
-          <Wrapper2 key={project.project_id}>
-            <CardContent>
-              <WrapperPN>{project.role}</WrapperPN>
-              <Typography gutterBottom variant="h6" component="div">
-                {project.title}
-              </Typography>
-              <WrapperDes variant="body2" color="text.secondary">
-                {project.description}
-              </WrapperDes>
-            </CardContent>
-            <WrappBtn>
-              <IconButton onClick={() => {
-                setProjectId(project.project_id);
-                return setConfirmOpen(true);
-              }}
-              >
-                <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
-                  <RiDeleteBinLine
-                    style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
-                  />
-=======
           <WrapCards>
             <Wrapper2 key={project.project_id}>
               <CardContent sx={{ flex: 1, padding: '0' }}>
@@ -176,7 +154,6 @@ const ProjectsCard = () => {
                     {project.title}
                   </Typography>
                   <LongMenu handleDeleteProject={handleDeleteProject} id={project.project_id} />
->>>>>>> main
                 </Box>
                 <WrapperDes variant="body2" color="text.secondary">
                   {project.description}
