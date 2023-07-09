@@ -18,6 +18,7 @@ import { iProjects } from '../../interfaces';
 import { NAV_LIST } from '../../constants';
 import { Logo, NavItem } from '../Common';
 import UserCard from '../UserCard';
+import { ServerError } from '../../pages/Errors';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Sidebar = () => {
         setProjects(response.data.data);
       })
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
@@ -47,6 +49,7 @@ const Sidebar = () => {
         navigate('/login', { state: { success: 'Logout Successfully' } });
       })
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
       });

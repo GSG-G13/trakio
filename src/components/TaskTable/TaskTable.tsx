@@ -18,6 +18,7 @@ import { task } from '../../interfaces';
 import Theme from '../../theme';
 import TaskRowSkeleton from './TaskRowSkeleton';
 import empty from '../../lotties/empty.json';
+import { ServerError } from '../../pages/Errors';
 
 const TaskTable = () => {
   const [tasks, setTasks] = useState<task[]>([]);
@@ -45,6 +46,7 @@ const TaskTable = () => {
         setTasks(res.data.data);
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         setLoading(false);
         navigator('/', { state: { error: err.response.data.message } });
       });

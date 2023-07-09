@@ -3,6 +3,7 @@ import Cookie from 'js-cookie';
 import axios from 'axios';
 import { userData } from '../interfaces/userData';
 import userContext from './context';
+import { ServerError } from '../pages/Errors';
 
 const AuthContext = ({ children }: { children: any }) => {
   const [user, setUserData] = useState<userData | null>(null);
@@ -13,7 +14,8 @@ const AuthContext = ({ children }: { children: any }) => {
       .then((res) => {
         setUserData(res.data.userData);
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         Cookie.remove('token');
       });
   }, []);

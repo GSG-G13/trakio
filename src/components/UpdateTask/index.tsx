@@ -14,6 +14,7 @@ import { task, ISection } from '../../interfaces';
 import {
   TaskBox, Label, Date, Section, Textarea,
 } from './updateTask.styled';
+import { ServerError } from '../../pages/Errors';
 
 interface IProps {
    data: task, open: boolean, handleClose: () => void,
@@ -77,6 +78,7 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
         setMessageSuccess(response.data.message);
       })
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
@@ -88,7 +90,8 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
       .then((values) => {
         setLoading(false);
         setSections(values.data.data);
-      }).catch(() => {
+      }).catch((err) => {
+        if (err.response.state >= 500) ServerError();
         setLoading(false);
       });
   }, []);

@@ -10,6 +10,7 @@ import { ErrorAlert, SuccessAlert } from '..';
 import THEME from '../../theme';
 import { addProjectSchema } from '../../helper/validation/schema';
 import { Props2 } from '../../interfaces';
+import { ServerError } from '../../pages/Errors';
 
 const AddProjectModal = ({ open, handleClose }:Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -25,6 +26,7 @@ const AddProjectModal = ({ open, handleClose }:Props2) => {
         setMessageSuccess(res.data.message);
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(err.response.data.message);
       }); handleClose();

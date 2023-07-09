@@ -8,6 +8,7 @@ import { task } from '../../interfaces/task';
 import { ISection } from '../../interfaces';
 import empty from '../../lotties/empty.json';
 import TaskSkeleton from './TaskSkeleton';
+import { ServerError } from '../Errors';
 
 const TaskBoard = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const TaskBoard = () => {
         }
       })
       .catch((err) => {
+        if (err.response.state >= 500) ServerError();
         setLoading(false);
         navigate('/', { state: { error: err.response.data.message } });
       });

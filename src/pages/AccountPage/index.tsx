@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AccountInput, ErrorAlert } from '../../components';
 import { WrappBtn } from '../../components/AccountInput/acount.styled';
 import userContext from '../../UserContext/context';
+import { ServerError } from '../Errors';
 
 const AccountPage = () => {
   const navigator = useNavigate();
@@ -17,6 +18,7 @@ const AccountPage = () => {
       .delete('/api/account')
       .then(() => navigator('/login'))
       .catch((error) => {
+        if (error.response.state >= 500) ServerError();
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
