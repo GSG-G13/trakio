@@ -13,6 +13,7 @@ import { SuccessAlert, ErrorAlert } from './Alerts';
 import TabBar from './TabBar';
 import FloatingButton from './FloatingButton';
 import { TitleAndDesc, OverviewTaskCard, Member } from './OverviewContent';
+import UploadModal from './uploadModal';
 
 export {
   TaskTable,
@@ -35,4 +36,5 @@ export {
   TitleAndDesc,
   OverviewTaskCard,
   Member,
+  UploadModal,
 };
