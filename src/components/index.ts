@@ -11,6 +11,7 @@ import WelcomeCard from './WelcomeCard';
 import Charts from './Charts';
 import { SuccessAlert, ErrorAlert, ConfirmDialog } from './Alerts';
 import TabBar from './TabBar';
+import FloatingButton from './FloatingButton';
 import { TitleAndDesc, OverviewTaskCard, Member } from './OverviewContent';
 
 export {
@@ -30,6 +31,7 @@ export {
   ErrorAlert,
   ProjectInput,
   TabBar,
+  FloatingButton,
   TitleAndDesc,
   OverviewTaskCard,
   Member,
