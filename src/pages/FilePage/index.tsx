@@ -65,7 +65,7 @@ const FilePage = () => {
               >
                 {item.attachment_name.split('.')[1] === 'pdf' ? (
                   <PictureAsPdfIcon
-                    sx={{ color: 'custom.black', fontSize: 48 }}
+                    sx={{ color: 'custom.white', fontSize: 48 }}
                   />
                 ) : (
                   <PhotoSizeSelectActualIcon
