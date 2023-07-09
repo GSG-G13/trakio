@@ -5,74 +5,119 @@ import {
   CardContent,
   Typography,
   CardActions,
+  Container,
 } from '@mui/material';
 import { MdDashboard } from 'react-icons/md';
 
-export const Wrapper = styled(Card)(({ theme: { palette: { custom } } }) => ({
-  background: custom.background,
-  display: 'grid',
-  gap: '1.5rem 1rem',
-  boxShadow: 'none',
-  gridTemplateColumns: 'auto auto auto',
-  padding: '0.8vw',
-  marginLeft: '1vw',
-}));
+export const WrapCards = styled(Card)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    background: custom.background,
+    display: 'grid',
+    gap: '1.5rem 1rem',
+    boxShadow: 'none',
+    gridTemplateColumns: 'auto auto auto',
+    ':last-child': {
+      padding: '0',
+    },
+  }),
+);
 
-export const Wrapper2 = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
-  background: custom.divider,
-  borderRadius: 10,
-  color: custom.white,
-  minWidth: '300px',
-  maxWidth: '330px',
-}));
+export const Wrapper2 = styled(Container)(
+  ({
+    theme: {
+      palette: { custom, primary },
+    },
+  }) => ({
+    background: custom.divider,
+    borderRadius: 10,
+    color: custom.white,
+    display: 'flex',
+    flexDirection: 'column',
+    maxwidth: '20rem',
+    width: '20rem',
+    maxheight: '15rem',
+    height: '13rem',
+    borderLeft: `1px solid ${primary.main}`,
+    padding: '1rem',
+  }),
+);
 
-export const WrapperPN = styled(Typography)(({ theme: { palette: { custom, primary } } }) => ({
-  background: primary.main,
-  color: custom.darkFont,
-  width: '7vw',
-  borderRadius: '4px',
-  height: '2vw',
-  overflow: 'hidden',
-  marginTop: '-3vw',
-  marginLeft: '-1.2vw',
-  marginBottom: '1vw',
-  textAlign: 'center',
-  fontWeight: 'bold',
-}));
+export const WrapperDes = styled(Typography)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    color: custom.gray,
+    marginTop: '10px',
+    fontSize: '13.8px',
+    overflow: 'hidden',
+    '-webkit-line-clamp': '3',
+    display: '-webkit-box',
+    '-webkit-box-orient': 'vertical',
+    textAlign: 'left',
+  }),
+);
 
-export const WrapperDes = styled(Typography)(({ theme: { palette: { custom } } }) => ({
-  color: custom.gray,
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-}));
+export const WrapperApp = styled(CardContent)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    background: custom.background,
+    ':last-child': {
+      padding: '0',
+    },
+  }),
+);
 
-export const WrapperApp = styled(CardContent)(({ theme: { palette: { custom } } }) => ({
-  background: custom.background,
-  marginTop: '5rem',
-  marginLeft: '-2rem',
-}));
+export const WrapperH1 = styled(Typography)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    color: custom.white,
+    fontSize: '1.5em',
+    marginBottom: '2rem',
+  }),
+);
 
-export const WrapperH1 = styled(Typography)(({ theme: { palette: { custom } } }) => ({
-  color: custom.white,
-  fontSize: '1.5em',
-  marginTop: '-8vh',
-  marginBottom: '2rem',
-  marginLeft: '1vw',
-}));
+export const WrappBtnDone = styled(Button)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    color: custom.green,
+  }),
+);
 
-export const WrappBtnDone = styled(Button)(({ theme: { palette: { custom } } }) => ({
-  color: custom.green,
-}));
+export const WrapperBtnUD = styled(Button)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    color: custom.orange,
+  }),
+);
 
-export const WrapperBtnUD = styled(Button)(({ theme: { palette: { custom } } }) => ({
-  color: custom.orange,
-}));
-
-export const WrapperIc = styled(MdDashboard)(({ theme: { palette: { custom } } }) => ({
-  color: custom.white,
-  marginRight: '0.6vw',
-}));
+export const WrapperIc = styled(MdDashboard)(
+  ({
+    theme: {
+      palette: { custom },
+    },
+  }) => ({
+    color: custom.white,
+    marginRight: '0.6vw',
+  }),
+);
 
 export const WrappBtn = styled(CardActions)({
   display: 'flex',

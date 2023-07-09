@@ -7,6 +7,7 @@ import {
   Calendar,
   SignupPage,
   Overview,
+  FilePage,
 } from '../pages';
 import { ProjectsCards, TaskTable } from '../components';
 
@@ -31,11 +32,11 @@ const router = createBrowserRouter([
             element: <TaskTable />,
           },
           {
-            path: '/mytask/board',
+            path: 'board',
             element: <TaskBoard />,
           },
           {
-            path: '/mytask/calendar',
+            path: 'calendar',
             element: <Calendar />,
           },
         ],
@@ -56,16 +57,20 @@ const router = createBrowserRouter([
             element: <Overview />,
           },
           {
-            path: '/project/:id/list',
+            path: 'list',
             element: <TaskTable />,
           },
           {
-            path: '/project/:id/board',
+            path: 'board',
             element: <TaskBoard />,
           },
           {
-            path: '/project/:id/calendar',
+            path: 'calendar',
             element: <Calendar />,
+          },
+          {
+            path: 'files',
+            element: <FilePage />,
           },
         ],
       },

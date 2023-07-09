@@ -1,26 +1,49 @@
 /* eslint-disable no-shadow */
 import {
-  Box, IconButton,
-  CardContent, Typography,
+  Box,
+  CardContent, Typography, LinearProgress, styled,
 } from '@mui/material';
-import { RiDeleteBinLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
 import empty from '../../lotties/empty.json';
-import THEME from '../../theme';
 import {
-  WrappBtnDone,
-  Wrapper2,
-  WrapperBtnUD,
   WrapperDes,
-  WrapperPN,
-  WrappBtn,
-  Wrapper,
+  WrapCards,
+  Wrapper2,
 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert, ConfirmDialog } from '..';
 import Loader from './Loader';
+import LongMenu from './Menu';
+
+const LinearProgressWithLabel = ({ value }: {value: number}) => (
+  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ width: '100%' }}>
+      <LinearProgress
+        variant="determinate"
+        value={value}
+        sx={{
+          backgroundColor: 'custom.gray',
+        }}
+      />
+    </Box>
+    <Box sx={{ minWidth: 35 }} />
+    <Typography variant="body2" color="primary.main">
+      {`${Math.round(value)}%`}
+    </Typography>
+  </Box>
+);
+
+export const LinearWithValueLabel = ({ value }: {value: number}) => (
+  <Box>
+    <LinearProgressWithLabel value={value} />
+  </Box>
+);
+
+export const Wrapper2Progress = styled(Box)`
+  margin-top: 10px;
+`;
 
 const ProjectsCard = () => {
   const [userProjects, setUserProjects] = useState<iProjects[]>([]);
@@ -30,7 +53,6 @@ const ProjectsCard = () => {
   const [projectId, setProjectId] = useState<number>();
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
   const handleDeleteProject = (projectId:any) => {
     axios
       .delete(`/api/project/${projectId}`)
@@ -71,9 +93,9 @@ const ProjectsCard = () => {
 
   if (isLoading) {
     return (
-      <Wrapper>
+      <WrapCards>
         <Loader userProjets={userProjects} />
-      </Wrapper>
+      </WrapCards>
     );
   }
 
@@ -110,9 +132,10 @@ const ProjectsCard = () => {
           />
         </Box>
       ) : userProjects.map((project: iProjects, index: number) => {
-        const todoTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section !== 'Done')?.length;
+        const allTasks = projectTasks[index].length;
         const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
         return (
+<<<<<<< HEAD
           <Wrapper2 key={project.project_id}>
             <CardContent>
               <WrapperPN>{project.role}</WrapperPN>
@@ -133,16 +156,39 @@ const ProjectsCard = () => {
                   <RiDeleteBinLine
                     style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
                   />
+=======
+          <WrapCards>
+            <Wrapper2 key={project.project_id}>
+              <CardContent sx={{ flex: 1, padding: '0' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      overflow: 'hidden',
+                      '-webkit-line-clamp': '1',
+                      display: '-webkit-box',
+                      '-webkit-box-orient': 'vertical',
+                      textAlign: 'left',
+                    }}
+                  >
+                    {project.title}
+                  </Typography>
+                  <LongMenu handleDeleteProject={handleDeleteProject} id={project.project_id} />
+>>>>>>> main
                 </Box>
-              </IconButton>
-              <WrapperBtnUD>
-                {`${todoTasks} Todo`}
-              </WrapperBtnUD>
-              <WrappBtnDone>
-                {`${doneTasks} Done`}
-              </WrappBtnDone>
-            </WrappBtn>
-          </Wrapper2>
+                <WrapperDes variant="body2" color="text.secondary">
+                  {project.description}
+                </WrapperDes>
+              </CardContent>
+              <Wrapper2Progress>
+                <LinearWithValueLabel
+                  value={allTasks !== 0 ? (doneTasks / allTasks) * 100 : 0}
+                />
+              </Wrapper2Progress>
+            </Wrapper2>
+          </WrapCards>
         );
       })}
       <ConfirmDialog

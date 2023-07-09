@@ -6,7 +6,7 @@ import {
   Wrapper2,
   WrapperBtnUD,
   WrappBtn,
-  Wrapper,
+  WrapCards,
 } from './cards.styled';
 import { Props } from '../../interfaces';
 
@@ -29,9 +29,9 @@ const Loader = ({ userProjets }: Props) => {
   ));
 
   return (
-    <Wrapper>
+    <WrapCards>
       {skeletonCards}
-    </Wrapper>
+    </WrapCards>
   );
 };
 

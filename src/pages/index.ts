@@ -5,7 +5,8 @@ import LoginPage from './LoginPage';
 import Overview from './Overview';
 import SignupPage from './SigupPage/SignupPage';
 import Calendar from './Calendar';
+import FilePage from './FilePage';
 
 export {
-  HomePage, AccountPage, LoginPage, SignupPage, TaskBoard, Calendar, Overview,
+  HomePage, AccountPage, LoginPage, SignupPage, TaskBoard, Calendar, Overview, FilePage,
 };
