@@ -10,7 +10,7 @@ import { IProjectDetails } from '../../interfaces';
 const TabBar = () => {
   const isProjectTab = useLocation().pathname.includes('project');
   const TAPS_ARRAY = ['Overview', 'List', 'Board', 'Calendar', 'Files'];
-  const tabs = isProjectTab ? TAPS_ARRAY : TAPS_ARRAY.splice(1, 4);
+  const tabs = isProjectTab ? TAPS_ARRAY : TAPS_ARRAY.splice(1, 3);
   const { id } = useParams();
   const [project, setProject] = useState<IProjectDetails>({});
   const title = isProjectTab ? project.title : 'My-Tasks';
@@ -28,7 +28,7 @@ const TabBar = () => {
 
   return (
     <Grid container paddingY={5}>
-      <Grid item xs={isProjectTab ? 3 : 2.5}>
+      <Grid item xs={isProjectTab ? 3 : 2}>
         <Box sx={{ display: 'flex', color: 'custom.white' }}>
           <Avatar
             sx={{
