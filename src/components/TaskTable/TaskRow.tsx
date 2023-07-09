@@ -10,7 +10,7 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { MdOutlineEdit } from 'react-icons/md';
 import axios from 'axios';
 import { task } from '../../interfaces';
-import { ErrorAlert, SuccessAlert } from '..';
+import { ErrorAlert, SuccessAlert, ConfirmDialog } from '..';
 import THEME from '../../theme';
 import EditTaskForm from '../../components/UpdateTask';
 
@@ -19,6 +19,7 @@ const TaskRow = ({ data }: {data: task}) => {
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
@@ -33,6 +34,11 @@ const TaskRow = ({ data }: {data: task}) => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
+  };
+
+  const handleConfirmDelete = () => {
+    setConfirmOpen(false);
+    handleDeleteTask();
   };
 
   return (
@@ -108,7 +114,7 @@ const TaskRow = ({ data }: {data: task}) => {
 
           <EditTaskForm open={open} handleClose={handleClose} data={data} />
 
-          <IconButton onClick={handleDeleteTask}>
+          <IconButton onClick={() => setConfirmOpen(true)}>
             <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
               <RiDeleteBinLine
                 style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
@@ -117,7 +123,14 @@ const TaskRow = ({ data }: {data: task}) => {
           </IconButton>
         </TableCell>
       </TableRow>
-
+      <ConfirmDialog
+        title="Delete Task"
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={handleConfirmDelete}
+      >
+        Are you sure you want to delete this task?
+      </ConfirmDialog>
     </>
   );
 };
