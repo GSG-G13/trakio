@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-// import PermanentAppBar from '../AppBar';
 import Cookie from 'js-cookie';
 import MainComponent from './layout.styled';
 import Sidebar from '../Sidebar';

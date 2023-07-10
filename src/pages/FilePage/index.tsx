@@ -7,7 +7,9 @@ import axios from 'axios';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import DownloadIcon from '@mui/icons-material/Download';
+import Lottie from 'react-lottie';
 import { IFile } from '../../interfaces';
+import noAttach from '../../lotties/noAttach.json';
 
 const handleDownloadClick = async (attach: string) => {
   try {
@@ -45,73 +47,114 @@ const FilePage = () => {
 
   return (
     <Grid container spacing={2}>
-      {files.map((item) => (
-        <Grid key={item.id} item xs={6}>
-          <Box
-            padding={2}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderRadius={2}
-            bgcolor="secondary.main"
-          >
-            <Box display="flex">
-              <Box
-                padding={2}
-                bgcolor="custom.gray"
-                display="flex"
-                alignItems="center"
-                borderRadius={1}
-              >
-                {item.attachment_name.split('.')[1] === 'pdf' ? (
-                  <PictureAsPdfIcon
-                    sx={{ color: 'custom.white', fontSize: 48 }}
-                  />
-                ) : (
-                  <PhotoSizeSelectActualIcon
-                    sx={{ color: 'custom.white', fontSize: 48 }}
-                  />
-                )}
-              </Box>
-              <Box
-                marginLeft={2}
-                display="flex"
-                flexDirection="column"
-                justifyContent="space-around"
-              >
-                <Box display="flex">
-                  <Typography fontSize={12} color="custom.gray" marginRight={2}>
-                    name:
-                  </Typography>
-                  <Typography fontSize={16} color="custom.white">
-                    {item.attachment_name.split('.')[0]}
-                  </Typography>
+      {files.length ? (
+        files.map((item) => (
+          <Grid key={item.id} item xs={6}>
+            <Box
+              padding={2}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              borderRadius={2}
+              bgcolor="secondary.main"
+            >
+              <Box display="flex">
+                <Box
+                  padding={2}
+                  bgcolor="custom.gray"
+                  display="flex"
+                  alignItems="center"
+                  borderRadius={1}
+                >
+                  {item.attachment_name.split('.')[1] === 'pdf' ? (
+                    <PictureAsPdfIcon
+                      sx={{ color: 'custom.white', fontSize: 48 }}
+                    />
+                  ) : (
+                    <PhotoSizeSelectActualIcon
+                      sx={{ color: 'custom.white', fontSize: 48 }}
+                    />
+                  )}
                 </Box>
+                <Box
+                  marginLeft={2}
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="space-around"
+                >
+                  <Box display="flex">
+                    <Typography
+                      fontSize={12}
+                      color="custom.gray"
+                      marginRight={2}
+                    >
+                      name:
+                    </Typography>
+                    <Typography fontSize={16} color="custom.white">
+                      {item.attachment_name.split('.')[0]}
+                    </Typography>
+                  </Box>
 
-                <Box display="flex">
-                  <Typography fontSize={12} color="custom.gray" marginRight={2}>
-                    Task:
-                  </Typography>
-                  <Typography fontSize={14} color="custom.white">
-                    {item.title}
-                  </Typography>
-                </Box>
-                <Box display="flex">
-                  <Typography fontSize={12} color="custom.gray" marginRight={2}>
-                    uploaded By:
-                  </Typography>
-                  <Typography fontSize={14} color="custom.white">
-                    {item.name}
-                  </Typography>
+                  <Box display="flex">
+                    <Typography
+                      fontSize={12}
+                      color="custom.gray"
+                      marginRight={2}
+                    >
+                      Task:
+                    </Typography>
+                    <Typography fontSize={14} color="custom.white">
+                      {item.title}
+                    </Typography>
+                  </Box>
+                  <Box display="flex">
+                    <Typography
+                      fontSize={12}
+                      color="custom.gray"
+                      marginRight={2}
+                    >
+                      uploaded By:
+                    </Typography>
+                    <Typography fontSize={14} color="custom.white">
+                      {item.name}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
+              <IconButton onClick={() => handleDownloadClick(item.attach_s3)}>
+                <DownloadIcon sx={{ color: 'custom.gray' }} />
+              </IconButton>
             </Box>
-            <IconButton onClick={() => handleDownloadClick(item.attach_s3)}>
-              <DownloadIcon sx={{ color: 'custom.gray' }} />
-            </IconButton>
+          </Grid>
+        ))
+      ) : (
+        <Box
+          width="100%"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography fontSize={24} fontWeight={700} mb={4} color="custom.gray">
+            No Attachment
+          </Typography>
+          <Box marginTop={10}>
+            <Lottie
+              height={300}
+              width={750}
+              options={{
+                animationData: noAttach,
+                loop: true,
+                autoplay: true,
+                rendererSettings: {
+                  preserveAspectRatio: 'xMidYMid slice',
+                },
+              }}
+            />
           </Box>
-        </Grid>
-      ))}
+        </Box>
+      )}
     </Grid>
   );
 };

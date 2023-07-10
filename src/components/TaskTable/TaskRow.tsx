@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   TableRow,
   TableCell,
@@ -17,7 +18,7 @@ import { task } from '../../interfaces';
 import THEME from '../../theme';
 import EditTaskForm from '../../components/UpdateTask';
 
-const TaskRow = ({ data }: { data: task }) => {
+const TaskRow = ({ data, isManager }: { data: task, isManager: boolean }) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
@@ -29,6 +30,8 @@ const TaskRow = ({ data }: { data: task }) => {
   const handleOpen = () => setOpen(true);
   const handleCloseUpload = () => setOpenUpload(false);
   const handleOpenUpload = () => setOpenUpload(true);
+  const { pathname } = useLocation();
+  const isProject = pathname.includes('project');
 
   const handleDeleteTask = () => {
     axios
@@ -101,31 +104,33 @@ const TaskRow = ({ data }: { data: task }) => {
           </Typography>
         </TableCell>
 
-        <TableCell align="center">
-          <IconButton onClick={handleOpenUpload}>
-            <Box bgcolor="rgba(77,250,62,.2)" borderRadius={2} padding={1}>
-              <AttachFileIcon sx={{ fontSize: 16, color: '#3EFA94' }} />
-            </Box>
-          </IconButton>
-          <IconButton onClick={handleOpen}>
-            <Box bgcolor="rgba(62, 123, 250, 0.2)" borderRadius={2} padding={1}>
-              <MdOutlineEdit
-                style={{ fontSize: 16, color: THEME.palette.custom.editIcon }}
-              />
-            </Box>
-          </IconButton>
+        {isProject && isManager && (
+          <TableCell align="center">
+            <IconButton onClick={handleOpenUpload}>
+              <Box bgcolor="rgba(77,250,62,.2)" borderRadius={2} padding={1}>
+                <AttachFileIcon sx={{ fontSize: 16, color: '#3EFA94' }} />
+              </Box>
+            </IconButton>
+            <IconButton onClick={handleOpen}>
+              <Box bgcolor="rgba(62, 123, 250, 0.2)" borderRadius={2} padding={1}>
+                <MdOutlineEdit
+                  style={{ fontSize: 16, color: THEME.palette.custom.editIcon }}
+                />
+              </Box>
+            </IconButton>
 
-          <EditTaskForm open={open} handleClose={handleClose} data={data} />
-          <UploadModal open={openUplad} handleClose={handleCloseUpload} taskId={data.id!} />
+            <EditTaskForm open={open} handleClose={handleClose} data={data} />
+            <UploadModal open={openUplad} handleClose={handleCloseUpload} taskId={data.id!} />
 
-          <IconButton onClick={() => setConfirmOpen(true)}>
-            <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
-              <RiDeleteBinLine
-                style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
-              />
-            </Box>
-          </IconButton>
-        </TableCell>
+            <IconButton onClick={() => setConfirmOpen(true)}>
+              <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
+                <RiDeleteBinLine
+                  style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
+                />
+              </Box>
+            </IconButton>
+          </TableCell>
+        )}
       </TableRow>
       <ConfirmDialog
         title="Delete Task"

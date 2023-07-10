@@ -19,10 +19,6 @@ const AddMemberModal = ({ open, handleClose }: Props2) => {
   const [selected, setSelected] = useState<userData[]>([]);
   const { id } = useParams();
 
-  const handleChange = (e, values: userData[]) => {
-    setSelected(values);
-  };
-
   useEffect(() => {
     axios.get(`/api/project/${id}/users`).then((res) => {
       setAllUsers(res.data.data);
@@ -57,13 +53,16 @@ const AddMemberModal = ({ open, handleClose }: Props2) => {
           <Stack width="80%">
             <Autocomplete
               value={selected}
-              onChange={handleChange}
+              onChange={(e, values: userData[]) => {
+                if (e) setSelected(values);
+              }}
               multiple
               id="tags-outlined"
               options={allUsers}
               getOptionLabel={(option) => option.name}
               renderOption={(props, option) => (
                 <Box
+                  component="li"
                   bgcolor="custom.background"
                   padding={1}
                   display="flex"

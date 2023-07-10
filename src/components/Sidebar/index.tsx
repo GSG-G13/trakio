@@ -106,7 +106,7 @@ const Sidebar = () => {
             <Typography sx={{ color: 'custom.fontGray', fontSize: '16px' }}>
               Others
             </Typography>
-            <NavItem path="/logout" title="Logout" icon={<MdLogout />} onClick={handleLogout} />
+            <NavItem path="/login" title="Logout" icon={<MdLogout />} onClick={handleLogout} />
           </Box>
         </DrawerItem>
       </Box>

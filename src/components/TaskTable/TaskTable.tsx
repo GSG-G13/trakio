@@ -22,11 +22,13 @@ import empty from '../../lotties/empty.json';
 const TaskTable = () => {
   const [tasks, setTasks] = useState<task[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isManager, setIsManager] = useState<boolean>(false);
   const { pathname } = useLocation();
   const { id } = useParams();
   const navigator = useNavigate();
   const isProject = pathname.includes('project');
   const endpoint = isProject ? `/api/project/${id}/task` : '/api/tasks';
+
   const COLS = [
     'Task name',
     'Project',
@@ -36,6 +38,8 @@ const TaskTable = () => {
     'Due date',
     'Actions',
   ];
+  const columns = isProject && isManager ? COLS : COLS.slice(0, 6);
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -48,7 +52,14 @@ const TaskTable = () => {
         setLoading(false);
         navigator('/', { state: { error: err.response.data.message } });
       });
+
+    if (isProject) {
+      axios.get(`/api/project/${id}`).then((res) => {
+        setIsManager(res.data.manager);
+      });
+    }
   }, [pathname]);
+  console.log(isManager);
 
   return !tasks.length && !loading ? (
     <Box
@@ -99,7 +110,7 @@ const TaskTable = () => {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            {COLS.map((col, index) => (
+            {columns.map((col, index) => (
               <TableCell key={index}>
                 <Typography
                   fontSize={12}
@@ -116,7 +127,7 @@ const TaskTable = () => {
           {loading ? (
             <TaskRowSkeleton />
           ) : (
-            tasks.map((item) => <TaskRow key={item.id} data={item} />)
+            tasks.map((item) => <TaskRow key={item.id} data={item} isManager={isManager} />)
           )}
         </TableBody>
       </Table>
