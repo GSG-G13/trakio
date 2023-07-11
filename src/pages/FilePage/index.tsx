@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Grid, IconButton, Typography } from '@mui/material';
+import {
+  Box, Grid, IconButton, Typography,
+} from '@mui/material';
 import axios from 'axios';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';

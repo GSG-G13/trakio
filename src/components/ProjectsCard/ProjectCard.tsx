@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
+import { useOutletContext } from 'react-router-dom';
 import empty from '../../lotties/empty.json';
 import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
@@ -52,6 +53,8 @@ const ProjectsCard = () => {
   const [projectId, setProjectId] = useState<number>();
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [render, setRender] = useOutletContext<any>();
+
   const handleDeleteProject = (projectId: any) => {
     axios
       .delete(`/api/project/${projectId}`)
@@ -60,6 +63,7 @@ const ProjectsCard = () => {
           (project) => project.project_id !== projectId,
         );
         setUserProjects(updatedProjects);
+        setRender(!render);
       })
       .catch((error) => {
         setOpenError(true);
@@ -76,8 +80,12 @@ const ProjectsCard = () => {
       .get('/api/projects')
       .then((res) => {
         setUserProjects(res.data.data);
-
-        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`/api/project/${project.project_id}/task`).then((task) => task.data.data));
+        setRender(!render);
+        const fetchProjectTasks = res.data.data.map((project: iProjects) =>
+          axios
+            .get(`/api/project/${project.project_id}/task`)
+            .then((task) => task.data.data)
+        );
 
         return Promise.all(fetchProjectTasks);
       })
