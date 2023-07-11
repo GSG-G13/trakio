@@ -1,12 +1,17 @@
 /* eslint-disable no-shadow */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
-  CardContent, Typography, LinearProgress, styled,
+  CardContent,
+  Typography,
+  LinearProgress,
+  styled,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
 import empty from '../../lotties/empty.json';
+import LongMenu from './Menu';
 import {
   WrapperDes,
   WrapCards,
@@ -15,9 +20,9 @@ import {
 import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert, ConfirmDialog } from '..';
 import Loader from './Loader';
-import LongMenu from './Menu';
+import UpdateProjectModal from '../UpdateProject';
 
-const LinearProgressWithLabel = ({ value }: {value: number}) => (
+const LinearProgressWithLabel = ({ value }: { value: number }) => (
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
     <Box sx={{ width: '100%' }}>
       <LinearProgress
@@ -35,7 +40,7 @@ const LinearProgressWithLabel = ({ value }: {value: number}) => (
   </Box>
 );
 
-export const LinearWithValueLabel = ({ value }: {value: number}) => (
+export const LinearWithValueLabel = ({ value }: { value: number }) => (
   <Box>
     <LinearProgressWithLabel value={value} />
   </Box>
@@ -53,11 +58,16 @@ const ProjectsCard = () => {
   const [projectId, setProjectId] = useState<number>();
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const handleDeleteProject = (projectId:any) => {
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<iProjects[]>();
+
+  const handleDeleteProject = (projectId: any) => {
     axios
       .delete(`/api/project/${projectId}`)
       .then(() => {
-        const updatedProjects = userProjects.filter((project) => project.project_id !== projectId);
+        const updatedProjects = userProjects.filter(
+          (project) => project.project_id !== projectId,
+        );
         setUserProjects(updatedProjects);
       })
       .catch((error) => {
@@ -65,18 +75,27 @@ const ProjectsCard = () => {
         setMessageError(error.response.data.message);
       });
   };
-  const handleConfirmDelete = (projectId:any) => {
+
+  const handleEditProject = (projectId: any) => {
+    const project = userProjects.find(
+      (project:iProjects) => project.project_id === projectId,
+    );
+    setSelectedProject(project);
+    setOpenUpdateModal(true);
+  };
+
+  const handleConfirmDelete = (projectId: any) => {
     setConfirmOpen(false);
     handleDeleteProject(projectId);
   };
 
   useEffect(() => {
-    axios.get('/api/projects')
+    axios
+      .get('/api/projects')
       .then((res) => {
         setUserProjects(res.data.data);
 
-        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`/api/project/${project.project_id}/task`)
-          .then((task) => task.data.data));
+        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`/api/project/${project.project_id}/task`).then((task) => task.data.data));
 
         return Promise.all(fetchProjectTasks);
       })
@@ -101,11 +120,7 @@ const ProjectsCard = () => {
 
   return (
     <>
-      <ErrorAlert
-        open={openError}
-        message={messageError}
-        setOpen={setOpenError}
-      />
+      <ErrorAlert open={openError} message={messageError} setOpen={setOpenError} />
       {!userProjects.length && !isLoading ? (
         <Box
           width="65vw"
@@ -131,43 +146,51 @@ const ProjectsCard = () => {
             }}
           />
         </Box>
-      ) : userProjects.map((project: iProjects, index: number) => {
-        const allTasks = projectTasks[index].length;
-        const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
-        return (
-          <WrapCards>
-            <Wrapper2 key={project.project_id}>
-              <CardContent sx={{ flex: 1, padding: '0' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      overflow: 'hidden',
-                      '-webkit-line-clamp': '1',
-                      display: '-webkit-box',
-                      '-webkit-box-orient': 'vertical',
-                      textAlign: 'left',
-                    }}
-                  >
-                    {project.title}
-                  </Typography>
-                  <LongMenu handleDeleteProject={handleDeleteProject} id={project.project_id} />
-                </Box>
-                <WrapperDes variant="body2" color="text.secondary">
-                  {project.description}
-                </WrapperDes>
-              </CardContent>
-              <Wrapper2Progress>
-                <LinearWithValueLabel
-                  value={allTasks !== 0 ? (doneTasks / allTasks) * 100 : 0}
-                />
-              </Wrapper2Progress>
-            </Wrapper2>
-          </WrapCards>
-        );
-      })}
+      ) : (
+        userProjects.map((project: iProjects, index: number) => {
+          const allTasks = projectTasks[index].length;
+          const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter(
+            (task: iProjectTasks) => task.section === 'Done',
+          )?.length;
+          return (
+            <WrapCards key={project.project_id}>
+              <Wrapper2>
+                <CardContent sx={{ flex: 1, padding: '0' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="div"
+                      sx={{
+                        overflow: 'hidden',
+                        '-webkit-line-clamp': '1',
+                        display: '-webkit-box',
+                        '-webkit-box-orient': 'vertical',
+                        textAlign: 'left',
+                      }}
+                    >
+                      {project.title}
+                    </Typography>
+                    <LongMenu
+                      handleDeleteProject={handleDeleteProject}
+                      handleEditProject={handleEditProject}
+                      id={project.project_id}
+                    />
+                  </Box>
+                  <WrapperDes variant="body2" color="text.secondary">
+                    {project.description}
+                  </WrapperDes>
+                </CardContent>
+                <Wrapper2Progress>
+                  <LinearWithValueLabel
+                    value={allTasks !== 0 ? (doneTasks / allTasks) * 100 : 0}
+                  />
+                </Wrapper2Progress>
+              </Wrapper2>
+            </WrapCards>
+          );
+        })
+      )}
       <ConfirmDialog
         title="Delete Task"
         open={confirmOpen}
@@ -178,6 +201,13 @@ const ProjectsCard = () => {
       >
         Are you sure you want to delete this project?
       </ConfirmDialog>
+      {openUpdateModal && (
+        <UpdateProjectModal
+          open={openUpdateModal}
+          handleClose={() => setOpenUpdateModal(false)}
+          project={selectedProject}
+        />
+      )}
     </>
   );
 };
