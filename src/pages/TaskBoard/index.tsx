@@ -47,25 +47,33 @@ const TaskBoard = () => {
       });
   }, [pathname]);
 
+  const onDragStart = async ({ destination, draggableId }:any) => {
+    const draggableTask = tasks.filter((task) => task.id === +draggableId);
+    const sectionId = sections.filter((section) => section.section === destination.droppableId);
+    draggableTask[0].section = destination.droppableId;
+    const { project_id: projectId, id: taskId } = draggableTask[0];
+    axios.put(`/api/project/${projectId}/task/${taskId}`, {
+      destinationSection: sectionId[0].id,
+    }).then((response) => response).catch(() => {
+      console.log('error');
+    });
+  };
+
   const onDragEnd = (result: DropResult) => {
-    if (!result.destination) return;
+    const {
+      source, destination, draggableId, type,
+    } = result;
+
+    if (!destination || type === 'section') return;
 
     const updatedTasks = [...tasks];
-    const draggedTask = updatedTasks[result.source.index];
-
-    if (result.source.droppableId === result.destination.droppableId) {
-      updatedTasks.splice(result.source.index, 1);
-      updatedTasks.splice(result.destination.index, 0, draggedTask);
+    if (destination.droppableId === source.droppableId) {
+      const [reorderedItem] = updatedTasks.splice(source.index, 1);
+      updatedTasks.splice(destination.index, 0, reorderedItem);
+      setTasks(updatedTasks);
     } else {
-      // const sourceSection = result.source.droppableId;
-      const destinationSection = result.destination.droppableId;
-
-      draggedTask.section = destinationSection;
-      updatedTasks.splice(result.source.index, 1);
-      updatedTasks.splice(result.destination.index, 0, draggedTask);
+      onDragStart({ destination, draggableId });
     }
-
-    setTasks(updatedTasks);
   };
 
   return (
