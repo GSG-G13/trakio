@@ -6,16 +6,17 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '..';
-import THEME from '../../theme';
 import { addProjectSchema } from '../../helper/validation/schema';
 import { Props2 } from '../../interfaces';
 
-const AddProjectModal = ({ open, handleClose }:Props2) => {
+const AddProjectModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
+  const navigator = useNavigate();
 
   const handleSubmit = (values: any) => {
     axios
@@ -23,11 +24,13 @@ const AddProjectModal = ({ open, handleClose }:Props2) => {
       .then((res) => {
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
+        navigator(`/project/${res.data.data[0].id}`);
       })
       .catch((err) => {
         setOpenError(true);
         setMessageError(err.response.data.message);
-      }); handleClose();
+      });
+    handleClose();
   };
 
   return (
@@ -74,7 +77,9 @@ const AddProjectModal = ({ open, handleClose }:Props2) => {
                 required
                 sx={{ marginBottom: '1rem', color: 'custom.gray' }}
               />
-              <ErrorMessage name="title" component="div" color="custom.white" />
+              <ErrorMessage name="title">
+                {(msg) => <Typography color="red">{msg}</Typography>}
+              </ErrorMessage>
 
               <Field
                 as={TextField}
@@ -86,7 +91,9 @@ const AddProjectModal = ({ open, handleClose }:Props2) => {
                 required
                 sx={{ marginBottom: '1rem', color: 'custom.gray' }}
               />
-              <ErrorMessage name="description" component="div" color={THEME.palette.custom.white} />
+              <ErrorMessage name="description">
+                {(msg) => <Typography color="custom.gray">{msg}</Typography>}
+              </ErrorMessage>
 
               <Button type="submit" variant="contained">
                 Submit

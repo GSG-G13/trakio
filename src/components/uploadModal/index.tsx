@@ -9,11 +9,11 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { FileUploader } from 'react-drag-drop-files';
-import S3FileUpload from 'react-s3';
 import { Buffer } from 'buffer';
 import axios, { AxiosResponse } from 'axios';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { ErrorAlert, SuccessAlert } from '..';
 
 window.Buffer = window.Buffer || Buffer;
@@ -37,23 +37,32 @@ const UploadModal = ({
   const { id } = useParams();
   const { VITE_ACCESS_KEY, VITE_SECRET_ACCESS_KEY } = import.meta.env;
 
-  const config = {
-    bucketName: 'trackio',
-    dirName: `${id}`,
+  const s3Client = new S3Client({
     region: 'eu-central-1',
-    accessKeyId: VITE_ACCESS_KEY,
-    secretAccessKey: VITE_SECRET_ACCESS_KEY,
-  };
+    credentials: {
+      accessKeyId: VITE_ACCESS_KEY,
+      secretAccessKey: VITE_SECRET_ACCESS_KEY,
+    },
+  });
 
   const handleChange = (file: File) => {
     setFile(file);
   };
 
-  const handleUpload = () => {
+  const fileUpload = (file: File) => {
     setLoading(true);
-    return S3FileUpload.uploadFile(uploadedFile, config)
-      .then((data: any) => axios.post(`/api/project/${id}/attachments?taskId=${taskId}`, {
-        attachS3: data.location,
+
+    const params = {
+      ACL: 'public-read',
+      Bucket: 'trackio',
+      Key: `${id}/${file.name}`,
+      Body: file,
+    };
+
+    s3Client
+      .send(new PutObjectCommand(params))
+      .then(() => axios.post(`/api/project/${id}/attachments?taskId=${taskId}`, {
+        attachS3: `https://trackio.s3.amazonaws.com/${id}/${file.name}`,
         attachmentName: uploadedFile?.name,
       }))
       .then((res: AxiosResponse) => {
@@ -62,8 +71,7 @@ const UploadModal = ({
         setMessageSuccess(res.data.message);
         setFile(null);
         handleClose();
-      })
-      .catch(() => {
+      }).catch(() => {
         setLoading(false);
         setOpenError(true);
         setMessageError('Something went wrong, try again later!');
@@ -103,7 +111,9 @@ const UploadModal = ({
           }}
         >
           <Stack>
-            <Typography color="custom.white" fontSize={16} marginY={1}>Add Attachments</Typography>
+            <Typography color="custom.white" fontSize={16} marginY={1}>
+              Add Attachments
+            </Typography>
             <FileUploader
               handleChange={handleChange}
               name="file"
@@ -135,7 +145,18 @@ const UploadModal = ({
               </Box>
             )}
 
-            <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={handleUpload}>
+            <Button
+              sx={{ marginTop: '1rem' }}
+              variant="contained"
+              onClick={() => {
+                if (uploadedFile) {
+                  fileUpload(uploadedFile!);
+                } else {
+                  setOpenError(true);
+                  setMessageError('No File chosen Yet');
+                }
+              }}
+            >
               {!loading ? (
                 <Typography
                   fontSize={14}
@@ -154,4 +175,5 @@ const UploadModal = ({
     </>
   );
 };
+
 export default UploadModal;

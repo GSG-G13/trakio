@@ -6,14 +6,22 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const ITEM_HEIGHT = 48;
 
-const LongMenu = ({ handleDeleteProject, id } : any) => {
+const LongMenu = ({ OpenConfirmation, setProjectId, projectId }: any) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDelete = () => {
+    setProjectId(projectId);
+    handleClose();
+    OpenConfirmation();
   };
 
   return (
@@ -43,12 +51,8 @@ const LongMenu = ({ handleDeleteProject, id } : any) => {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>
-          Edit
-        </MenuItem>
-        <MenuItem onClick={() => handleDeleteProject(id)}>
-          Delete
-        </MenuItem>
+        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </div>
   );

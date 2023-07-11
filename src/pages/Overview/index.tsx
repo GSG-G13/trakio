@@ -113,7 +113,7 @@ const Overview = () => {
           <Member member={item} key={item.id} />
         ))}
       </Grid>
-      <FloatingButton onClick={handleOpenTask} />
+      {manager && (<FloatingButton onClick={handleOpenTask} />)}
       <AddTaskModal open={openTask} handleClose={handleCloseTask} />
     </>
 
