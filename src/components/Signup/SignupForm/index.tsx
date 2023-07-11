@@ -25,7 +25,7 @@ const SignupForm = () => {
   const [openError, setOpenError] = useState(false);
   const [messageSuccess, setMessageSuccess] = useState('');
   const [messageError, setMessageError] = useState('');
-  const { setUserData } = useContext(userContext);
+  const setUserData = useContext(userContext)?.setUserData;
   const navigator = useNavigate();
 
   const handleSubmit = (values: SignupFormValues) => {

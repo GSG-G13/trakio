@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
-  TextField, Modal, Box, Button,
+  TextField, Modal, Box, Button, CircularProgress, Typography,
 } from '@mui/material';
 import {
   Formik, Form,
@@ -71,14 +71,19 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     axios.put(`/api/project/${formData.projectId}/task?taskId=${data.id}`, formData)
       .then((response) => {
+        setLoading(false);
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
+        handleClose();
       })
       .catch((error) => {
+        setLoading(false);
         setOpenError(true);
         setMessageError(error.response.data.message);
+        handleClose();
       });
   };
 
@@ -202,7 +207,7 @@ const EditTaskForm = ({ data, open, handleClose }:IProps) => {
                 id="description"
               />
               <Button type="submit" variant="contained" sx={{ marginTop: 0, width: '30%' }}>
-                Submit
+                {isLoading ? <CircularProgress color="secondary" /> : <Typography>Submit</Typography>}
               </Button>
             </Form>
           </Formik>
