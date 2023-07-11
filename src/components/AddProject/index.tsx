@@ -6,6 +6,7 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '..';
 import { addProjectSchema } from '../../helper/validation/schema';
 import { Props2 } from '../../interfaces';
@@ -15,6 +16,7 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
+  const navigator = useNavigate();
 
   const handleSubmit = (values: any) => {
     axios
@@ -22,6 +24,7 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
       .then((res) => {
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
+        navigator(`/project/${res.data.data[0].id}`);
       })
       .catch((err) => {
         setOpenError(true);
@@ -75,7 +78,7 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
                 sx={{ marginBottom: '1rem', color: 'custom.gray' }}
               />
               <ErrorMessage name="title">
-                {(msg) => <Typography color="custom.gray">{msg}</Typography>}
+                {(msg) => <Typography color="red">{msg}</Typography>}
               </ErrorMessage>
 
               <Field

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  Box, Grid, IconButton, Typography,
-} from '@mui/material';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
 import axios from 'axios';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
@@ -38,12 +36,17 @@ const handleDownloadClick = async (attach: string) => {
 const FilePage = () => {
   const { id } = useParams();
   const [files, setFiles] = useState<IFile[]>([]);
+  const [isLoading, setIsLoadig] = useState(false);
 
   useEffect(() => {
+    setIsLoadig(true);
     axios.get(`/api/project/${id}/attachments`).then((res) => {
       setFiles(res.data.data);
+      setIsLoadig(false);
     });
   }, []);
+
+  if (isLoading) return <Box>Loading...</Box>;
 
   return (
     <Grid container spacing={2}>
@@ -136,9 +139,6 @@ const FilePage = () => {
             alignItems: 'center',
           }}
         >
-          <Typography fontSize={24} fontWeight={700} mb={4} color="custom.gray">
-            No Attachment
-          </Typography>
           <Box marginTop={10}>
             <Lottie
               height={300}
@@ -153,6 +153,9 @@ const FilePage = () => {
               }}
             />
           </Box>
+          <Typography fontSize={24} fontWeight={700} mt={6} color="custom.gray">
+            No Attachment
+          </Typography>
         </Box>
       )}
     </Grid>

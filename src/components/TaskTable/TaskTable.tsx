@@ -59,7 +59,6 @@ const TaskTable = () => {
       });
     }
   }, [pathname]);
-  console.log(isManager);
 
   return !tasks.length && !loading ? (
     <Box

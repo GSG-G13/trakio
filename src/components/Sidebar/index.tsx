@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {
   Box,
@@ -26,6 +26,7 @@ const Sidebar = () => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
+  const { pathname } = useLocation();
 
   useEffect(() => {
     axios
@@ -37,7 +38,7 @@ const Sidebar = () => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
-  }, []);
+  }, [pathname]);
 
   const handleLogout = () => {
     axios.get('/api/logout')
