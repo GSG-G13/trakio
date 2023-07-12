@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Modal, Box, TextField } from '@mui/material';
+import {
+  Modal, Box, TextField, Typography,
+} from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -121,7 +123,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
     axios
       .get(`/api/project/${projectId}/members`)
       .then((response) => setMembers(response.data.data));
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     setLoading(true);
@@ -164,7 +166,19 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               <Title> Add Task </Title>
               <ProjectTitleBox>
                 <Label>Project </Label>
-                <Label>{projectTitle}</Label>
+                <Typography
+                  color="custom.white"
+                  sx={{
+                    overflow: 'hidden',
+                    '-webkit-line-clamp': '1',
+                    display: '-webkit-box',
+                    '-webkit-box-orient': 'vertical',
+                    textAlign: 'left',
+                  }}
+                >
+                  {projectTitle}
+
+                </Typography>
               </ProjectTitleBox>
               <InputBox>
                 <Label>Assignee</Label>
@@ -208,7 +222,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               </InputBox>
               <Box sx={{ display: 'flex', width: '90%', gap: '0.5rem' }}>
                 <InputBox sx={{ width: '50%' }}>
-                  <Label>Section</Label>
+                  {/* <Label>Section</Label> */}
                   <Section
                     id="section"
                     options={sections}
@@ -234,7 +248,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   />
                 </InputBox>
                 <InputBox sx={{ width: '50%' }}>
-                  <Label> Priority </Label>
+                  {/* <Label> Priority </Label> */}
                   <Section
                     id="priority"
                     options={PRIORITIES}
