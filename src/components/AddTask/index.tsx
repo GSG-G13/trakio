@@ -159,7 +159,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1rem',
+                gap: '0.8rem',
                 justifyContent: 'center',
               }}
             >
@@ -177,7 +177,6 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   }}
                 >
                   {projectTitle}
-
                 </Typography>
               </ProjectTitleBox>
               <InputBox>
@@ -222,7 +221,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
               </InputBox>
               <Box sx={{ display: 'flex', width: '90%', gap: '0.5rem' }}>
                 <InputBox sx={{ width: '50%' }}>
-                  {/* <Label>Section</Label> */}
+                  <Label>Section</Label>
                   <Section
                     id="section"
                     options={sections}
@@ -248,7 +247,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   />
                 </InputBox>
                 <InputBox sx={{ width: '50%' }}>
-                  {/* <Label> Priority </Label> */}
+                  <Label> Priority </Label>
                   <Section
                     id="priority"
                     options={PRIORITIES}
