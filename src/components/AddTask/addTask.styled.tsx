@@ -56,7 +56,7 @@ export const Section = styled(Autocomplete)(
         fill: custom.fontGray,
       },
     },
-  })
+  }),
 );
 
 export const Label = styled(Typography)(
@@ -69,7 +69,7 @@ export const Label = styled(Typography)(
     fontFamily: 'Montserrat',
     fontWeight: '300',
     fontSize: '12px',
-  })
+  }),
 );
 
 export const Date = styled('input')(
@@ -82,7 +82,7 @@ export const Date = styled('input')(
     border: 'none',
     fontFamily: 'Montserrat',
     color: custom.fontGray,
-  })
+  }),
 );
 
 export const Textarea = styled(TextField)(
@@ -129,7 +129,7 @@ export const Textarea = styled(TextField)(
       fontWeight: '300',
       fontSize: '12px',
     },
-  })
+  }),
 );
 
 export const Title = styled(Label)(
@@ -143,7 +143,7 @@ export const Title = styled(Label)(
     marginTop: '2rem',
     marginBottom: '0.5rem',
     color: custom.white,
-  })
+  }),
 );
 
 export const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
@@ -162,7 +162,7 @@ export const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
   },
   '& .MuiOutlinedInput-input': {
     padding: '14px',
-  }
+  },
 }));
 
 export const InputBox = styled(Box)({
@@ -204,7 +204,7 @@ export const TitleField = styled(Field)(
       fontWeight: '300',
       fontSize: '12px',
     },
-  })
+  }),
 );
 
 export const TextFieldInput = styled(TextField)(
@@ -218,5 +218,5 @@ export const TextFieldInput = styled(TextField)(
         borderColor: custom.white,
       },
     },
-  })
+  }),
 );
