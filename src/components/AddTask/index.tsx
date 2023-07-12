@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Modal, Box, TextField, Typography,
-} from '@mui/material';
+import { Modal, Box, TextField, Typography, CircularProgress } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -49,7 +47,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
     const { id, value } = event.target;
     if (id === 'section') {
       const selectedSection = sections.filter(
-        (section: any) => section.section === value,
+        (section: any) => section.section === value
       );
       const sectionId = selectedSection.length ? selectedSection[0].id : null;
       setFormData((prevFormData: any) => ({
@@ -58,7 +56,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
       }));
     } else if (id === 'priority') {
       const selectedPriority = PRIORITIES.find(
-        (priority) => priority.priority === value,
+        (priority) => priority.priority === value
       );
       const priorityId = selectedPriority ? selectedPriority.id : null;
       setFormData((prevFormData: any) => ({
@@ -72,7 +70,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
       }));
     } else if (id === 'member') {
       const selectedmember = members.filter(
-        (member: any) => member.email === value,
+        (member: any) => member.email === value
       );
       const memberId = selectedmember.length ? selectedmember[0].id : null;
       setFormData((prevFormData: any) => ({
@@ -313,7 +311,11 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 variant="contained"
                 sx={{ marginTop: 0, width: '90%', fontWeight: '600' }}
               >
-                Submit
+                {isLoading ? (
+                  <CircularProgress color="secondary" />
+                ) : (
+                  <Typography>Submit</Typography>
+                )}
               </LoadingButton>
             </Form>
           </Formik>
