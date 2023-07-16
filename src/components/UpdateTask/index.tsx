@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -39,9 +39,12 @@ interface IProps {
   handleClose: () => void;
   sections: ISection[];
   priorities: IPriority[];
+  setRowTask: Dispatch<SetStateAction<task>>;
 }
 
-const EditTaskForm = ({ data, open, handleClose, sections, priorities }: IProps) => {
+const EditTaskForm = ({
+  data, open, handleClose, sections, priorities, setRowTask,
+}: IProps) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
@@ -69,12 +72,9 @@ const EditTaskForm = ({ data, open, handleClose, sections, priorities }: IProps)
         sectionId,
       }));
     } else if (id === 'priority') {
-      console.log(value);
-
       const selectedPriority = priorities.length && priorities.find(
         (priority) => priority.priority === value,
       );
-      console.log(selectedPriority);
 
       const priorityId = selectedPriority ? selectedPriority.id : null;
       setFormData((prevFormData: any) => ({
@@ -107,7 +107,23 @@ const EditTaskForm = ({ data, open, handleClose, sections, priorities }: IProps)
         formData,
       )
       .then((response) => {
+        const newData = response.data.data[0];
+
         setLoading(false);
+        setRowTask({
+          id: newData.id,
+          created_at: newData.created_at,
+          color: priorities.find((item) => item.id === newData.priority_id)!.color,
+          description: newData.description,
+          title: newData.title,
+          due_date: newData.due_date,
+          name: data.name,
+          priority: priorities.find((item) => item.id === newData.priority_id)!.priority,
+          section: sections.find((item) => item.id === newData.section_id)!.section,
+          project: data.project,
+          project_id: data.project_id,
+          user_id: data.user_id,
+        });
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
         handleClose();

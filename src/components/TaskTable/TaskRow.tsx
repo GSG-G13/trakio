@@ -17,6 +17,7 @@ import {
 import { IPriority, ISection, task } from '../../interfaces';
 import THEME from '../../theme';
 import EditTaskForm from '../../components/UpdateTask';
+import TaskRowSkeleton from './TaskRowSkeleton';
 
 const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
   const [openError, setOpenError] = useState(false);
@@ -34,7 +35,8 @@ const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
   const isProject = pathname.includes('project');
   const [sections, setSections] = useState<ISection[]>([]);
   const [priorities, setPriorities] = useState<IPriority[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [rowTask, setRowTask] = useState<task>(data);
 
   const handleDeleteTask = () => {
     axios
@@ -54,19 +56,20 @@ const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    axios.get('/api/sections').then((res) => {
-      setSections(res.data.data);
-      setIsLoading(false);
-    });
+    axios
+      .get('/api/sections')
+      .then((res) => {
+        setSections(res.data.data);
+        return axios.get('/api/priorities');
+      })
 
-    axios.get('/api/priorities').then((res) => {
-      setPriorities(res.data.data);
-      setIsLoading(false);
-    });
-  }, []);
+      .then((res) => {
+        setPriorities(res.data.data);
+        setIsLoading(false);
+      });
+  }, [rowTask]);
 
-  return (
+  return isLoading ? <TaskRowSkeleton /> : (
     <>
       <SuccessAlert
         open={openSuccess}
@@ -78,105 +81,102 @@ const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
         message={messageError}
         setOpen={setOpenError}
       />
-      {isLoading ? (
-        <Typography>Loading</Typography>
-      ) : (
-        <TableRow>
-          <TableCell>
-            <Typography fontSize={12} fontWeight={600} color="custom.white">
-              {data.title.toUpperCase()}
+      <TableRow>
+        <TableCell>
+          <Typography fontSize={12} fontWeight={600} color="custom.white">
+            {rowTask.title.toUpperCase()}
+          </Typography>
+        </TableCell>
+
+        <TableCell align="center">
+          <Typography fontSize={12} color="custom.fontGray">
+            {rowTask.project.split(' ')[0]}
+          </Typography>
+        </TableCell>
+
+        <TableCell align="center">
+          <Typography fontSize={12} color="custom.fontGray">
+            {rowTask.name}
+          </Typography>
+        </TableCell>
+
+        <TableCell align="center">
+          <Box
+            component="div"
+            bgcolor={rowTask.color}
+            sx={{ paddingX: 1, borderRadius: 1.5, display: 'inline-block' }}
+          >
+            <Typography fontSize={11} fontWeight={700} color="custom.white">
+              {rowTask.priority.toUpperCase()}
             </Typography>
-          </TableCell>
+          </Box>
+        </TableCell>
 
+        <TableCell align="center">
+          <Typography fontSize={12} color="custom.white" fontWeight={700}>
+            {rowTask.section}
+          </Typography>
+        </TableCell>
+
+        <TableCell align="center">
+          <Typography fontSize={12} color="custom.fontGray">
+            {rowTask.due_date.split('T')[0]}
+          </Typography>
+        </TableCell>
+
+        {isProject && isManager && (
           <TableCell align="center">
-            <Typography fontSize={12} color="custom.fontGray">
-              {data.project.split(' ')[0]}
-            </Typography>
+            <IconButton onClick={handleOpenUpload}>
+              <Box bgcolor="rgba(77,250,62,.2)" borderRadius={2} padding={1}>
+                <AttachFileIcon sx={{ fontSize: 16, color: '#3EFA94' }} />
+              </Box>
+            </IconButton>
+            <IconButton onClick={handleOpen}>
+              <Box
+                bgcolor="rgba(62, 123, 250, 0.2)"
+                borderRadius={2}
+                padding={1}
+              >
+                <MdOutlineEdit
+                  style={{
+                    fontSize: 16,
+                    color: THEME.palette.custom.editIcon,
+                  }}
+                />
+              </Box>
+            </IconButton>
+
+            <EditTaskForm
+              open={open}
+              handleClose={handleClose}
+              data={rowTask}
+              sections={sections}
+              priorities={priorities}
+              setRowTask={setRowTask}
+            />
+            <UploadModal
+              open={openUplad}
+              handleClose={handleCloseUpload}
+              taskId={rowTask.id!}
+            />
+
+            <IconButton onClick={() => setConfirmOpen(true)}>
+              <Box
+                bgcolor="rgba(255, 46, 38, 0.2)"
+                borderRadius={2}
+                padding={1}
+              >
+                <RiDeleteBinLine
+                  style={{
+                    color: THEME.palette.custom.deleteIcon,
+                    fontSize: 16,
+                  }}
+                />
+              </Box>
+            </IconButton>
           </TableCell>
-
-          <TableCell align="center">
-            <Typography fontSize={12} color="custom.fontGray">
-              {data.name}
-            </Typography>
-          </TableCell>
-
-          <TableCell align="center">
-            <Box
-              component="div"
-              bgcolor={data.color}
-              sx={{ paddingX: 1, borderRadius: 1.5, display: 'inline-block' }}
-            >
-              <Typography fontSize={11} fontWeight={700} color="custom.white">
-                {data.priority.toUpperCase()}
-              </Typography>
-            </Box>
-          </TableCell>
-
-          <TableCell align="center">
-            <Typography fontSize={12} color="custom.white" fontWeight={700}>
-              {data.section}
-            </Typography>
-          </TableCell>
-
-          <TableCell align="center">
-            <Typography fontSize={12} color="custom.fontGray">
-              {data.due_date.split('T')[0]}
-            </Typography>
-          </TableCell>
-
-          {isProject && isManager && (
-            <TableCell align="center">
-              <IconButton onClick={handleOpenUpload}>
-                <Box bgcolor="rgba(77,250,62,.2)" borderRadius={2} padding={1}>
-                  <AttachFileIcon sx={{ fontSize: 16, color: '#3EFA94' }} />
-                </Box>
-              </IconButton>
-              <IconButton onClick={handleOpen}>
-                <Box
-                  bgcolor="rgba(62, 123, 250, 0.2)"
-                  borderRadius={2}
-                  padding={1}
-                >
-                  <MdOutlineEdit
-                    style={{
-                      fontSize: 16,
-                      color: THEME.palette.custom.editIcon,
-                    }}
-                  />
-                </Box>
-              </IconButton>
-
-              <EditTaskForm
-                open={open}
-                handleClose={handleClose}
-                data={data}
-                sections={sections}
-                priorities={priorities}
-              />
-              <UploadModal
-                open={openUplad}
-                handleClose={handleCloseUpload}
-                taskId={data.id!}
-              />
-
-              <IconButton onClick={() => setConfirmOpen(true)}>
-                <Box
-                  bgcolor="rgba(255, 46, 38, 0.2)"
-                  borderRadius={2}
-                  padding={1}
-                >
-                  <RiDeleteBinLine
-                    style={{
-                      color: THEME.palette.custom.deleteIcon,
-                      fontSize: 16,
-                    }}
-                  />
-                </Box>
-              </IconButton>
-            </TableCell>
-          )}
-        </TableRow>
-      )}
+        )}
+      </TableRow>
       <ConfirmDialog
         title="Delete Task"
         open={confirmOpen}

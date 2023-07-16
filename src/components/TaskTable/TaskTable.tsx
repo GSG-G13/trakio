@@ -21,7 +21,7 @@ import empty from '../../lotties/empty.json';
 
 const TaskTable = () => {
   const [tasks, setTasks] = useState<task[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [isManager, setIsManager] = useState<boolean>(false);
   const { pathname } = useLocation();
   const { id } = useParams();
@@ -41,7 +41,6 @@ const TaskTable = () => {
   const columns = isProject && isManager ? COLS : COLS.slice(0, 6);
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get(endpoint)
       .then((res) => {

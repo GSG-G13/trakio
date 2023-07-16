@@ -71,7 +71,8 @@ const UploadModal = ({
         setMessageSuccess(res.data.message);
         setFile(null);
         handleClose();
-      }).catch(() => {
+      })
+      .catch(() => {
         setLoading(false);
         setOpenError(true);
         setMessageError('Something went wrong, try again later!');
