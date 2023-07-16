@@ -10,7 +10,7 @@ const PRIORITIES = [
   },
   {
     id: 2,
-    priority: 'meduim',
+    priority: 'medium',
     color: '#FF8800',
   },
   {
@@ -19,5 +19,25 @@ const PRIORITIES = [
     color: '#06C270',
   },
 ];
+const SECTIONS = [
+  {
+    id: 1,
+    section: 'To-Do',
+  },
+  {
+    id: 2,
+    section: 'Doing',
+  },
+  {
+    id: 3,
+    section: 'Reviewing',
+  },
+  {
+    id: 4,
+    section: 'Done',
+  },
+];
 
-export { NAV_LIST, DRAWER_WIDTH, PRIORITIES };
+export {
+  NAV_LIST, DRAWER_WIDTH, PRIORITIES, SECTIONS,
+};

@@ -15,7 +15,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LoadingButton } from '@mui/lab';
-import { PRIORITIES } from '../../constants';
+import dayjs from 'dayjs';
+import { PRIORITIES, SECTIONS } from '../../constants';
 import { ErrorAlert, SuccessAlert } from '..';
 import { task, ISection } from '../../interfaces';
 // import { TaskBox, Label, Date, Section, Textarea } from './updateTask.styled';
@@ -23,7 +24,6 @@ import {
   Title,
   TaskBox,
   Label,
-  Date,
   Section,
   Textarea,
   ProjectTitleBox,
@@ -51,8 +51,8 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
     userId: data.user_id,
     projectId: data.project_id,
     dueDate: data.due_date.split('T')[0],
-    sectionId: 1,
-    priorityId: 1,
+    sectionId: SECTIONS.find((item) => item.section === data.section)?.id,
+    priorityId: PRIORITIES.find((item) => item.priority === data.priority)?.id,
     description: data.description,
   });
 
@@ -60,7 +60,7 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
     const { id, value } = event.target;
     if (id === 'section') {
       const selectedSection = sections.filter(
-        (section) => section.section === value
+        (section) => section.section === value,
       );
       const sectionId = selectedSection ? selectedSection[0].id : null;
       setFormData((prevFormData: any) => ({
@@ -69,7 +69,7 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
       }));
     } else if (id === 'priority') {
       const selectedPriority = PRIORITIES.find(
-        (priority) => priority.priority === value
+        (priority) => priority.priority === value,
       );
       const priorityId = selectedPriority ? selectedPriority.id : null;
       setFormData((prevFormData: any) => ({
@@ -99,7 +99,7 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
     axios
       .put(
         `/api/project/${formData.projectId}/task?taskId=${data.id}`,
-        formData
+        formData,
       )
       .then((response) => {
         setLoading(false);
@@ -118,7 +118,7 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
   const handleDateChange = (date: any) => {
     setFormData((prevFormData: any) => ({
       ...prevFormData,
-      dueDate: date,
+      dueDate: dayjs(date).format('YYYY-MM-DD'),
     }));
   };
 
@@ -197,6 +197,8 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
                       label="Basic date picker"
                       onChange={handleDateChange}
                       sx={{ width: '90%' }}
+                      format="YYYY-MM-DD"
+                      value={dayjs(formData.dueDate)}
                     />
                   </DemoContainer>
                 </LocalizationProvider>
@@ -209,7 +211,9 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
                     options={sections}
                     sx={{ width: '100%' }}
                     autoHighlight
-                    // value={data.section}
+                    defaultValue={sections.find(
+                      (item) => item.section === data.section,
+                    )}
                     onSelect={(event) => handleChange(event)}
                     getOptionLabel={(option: any) => option.section}
                     renderOption={(props, option: any) => (
@@ -238,6 +242,9 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
                     onSelect={(event) => {
                       handleChange(event);
                     }}
+                    defaultValue={PRIORITIES.find(
+                      (item) => item.priority === data.priority,
+                    )}
                     getOptionLabel={(option: any) => option.priority}
                     sx={{ width: '100%' }}
                     renderOption={(props, option: any) => (
