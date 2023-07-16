@@ -168,9 +168,9 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   color="custom.white"
                   sx={{
                     overflow: 'hidden',
-                    '-webkit-line-clamp': '1',
+                    WebkitLineClamp: 1,
                     display: '-webkit-box',
-                    '-webkit-box-orient': 'vertical',
+                    WebkitBoxOrient: 'vertical',
                     textAlign: 'left',
                   }}
                 >

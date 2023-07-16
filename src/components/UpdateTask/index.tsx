@@ -10,15 +10,15 @@ import {
 } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LoadingButton } from '@mui/lab';
 import dayjs from 'dayjs';
-import { PRIORITIES, SECTIONS } from '../../constants';
+// import { PRIORITIES, SECTIONS } from '../../constants';
 import { ErrorAlert, SuccessAlert } from '..';
-import { task, ISection } from '../../interfaces';
+import { task, ISection, IPriority } from '../../interfaces';
 // import { TaskBox, Label, Date, Section, Textarea } from './updateTask.styled';
 import {
   Title,
@@ -37,29 +37,30 @@ interface IProps {
   data: task;
   open: boolean;
   handleClose: () => void;
+  sections: ISection[];
+  priorities: IPriority[];
 }
 
-const EditTaskForm = ({ data, open, handleClose }: IProps) => {
+const EditTaskForm = ({ data, open, handleClose, sections, priorities }: IProps) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [sections, setSections] = useState<ISection[]>([]);
   const [formData, setFormData] = useState({
     title: data.title,
     userId: data.user_id,
     projectId: data.project_id,
     dueDate: data.due_date.split('T')[0],
-    sectionId: SECTIONS.find((item) => item.section === data.section)?.id,
-    priorityId: PRIORITIES.find((item) => item.priority === data.priority)?.id,
+    sectionId: sections.find((item) => item.section === data.section)?.id,
+    priorityId: priorities.find((item) => item.priority === data.priority)?.id,
     description: data.description,
   });
 
   const handleChange = (event: any) => {
     const { id, value } = event.target;
     if (id === 'section') {
-      const selectedSection = sections.filter(
+      const selectedSection = sections.length && sections.filter(
         (section) => section.section === value,
       );
       const sectionId = selectedSection ? selectedSection[0].id : null;
@@ -68,9 +69,13 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
         sectionId,
       }));
     } else if (id === 'priority') {
-      const selectedPriority = PRIORITIES.find(
+      console.log(value);
+
+      const selectedPriority = priorities.length && priorities.find(
         (priority) => priority.priority === value,
       );
+      console.log(selectedPriority);
+
       const priorityId = selectedPriority ? selectedPriority.id : null;
       setFormData((prevFormData: any) => ({
         ...prevFormData,
@@ -122,19 +127,6 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
     }));
   };
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get('/api/sections')
-      .then((values) => {
-        setLoading(false);
-        setSections(values.data.data);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, []);
-
   return (
     <>
       <SuccessAlert
@@ -165,9 +157,9 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
                   color="custom.white"
                   sx={{
                     overflow: 'hidden',
-                    '-webkit-line-clamp': '1',
+                    WebkitLineClamp: 1,
                     display: '-webkit-box',
-                    '-webkit-box-orient': 'vertical',
+                    WebkitBoxOrient: 'vertical',
                     textAlign: 'left',
                   }}
                 >
@@ -180,9 +172,9 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
                   color="custom.white"
                   sx={{
                     overflow: 'hidden',
-                    '-webkit-line-clamp': '1',
+                    WebkitLineClamp: 1,
                     display: '-webkit-box',
-                    '-webkit-box-orient': 'vertical',
+                    WebkitBoxOrient: 'vertical',
                     textAlign: 'left',
                   }}
                 >
@@ -237,12 +229,12 @@ const EditTaskForm = ({ data, open, handleClose }: IProps) => {
                   <Label> Priority </Label>
                   <Section
                     id="priority"
-                    options={PRIORITIES}
+                    options={priorities}
                     autoHighlight
                     onSelect={(event) => {
                       handleChange(event);
                     }}
-                    defaultValue={PRIORITIES.find(
+                    defaultValue={priorities.find(
                       (item) => item.priority === data.priority,
                     )}
                     getOptionLabel={(option: any) => option.priority}
