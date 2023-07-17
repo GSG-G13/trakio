@@ -6,7 +6,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const ITEM_HEIGHT = 48;
 
-const LongMenu = ({ OpenConfirmation, setProjectId, projectId }: any) => {
+const LongMenu = ({
+  OpenConfirmation, setProjectId, projectId, handleEditProject,
+}: any) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -51,7 +53,9 @@ const LongMenu = ({ OpenConfirmation, setProjectId, projectId }: any) => {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={() => handleEditProject(projectId)}>
+          Edit
+        </MenuItem>
         <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </div>

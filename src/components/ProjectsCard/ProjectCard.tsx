@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   CardContent,
@@ -11,11 +12,12 @@ import axios from 'axios';
 import Lottie from 'react-lottie';
 import { useOutletContext } from 'react-router-dom';
 import empty from '../../lotties/empty.json';
+import LongMenu from './Menu';
 import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert, ConfirmDialog } from '..';
 import Loader from './Loader';
-import LongMenu from './Menu';
+import UpdateProjectModal from '../UpdateProject';
 
 const LinearProgressWithLabel = ({ value }: { value: number }) => (
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -53,6 +55,8 @@ const ProjectsCard = () => {
   const [projectId, setProjectId] = useState<number>();
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<iProjects[]>();
   const [render, setRender] = useOutletContext<any>();
 
   const handleDeleteProject = (projectId: any) => {
@@ -69,6 +73,14 @@ const ProjectsCard = () => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
+  };
+
+  const handleEditProject = (projectId: any) => {
+    const project = userProjects.find(
+      (project:iProjects) => project.project_id === projectId,
+    );
+    setSelectedProject(project);
+    setOpenUpdateModal(true);
   };
 
   const OpenConfirmation = () => {
@@ -108,11 +120,7 @@ const ProjectsCard = () => {
 
   return (
     <>
-      <ErrorAlert
-        open={openError}
-        message={messageError}
-        setOpen={setOpenError}
-      />
+      <ErrorAlert open={openError} message={messageError} setOpen={setOpenError} />
       {!userProjects.length && !isLoading ? (
         <Box
           width="65vw"
@@ -166,6 +174,7 @@ const ProjectsCard = () => {
                       {project.title}
                     </Typography>
                     <LongMenu
+                      handleEditProject={handleEditProject}
                       OpenConfirmation={OpenConfirmation}
                       setProjectId={setProjectId}
                       projectId={project.project_id}
@@ -195,6 +204,13 @@ const ProjectsCard = () => {
       >
         Are you sure you want to delete this project?
       </ConfirmDialog>
+      {openUpdateModal && (
+        <UpdateProjectModal
+          open={openUpdateModal}
+          handleClose={() => setOpenUpdateModal(false)}
+          project={selectedProject}
+        />
+      )}
     </>
   );
 };
