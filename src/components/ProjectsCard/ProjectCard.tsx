@@ -81,7 +81,8 @@ const ProjectsCard = () => {
       .then((res) => {
         setUserProjects(res.data.data);
         setRender(!render);
-        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`/api/project/${project.project_id}/task`)
+        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios
+          .get(`/api/project/${project.project_id}/task`)
           .then((task) => task.data.data));
 
         return Promise.all(fetchProjectTasks);
