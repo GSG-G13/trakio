@@ -54,7 +54,7 @@ const UploadModal = ({
 
     const params = {
       ACL: 'public-read',
-      Bucket: 'trackio',
+      Bucket: 'trackionizar',
       Key: `${id}/${file.name}`,
       Body: file,
     };
@@ -62,7 +62,7 @@ const UploadModal = ({
     s3Client
       .send(new PutObjectCommand(params))
       .then(() => axios.post(`/api/project/${id}/attachments?taskId=${taskId}`, {
-        attachS3: `https://trackio.s3.amazonaws.com/${id}/${file.name}`,
+        attachS3: `https://trackionizar.s3.amazonaws.com/${id}/${file.name}`,
         attachmentName: uploadedFile?.name,
       }))
       .then((res: AxiosResponse) => {
@@ -71,7 +71,8 @@ const UploadModal = ({
         setMessageSuccess(res.data.message);
         setFile(null);
         handleClose();
-      }).catch(() => {
+      })
+      .catch(() => {
         setLoading(false);
         setOpenError(true);
         setMessageError('Something went wrong, try again later!');
