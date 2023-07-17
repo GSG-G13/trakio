@@ -1,4 +1,6 @@
-import { useEffect, useState, useContext } from 'react';
+import {
+  useEffect, useState, useContext,
+} from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -19,10 +21,9 @@ const TabBar = () => {
 
   useEffect(() => {
     if (isProjectTab) {
-      axios.get(`/api/project/${id}`)
-        .then((res) => {
-          setProject(res.data.data[0]);
-        });
+      axios.get(`/api/project/${id}`).then((res) => {
+        setProject(res.data.data[0]);
+      });
     }
   }, [isProjectTab, id]);
 
@@ -32,7 +33,10 @@ const TabBar = () => {
         <Box sx={{ display: 'flex', color: 'custom.white' }}>
           <Avatar
             sx={{
-              width: 36, height: 36, padding: '8px', backgroundColor: 'custom.green',
+              width: 36,
+              height: 36,
+              padding: '8px',
+              backgroundColor: 'custom.green',
             }}
           >
             {user?.user?.name.slice(0, 2).toUpperCase()}
@@ -50,7 +54,9 @@ const TabBar = () => {
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               {tabs.map((tab, index) => (
                 <NavLink
-                  to={index === 0 ? endpoint : `/${endpoint}/${tab.toLowerCase()}`}
+                  to={
+                    index === 0 ? endpoint : `/${endpoint}/${tab.toLowerCase()}`
+                  }
                   style={{ textDecoration: 'none', marginRight: '8px' }}
                   key={tab}
                   end

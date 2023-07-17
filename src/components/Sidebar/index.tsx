@@ -1,31 +1,26 @@
 /* eslint-disable camelcase */
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {
-  Box,
-  Divider,
-  List,
-  Typography,
+  Box, Divider, List, Typography,
 } from '@mui/material';
 import { MdLogout } from 'react-icons/md';
-import {
-  DrawerItem,
-  ProjectTextItem,
-} from './sidebar.styled';
+import { DrawerItem, ProjectTextItem } from './sidebar.styled';
 import { ErrorAlert, SuccessAlert } from '..';
 import { iProjects } from '../../interfaces';
 import { NAV_LIST } from '../../constants';
 import { Logo, NavItem } from '../Common';
 import UserCard from '../UserCard';
 
-const Sidebar = () => {
+const Sidebar = ({ render }: any) => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState<iProjects[]>([]);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
+  const { pathname } = useLocation();
 
   useEffect(() => {
     axios
@@ -37,10 +32,11 @@ const Sidebar = () => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
-  }, []);
+  }, [pathname, render]);
 
   const handleLogout = () => {
-    axios.get('/api/logout')
+    axios
+      .get('/api/logout')
       .then((data) => {
         setOpenSuccess(true);
         setMessageSuccess(data.data.message);
@@ -75,7 +71,10 @@ const Sidebar = () => {
           <List
             disablePadding
             sx={{
-              p: 1, display: 'flex', flexDirection: 'column', gap: '0.6rem',
+              p: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.6rem',
             }}
           >
             {NAV_LIST.map(({ title, path, icon }: any) => (
@@ -85,10 +84,19 @@ const Sidebar = () => {
           <List
             disablePadding
             sx={{
-              p: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem',
+              p: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.8rem',
             }}
           >
-            <ProjectTextItem sx={{ display: 'flex', justifyContent: 'space-between', color: 'custom.white' }}>
+            <ProjectTextItem
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'custom.white',
+              }}
+            >
               <Typography sx={{ color: 'custom.fontGray', fontSize: '16px' }}>
                 Projects
               </Typography>
@@ -106,7 +114,12 @@ const Sidebar = () => {
             <Typography sx={{ color: 'custom.fontGray', fontSize: '16px' }}>
               Others
             </Typography>
-            <NavItem path="/logout" title="Logout" icon={<MdLogout />} onClick={handleLogout} />
+            <NavItem
+              path="/login"
+              title="Logout"
+              icon={<MdLogout />}
+              onClick={handleLogout}
+            />
           </Box>
         </DrawerItem>
       </Box>

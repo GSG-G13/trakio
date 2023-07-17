@@ -1,33 +1,34 @@
 import { useEffect, useState } from 'react';
-import {
-  Modal,
-  Box,
-  TextField,
-} from '@mui/material';
+import { Modal, Box, TextField, Typography, CircularProgress } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import {
-  Formik, Field, Form,
-} from 'formik';
+import { Formik, Field, Form } from 'formik';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
 import {
-  TaskBox, Label, Section, Textarea, Title, StyledDatePicker,
-  InputBox, ProjectTitleBox, TitleField, TextFieldInput,
+  TaskBox,
+  Label,
+  Section,
+  Textarea,
+  Title,
+  StyledDatePicker,
+  InputBox,
+  ProjectTitleBox,
+  TitleField,
+  TextFieldInput,
 } from './addTask.styled';
 import { ErrorAlert, SuccessAlert } from '..';
-import { IMember, Props2 } from '../../interfaces';
+import { IMember, ISection, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
-import IIntialValues from '../../interfaces/initialValues';
 
 const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
-  const [sections, setSections] = useState([]);
+  const [sections, setSections] = useState<ISection[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);
   const [projectTitle, setProjectTitle] = useState('');
@@ -42,36 +43,42 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
     description: '',
   });
 
-  const handleChange = (event:any) => {
+  const handleChange = (event: any) => {
     const { id, value } = event.target;
     if (id === 'section') {
-      const selectedSection = sections.filter((section:any) => section.section === value);
+      const selectedSection = sections.filter(
+        (section: any) => section.section === value
+      );
       const sectionId = selectedSection.length ? selectedSection[0].id : null;
-      setFormData((prevFormData:IIntialValues) => ({
+      setFormData((prevFormData: any) => ({
         ...prevFormData,
         sectionId,
       }));
     } else if (id === 'priority') {
-      const selectedPriority = PRIORITIES.find((priority) => priority.priority === value);
+      const selectedPriority = PRIORITIES.find(
+        (priority) => priority.priority === value
+      );
       const priorityId = selectedPriority ? selectedPriority.id : null;
-      setFormData((prevFormData:any) => ({
+      setFormData((prevFormData: any) => ({
         ...prevFormData,
         priorityId,
       }));
     } else if (id === 'description') {
-      setFormData((prevFormData:IIntialValues) => ({
+      setFormData((prevFormData: any) => ({
         ...prevFormData,
         description: value,
       }));
     } else if (id === 'member') {
-      const selectedmember = members.filter((member:any) => member.email === value);
+      const selectedmember = members.filter(
+        (member: any) => member.email === value
+      );
       const memberId = selectedmember.length ? selectedmember[0].id : null;
-      setFormData((prevFormData:any) => ({
+      setFormData((prevFormData: any) => ({
         ...prevFormData,
         userId: memberId,
       }));
     } else if (id === 'title') {
-      setFormData((prevFormData:any) => ({
+      setFormData((prevFormData: any) => ({
         ...prevFormData,
         title: value,
       }));
@@ -91,7 +98,8 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
   };
 
   const handleSubmit = () => {
-    axios.post(`/api/project/${formData.projectId}/task`, formData)
+    axios
+      .post(`/api/project/${formData.projectId}/task`, formData)
       .then((response) => {
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
@@ -104,23 +112,28 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
   };
 
   useEffect(() => {
-    axios.get(`/api/project/${projectId}`)
+    axios
+      .get(`/api/project/${projectId}`)
       .then((response) => setProjectTitle(response.data.data[0].title));
   });
 
   useEffect(() => {
-    axios.get(`/api/project/${projectId}/members`)
+    axios
+      .get(`/api/project/${projectId}/members`)
       .then((response) => setMembers(response.data.data));
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     setLoading(true);
-    axios.get('/api/sections').then((values) => {
-      setLoading(false);
-      setSections(values.data.data);
-    }).catch(() => {
-      setLoading(false);
-    });
+    axios
+      .get('/api/sections')
+      .then((values) => {
+        setLoading(false);
+        setSections(values.data.data);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
 
   if (isLoading) return <Box>Loading...</Box>;
@@ -137,26 +150,32 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
         message={messageError}
         setOpen={setOpenError}
       />
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal open={open} onClose={handleClose}>
         <TaskBox>
-          <Formik
-            initialValues={formData}
-            onSubmit={handleSubmit}
-          >
+          <Formik initialValues={formData} onSubmit={handleSubmit}>
             <Form
               style={{
-                display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.8rem',
+                justifyContent: 'center',
               }}
             >
               <Title> Add Task </Title>
               <ProjectTitleBox>
                 <Label>Project </Label>
-                <Label>
+                <Typography
+                  color="custom.white"
+                  sx={{
+                    overflow: 'hidden',
+                    WebkitLineClamp: 1,
+                    display: '-webkit-box',
+                    WebkitBoxOrient: 'vertical',
+                    textAlign: 'left',
+                  }}
+                >
                   {projectTitle}
-                </Label>
+                </Typography>
               </ProjectTitleBox>
               <InputBox>
                 <Label>Assignee</Label>
@@ -168,8 +187,8 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   }}
                   sx={{ width: '90%' }}
                   autoHighlight
-                  getOptionLabel={(option:any) => option.email}
-                  renderOption={(props, option) => (
+                  getOptionLabel={(option: any) => option.email}
+                  renderOption={(props, option: any) => (
                     <Box component="li" {...props}>
                       {option.email}
                     </Box>
@@ -207,8 +226,8 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                     sx={{ width: '100%' }}
                     autoHighlight
                     onSelect={(event) => handleChange(event)}
-                    getOptionLabel={(option:any) => option.section}
-                    renderOption={(props, option:any) => (
+                    getOptionLabel={(option: any) => option.section}
+                    renderOption={(props, option: any) => (
                       <Box component="li" {...props}>
                         {option.section}
                       </Box>
@@ -234,9 +253,9 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                     onSelect={(event) => {
                       handleChange(event);
                     }}
-                    getOptionLabel={(option:any) => option.priority}
+                    getOptionLabel={(option: any) => option.priority}
                     sx={{ width: '100%' }}
-                    renderOption={(props, option:any) => (
+                    renderOption={(props, option: any) => (
                       <Box component="li" {...props}>
                         {option.priority}
                       </Box>
@@ -258,7 +277,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 <Label>Title</Label>
                 <TitleField
                   value={formData.title}
-                  onChange={(event:any) => handleChange(event)}
+                  onChange={(event: any) => handleChange(event)}
                   id="title"
                   as={TextField}
                   name="title"
@@ -270,7 +289,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 <Label> Description </Label>
                 <Field
                   value={formData.description}
-                  onChange={(event:any) => {
+                  onChange={(event: any) => {
                     handleChange(event);
                   }}
                   name="description"
@@ -280,7 +299,11 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   multiline
                   rows={3}
                   required
-                  sx={{ marginBottom: '1rem', color: 'custom.gray', width: '90%' }}
+                  sx={{
+                    marginBottom: '1rem',
+                    color: 'custom.gray',
+                    width: '90%',
+                  }}
                 />
               </InputBox>
               <LoadingButton
@@ -288,7 +311,11 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 variant="contained"
                 sx={{ marginTop: 0, width: '90%', fontWeight: '600' }}
               >
-                Submit
+                {isLoading ? (
+                  <CircularProgress color="secondary" />
+                ) : (
+                  <Typography>Submit</Typography>
+                )}
               </LoadingButton>
             </Form>
           </Formik>

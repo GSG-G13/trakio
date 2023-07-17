@@ -38,9 +38,6 @@ const WelcomeCard = () => {
       </ContentCard>
       <ImageCard>
         <CardImage
-          component="img"
-          alt="My Image"
-          height="200"
           image={myImage}
         />
       </ImageCard>

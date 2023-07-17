@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   TableRow,
   TableCell,
@@ -13,11 +14,12 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import {
   ErrorAlert, SuccessAlert, ConfirmDialog, UploadModal,
 } from '..';
-import { task } from '../../interfaces';
+import { IPriority, ISection, task } from '../../interfaces';
 import THEME from '../../theme';
 import EditTaskForm from '../../components/UpdateTask';
+import TaskRowSkeleton from './TaskRowSkeleton';
 
-const TaskRow = ({ data }: { data: task }) => {
+const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
@@ -29,14 +31,20 @@ const TaskRow = ({ data }: { data: task }) => {
   const handleOpen = () => setOpen(true);
   const handleCloseUpload = () => setOpenUpload(false);
   const handleOpenUpload = () => setOpenUpload(true);
+  const { pathname } = useLocation();
+  const isProject = pathname.includes('project');
+  const [sections, setSections] = useState<ISection[]>([]);
+  const [priorities, setPriorities] = useState<IPriority[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [rowTask, setRowTask] = useState<task>(data);
 
   const handleDeleteTask = () => {
     axios
       .delete(`/api/project/${data.project_id}/task?taskId=${data.id}`)
-      .then((response:any) => {
+      .then((response: any) => {
         setMessageSuccess(response.data.message);
       })
-      .catch((error:any) => {
+      .catch((error: any) => {
         setOpenError(true);
         setMessageError(error.response.data.message);
       });
@@ -46,7 +54,22 @@ const TaskRow = ({ data }: { data: task }) => {
     setConfirmOpen(false);
     handleDeleteTask();
   };
-  return (
+
+  useEffect(() => {
+    axios
+      .get('/api/sections')
+      .then((res) => {
+        setSections(res.data.data);
+        return axios.get('/api/priorities');
+      })
+
+      .then((res) => {
+        setPriorities(res.data.data);
+        setIsLoading(false);
+      });
+  }, [rowTask]);
+
+  return isLoading ? <TaskRowSkeleton /> : (
     <>
       <SuccessAlert
         open={openSuccess}
@@ -61,71 +84,98 @@ const TaskRow = ({ data }: { data: task }) => {
       <TableRow>
         <TableCell>
           <Typography fontSize={12} fontWeight={600} color="custom.white">
-            {data.title.toUpperCase()}
+            {rowTask.title.toUpperCase()}
           </Typography>
         </TableCell>
 
         <TableCell align="center">
           <Typography fontSize={12} color="custom.fontGray">
-            {data.project.split(' ')[0]}
+            {rowTask.project.split(' ')[0]}
           </Typography>
         </TableCell>
 
         <TableCell align="center">
           <Typography fontSize={12} color="custom.fontGray">
-            {data.name}
+            {rowTask.name}
           </Typography>
         </TableCell>
 
         <TableCell align="center">
           <Box
             component="div"
-            bgcolor={data.color}
+            bgcolor={rowTask.color}
             sx={{ paddingX: 1, borderRadius: 1.5, display: 'inline-block' }}
           >
             <Typography fontSize={11} fontWeight={700} color="custom.white">
-              {data.priority.toUpperCase()}
+              {rowTask.priority.toUpperCase()}
             </Typography>
           </Box>
         </TableCell>
 
         <TableCell align="center">
           <Typography fontSize={12} color="custom.white" fontWeight={700}>
-            {data.section}
+            {rowTask.section}
           </Typography>
         </TableCell>
 
         <TableCell align="center">
           <Typography fontSize={12} color="custom.fontGray">
-            {data.due_date.split('T')[0]}
+            {rowTask.due_date.split('T')[0]}
           </Typography>
         </TableCell>
 
-        <TableCell align="center">
-          <IconButton onClick={handleOpenUpload}>
-            <Box bgcolor="rgba(77,250,62,.2)" borderRadius={2} padding={1}>
-              <AttachFileIcon sx={{ fontSize: 16, color: '#3EFA94' }} />
-            </Box>
-          </IconButton>
-          <IconButton onClick={handleOpen}>
-            <Box bgcolor="rgba(62, 123, 250, 0.2)" borderRadius={2} padding={1}>
-              <MdOutlineEdit
-                style={{ fontSize: 16, color: THEME.palette.custom.editIcon }}
-              />
-            </Box>
-          </IconButton>
+        {isProject && isManager && (
+          <TableCell align="center">
+            <IconButton onClick={handleOpenUpload}>
+              <Box bgcolor="rgba(77,250,62,.2)" borderRadius={2} padding={1}>
+                <AttachFileIcon sx={{ fontSize: 16, color: '#3EFA94' }} />
+              </Box>
+            </IconButton>
+            <IconButton onClick={handleOpen}>
+              <Box
+                bgcolor="rgba(62, 123, 250, 0.2)"
+                borderRadius={2}
+                padding={1}
+              >
+                <MdOutlineEdit
+                  style={{
+                    fontSize: 16,
+                    color: THEME.palette.custom.editIcon,
+                  }}
+                />
+              </Box>
+            </IconButton>
 
-          <EditTaskForm open={open} handleClose={handleClose} data={data} />
-          <UploadModal open={openUplad} handleClose={handleCloseUpload} taskId={data.id!} />
+            <EditTaskForm
+              open={open}
+              handleClose={handleClose}
+              data={rowTask}
+              sections={sections}
+              priorities={priorities}
+              setRowTask={setRowTask}
+            />
+            <UploadModal
+              open={openUplad}
+              handleClose={handleCloseUpload}
+              taskId={rowTask.id!}
+            />
 
-          <IconButton onClick={() => setConfirmOpen(true)}>
-            <Box bgcolor="rgba(255, 46, 38, 0.2)" borderRadius={2} padding={1}>
-              <RiDeleteBinLine
-                style={{ color: THEME.palette.custom.deleteIcon, fontSize: 16 }}
-              />
-            </Box>
-          </IconButton>
-        </TableCell>
+            <IconButton onClick={() => setConfirmOpen(true)}>
+              <Box
+                bgcolor="rgba(255, 46, 38, 0.2)"
+                borderRadius={2}
+                padding={1}
+              >
+                <RiDeleteBinLine
+                  style={{
+                    color: THEME.palette.custom.deleteIcon,
+                    fontSize: 16,
+                  }}
+                />
+              </Box>
+            </IconButton>
+          </TableCell>
+        )}
       </TableRow>
       <ConfirmDialog
         title="Delete Task"

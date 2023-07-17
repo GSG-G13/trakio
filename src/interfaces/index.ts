@@ -10,6 +10,7 @@ import { IProjectDetails } from './projectDetails';
 import { ISection } from './section';
 import { IMember } from './member';
 import { IFile } from './files';
+import { IPriority } from './priorities';
 
 export type {
   iTask,
@@ -23,4 +24,5 @@ export type {
   ISection,
   IMember,
   IFile,
+  IPriority,
 };

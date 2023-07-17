@@ -10,13 +10,10 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
+import { useOutletContext } from 'react-router-dom';
 import empty from '../../lotties/empty.json';
 import LongMenu from './Menu';
-import {
-  WrapperDes,
-  WrapCards,
-  Wrapper2,
-} from './cards.styled';
+import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert, ConfirmDialog } from '..';
 import Loader from './Loader';
@@ -60,6 +57,7 @@ const ProjectsCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState<iProjects[]>();
+  const [render, setRender] = useOutletContext<any>();
 
   const handleDeleteProject = (projectId: any) => {
     axios
@@ -69,6 +67,7 @@ const ProjectsCard = () => {
           (project) => project.project_id !== projectId,
         );
         setUserProjects(updatedProjects);
+        setRender(!render);
       })
       .catch((error) => {
         setOpenError(true);
@@ -84,9 +83,8 @@ const ProjectsCard = () => {
     setOpenUpdateModal(true);
   };
 
-  const handleConfirmDelete = (projectId: any) => {
-    setConfirmOpen(false);
-    handleDeleteProject(projectId);
+  const OpenConfirmation = () => {
+    setConfirmOpen(true);
   };
 
   useEffect(() => {
@@ -94,8 +92,10 @@ const ProjectsCard = () => {
       .get('/api/projects')
       .then((res) => {
         setUserProjects(res.data.data);
-
-        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`/api/project/${project.project_id}/task`).then((task) => task.data.data));
+        setRender(!render);
+        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios
+          .get(`/api/project/${project.project_id}/task`)
+          .then((task) => task.data.data));
 
         return Promise.all(fetchProjectTasks);
       })
@@ -149,14 +149,16 @@ const ProjectsCard = () => {
       ) : (
         userProjects.map((project: iProjects, index: number) => {
           const allTasks = projectTasks[index].length;
-          const doneTasks = (projectTasks[index] as unknown as iProjectTasks[])?.filter(
-            (task: iProjectTasks) => task.section === 'Done',
-          )?.length;
+          const doneTasks = (
+            projectTasks[index] as unknown as iProjectTasks[]
+          )?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
           return (
-            <WrapCards key={project.project_id}>
-              <Wrapper2>
+            <WrapCards>
+              <Wrapper2 key={project.project_id}>
                 <CardContent sx={{ flex: 1, padding: '0' }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box
+                    sx={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
                     <Typography
                       gutterBottom
                       variant="h6"
@@ -172,9 +174,10 @@ const ProjectsCard = () => {
                       {project.title}
                     </Typography>
                     <LongMenu
-                      handleDeleteProject={handleDeleteProject}
                       handleEditProject={handleEditProject}
-                      id={project.project_id}
+                      OpenConfirmation={OpenConfirmation}
+                      setProjectId={setProjectId}
+                      projectId={project.project_id}
                     />
                   </Box>
                   <WrapperDes variant="body2" color="text.secondary">
@@ -196,7 +199,7 @@ const ProjectsCard = () => {
         open={confirmOpen}
         setOpen={setConfirmOpen}
         onConfirm={() => {
-          handleConfirmDelete(projectId);
+          handleDeleteProject(projectId);
         }}
       >
         Are you sure you want to delete this project?

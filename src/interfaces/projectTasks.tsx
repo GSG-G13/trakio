@@ -1,5 +1,5 @@
 interface iProjectTasks {
-  length: any;
+  [x: string]: any;
   id: number;
   title: string;
   description: string;
