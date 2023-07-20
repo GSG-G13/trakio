@@ -7,21 +7,32 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import { ErrorAlert, SuccessAlert } from '..';
-import THEME from '../../theme';
 import { addProjectSchema } from '../../helper/validation/schema';
 
-const UpdateProjectModal = (
-  { open, handleClose, project }: {open:boolean, handleClose:()=> void, project:any},
-) => {
+const UpdateProjectModal = ({
+  open,
+  handleClose,
+  project,
+}: {
+  open: boolean;
+  handleClose: () => void;
+  project: any;
+}) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
-  const [initialValues, setInitialValues] = useState({ title: '', description: '' });
+  const [initialValues, setInitialValues] = useState({
+    title: project.title,
+    description: project.description,
+  });
 
   useEffect(() => {
     if (project) {
-      setInitialValues({ title: project.title, description: project.description });
+      setInitialValues({
+        title: project.title,
+        description: project.description,
+      });
     }
   }, [project]);
 
@@ -81,9 +92,31 @@ const UpdateProjectModal = (
                 label="Title"
                 fullWidth
                 required
-                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+                sx={{
+                  marginBottom: '2vh',
+                  color: 'custom.gray',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'custom.gray',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '12px',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '14px',
+                  },
+                }}
               />
-              <ErrorMessage name="title" component="div" color="custom.white" />
+              <ErrorMessage name="title">
+                {(msg) => <Typography fontSize={12} marginBottom={1} color="custom.deleteIcon">{msg}</Typography>}
+              </ErrorMessage>
 
               <Field
                 as={TextField}
@@ -93,9 +126,31 @@ const UpdateProjectModal = (
                 multiline
                 rows={4}
                 required
-                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+                sx={{
+                  marginBottom: '2vh',
+                  color: 'custom.gray',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'custom.gray',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '12px',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '14px',
+                  },
+                }}
               />
-              <ErrorMessage name="description" component="div" color={THEME.palette.custom.white} />
+              <ErrorMessage name="description">
+                {(msg) => <Typography fontSize={12} marginBottom={1} color="custom.deleteIcon">{msg}</Typography>}
+              </ErrorMessage>
 
               <Button type="submit" variant="contained">
                 Update

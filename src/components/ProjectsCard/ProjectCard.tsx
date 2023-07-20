@@ -56,7 +56,7 @@ const ProjectsCard = () => {
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<iProjects[]>();
+  const [selectedProject, setSelectedProject] = useState<iProjects>();
   const [render, setRender] = useOutletContext<any>();
 
   const handleDeleteProject = (projectId: any) => {
@@ -76,9 +76,9 @@ const ProjectsCard = () => {
   };
 
   const handleEditProject = (projectId: any) => {
-    const project = userProjects.find(
+    const project: iProjects = userProjects.find(
       (project:iProjects) => project.project_id === projectId,
-    );
+    )!;
     setSelectedProject(project);
     setOpenUpdateModal(true);
   };

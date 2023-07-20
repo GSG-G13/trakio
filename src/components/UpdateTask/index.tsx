@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   TextField,
   Modal,
   Box,
-  Button,
   CircularProgress,
   Typography,
 } from '@mui/material';
