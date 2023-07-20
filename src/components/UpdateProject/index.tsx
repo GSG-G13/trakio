@@ -1,27 +1,38 @@
 import { useState, useEffect } from 'react';
 import {
-  Button, Modal, Box, Typography, TextField,
+  Button,
+  Modal,
+  Box,
+  Typography,
+  TextField,
+  CircularProgress,
 } from '@mui/material';
 import axios from 'axios';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
-import { ErrorAlert, SuccessAlert } from '..';
 import { addProjectSchema } from '../../helper/validation/schema';
 
 const UpdateProjectModal = ({
   open,
   handleClose,
   project,
+  setProject,
+  setOpenSuccess,
+  setOpenError,
+  setMessageSuccess,
+  setMessageError,
 }: {
   open: boolean;
   handleClose: () => void;
   project: any;
+  setProject: any;
+  setOpenSuccess: any;
+  setOpenError: any;
+  setMessageSuccess: any;
+  setMessageError: any;
 }) => {
-  const [openError, setOpenError] = useState(false);
-  const [messageError, setMessageError] = useState('');
-  const [messageSuccess, setMessageSuccess] = useState('');
-  const [openSuccess, setOpenSuccess] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [initialValues, setInitialValues] = useState({
     title: project.title,
     description: project.description,
@@ -37,13 +48,17 @@ const UpdateProjectModal = ({
   }, [project]);
 
   const handleSubmit = (values: any) => {
+    setLoading(true);
     axios
       .put(`/api/project/${project.project_id}`, values)
       .then((res) => {
+        setLoading(false);
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
+        setProject(res.data.data[0]);
       })
       .catch((err) => {
+        setLoading(false);
         setOpenError(true);
         setMessageError(err.response.data.message);
       });
@@ -52,16 +67,6 @@ const UpdateProjectModal = ({
 
   return (
     <Box>
-      <SuccessAlert
-        open={openSuccess}
-        message={messageSuccess}
-        setOpen={setOpenSuccess}
-      />
-      <ErrorAlert
-        open={openError}
-        message={messageError}
-        setOpen={setOpenError}
-      />
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -115,7 +120,15 @@ const UpdateProjectModal = ({
                 }}
               />
               <ErrorMessage name="title">
-                {(msg) => <Typography fontSize={12} marginBottom={1} color="custom.deleteIcon">{msg}</Typography>}
+                {(msg) => (
+                  <Typography
+                    fontSize={12}
+                    marginBottom={1}
+                    color="custom.deleteIcon"
+                  >
+                    {msg}
+                  </Typography>
+                )}
               </ErrorMessage>
 
               <Field
@@ -149,11 +162,23 @@ const UpdateProjectModal = ({
                 }}
               />
               <ErrorMessage name="description">
-                {(msg) => <Typography fontSize={12} marginBottom={1} color="custom.deleteIcon">{msg}</Typography>}
+                {(msg) => (
+                  <Typography
+                    fontSize={12}
+                    marginBottom={1}
+                    color="custom.deleteIcon"
+                  >
+                    {msg}
+                  </Typography>
+                )}
               </ErrorMessage>
 
               <Button type="submit" variant="contained">
-                Update
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <Typography>Update</Typography>
+                )}
               </Button>
             </Form>
           </Formik>

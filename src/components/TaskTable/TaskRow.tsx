@@ -19,7 +19,17 @@ import THEME from '../../theme';
 import EditTaskForm from '../../components/UpdateTask';
 import TaskRowSkeleton from './TaskRowSkeleton';
 
-const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
+const TaskRow = ({
+  data,
+  isManager,
+  tasks,
+  setTasks,
+}: {
+  data: task;
+  isManager: boolean;
+  tasks: task[];
+  setTasks: any;
+}) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
@@ -51,6 +61,7 @@ const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
   };
 
   const handleConfirmDelete = () => {
+    setTasks(tasks.filter((item) => item.id !== data.id));
     setConfirmOpen(false);
     handleDeleteTask();
   };
@@ -69,7 +80,9 @@ const TaskRow = ({ data, isManager }: { data: task; isManager: boolean }) => {
       });
   }, [rowTask]);
 
-  return isLoading ? <TaskRowSkeleton /> : (
+  return isLoading ? (
+    <TaskRowSkeleton />
+  ) : (
     <>
       <SuccessAlert
         open={openSuccess}

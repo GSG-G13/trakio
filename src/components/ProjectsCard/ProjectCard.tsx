@@ -15,7 +15,7 @@ import empty from '../../lotties/empty.json';
 import LongMenu from './Menu';
 import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
-import { ErrorAlert, ConfirmDialog } from '..';
+import { ErrorAlert, ConfirmDialog, SuccessAlert } from '..';
 import Loader from './Loader';
 import UpdateProjectModal from '../UpdateProject';
 
@@ -58,6 +58,8 @@ const ProjectsCard = () => {
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState<iProjects>();
   const [render, setRender] = useOutletContext<any>();
+  const [openSuccess, setOpenSuccess] = useState<boolean>(false);
+  const [messageSuccess, setMessageSuccess] = useState<string>('');
 
   const handleDeleteProject = (projectId: any) => {
     axios
@@ -77,7 +79,7 @@ const ProjectsCard = () => {
 
   const handleEditProject = (projectId: any) => {
     const project: iProjects = userProjects.find(
-      (project:iProjects) => project.project_id === projectId,
+      (project: iProjects) => project.project_id === projectId,
     )!;
     setSelectedProject(project);
     setOpenUpdateModal(true);
@@ -108,7 +110,7 @@ const ProjectsCard = () => {
         setMessageError(error.response.data.message);
         setIsLoading(false);
       });
-  }, []);
+  }, [selectedProject]);
 
   if (isLoading) {
     return (
@@ -120,7 +122,16 @@ const ProjectsCard = () => {
 
   return (
     <>
-      <ErrorAlert open={openError} message={messageError} setOpen={setOpenError} />
+      <SuccessAlert
+        open={openSuccess}
+        message={messageSuccess}
+        setOpen={setOpenSuccess}
+      />
+      <ErrorAlert
+        open={openError}
+        message={messageError}
+        setOpen={setOpenError}
+      />
       {!userProjects.length && !isLoading ? (
         <Box
           width="65vw"
@@ -153,8 +164,8 @@ const ProjectsCard = () => {
             projectTasks[index] as unknown as iProjectTasks[]
           )?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
           return (
-            <WrapCards>
-              <Wrapper2 key={project.project_id}>
+            <WrapCards key={project.project_id}>
+              <Wrapper2>
                 <CardContent sx={{ flex: 1, padding: '0' }}>
                   <Box
                     sx={{ display: 'flex', justifyContent: 'space-between' }}
@@ -165,20 +176,22 @@ const ProjectsCard = () => {
                       component="div"
                       sx={{
                         overflow: 'hidden',
-                        '-webkit-line-clamp': '1',
+                        WebkitLineClamp: 1,
                         display: '-webkit-box',
-                        '-webkit-box-orient': 'vertical',
+                        WebkitBoxOrient: 'vertical',
                         textAlign: 'left',
                       }}
                     >
-                      {project.title}
+                      {project.title.toUpperCase()}
                     </Typography>
-                    <LongMenu
-                      handleEditProject={handleEditProject}
-                      OpenConfirmation={OpenConfirmation}
-                      setProjectId={setProjectId}
-                      projectId={project.project_id}
-                    />
+                    {project.role === 'manager' && (
+                      <LongMenu
+                        handleEditProject={handleEditProject}
+                        OpenConfirmation={OpenConfirmation}
+                        setProjectId={setProjectId}
+                        projectId={project.project_id}
+                      />
+                    )}
                   </Box>
                   <WrapperDes variant="body2" color="text.secondary">
                     {project.description}
@@ -209,6 +222,11 @@ const ProjectsCard = () => {
           open={openUpdateModal}
           handleClose={() => setOpenUpdateModal(false)}
           project={selectedProject}
+          setProject={setSelectedProject}
+          setOpenSuccess={setOpenSuccess}
+          setOpenError={setOpenError}
+          setMessageSuccess={setMessageSuccess}
+          setMessageError={setMessageError}
         />
       )}
     </>

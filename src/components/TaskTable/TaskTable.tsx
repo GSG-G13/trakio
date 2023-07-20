@@ -125,7 +125,15 @@ const TaskTable = () => {
           {loading ? (
             <TaskRowSkeleton />
           ) : (
-            tasks.map((item) => <TaskRow key={item.id} data={item} isManager={isManager} />)
+            tasks.map((item) => (
+              <TaskRow
+                key={item.id}
+                data={item}
+                isManager={isManager}
+                tasks={tasks}
+                setTasks={setTasks}
+              />
+            ))
           )}
         </TableBody>
       </Table>
