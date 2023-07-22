@@ -38,6 +38,9 @@ export const BodyContainer = styled(Container)(({ theme: { palette: { custom } }
   top: '0px',
   right: '0px',
   backgroundColor: custom.purple,
+  '@media(max-width: 600px)': {
+    backgroundColor: custom.background,
+  },
 }));
 export const CustomContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
   position: 'absolute',
@@ -48,6 +51,13 @@ export const CustomContainer = styled(Container)(({ theme: { palette: { custom }
   background: custom.background,
   borderRadius: '66px',
   borderColor: custom.white,
+  '@media(max-width: 600px)': {
+    width: '28rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: '7rem',
+  },
 }));
 
 export const DontHaveAcount = styled(Typography)(() => ({
@@ -58,6 +68,10 @@ export const DontHaveAcount = styled(Typography)(() => ({
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   color: '#777777',
+  '@media(max-width: 600px)': {
+    left: '65px',
+    top: '600px',
+  },
 }));
 export const SignupText = styled(Typography)(() => ({
   position: 'absolute',
@@ -65,4 +79,8 @@ export const SignupText = styled(Typography)(() => ({
   left: '107px',
   fontSize: '12px',
   color: '#FFDA3C',
+  '@media(max-width: 600px)': {
+    left: '200px',
+    top: '600px',
+  },
 }));
