@@ -38,7 +38,7 @@ const LoginForm = () => {
       .then((res) => {
         setOpenSuccess(true);
         setUserData(res.data.data[0]);
-        if (!openSuccess) navigator('/');
+        navigator('/');
       })
       .catch((err) => {
         setOpenError(true);

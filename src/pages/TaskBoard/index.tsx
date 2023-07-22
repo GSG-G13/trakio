@@ -18,7 +18,7 @@ const TaskBoard = () => {
   const { pathname } = useLocation();
   const [tasks, setTasks] = useState<task[]>([]);
   const [sections, setSections] = useState<ISection[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [emptyList, setEmptyList] = useState<boolean>(false);
   const { id } = useParams();
   const endpoint = pathname.includes('project')

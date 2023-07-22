@@ -1,7 +1,9 @@
-import { Grid, Box, Typography } from '@mui/material';
+import {
+  Grid, Box, Typography, Skeleton,
+} from '@mui/material';
 import { IProjectDetails } from '../../interfaces';
 
-const TitleAndDesc = ({ project }: { project: IProjectDetails }) => (
+const TitleAndDesc = ({ project, loading }: { project: IProjectDetails, loading: boolean }) => (
   <Grid item xs={8}>
     <Box
       padding={3}
@@ -20,7 +22,7 @@ const TitleAndDesc = ({ project }: { project: IProjectDetails }) => (
         fontWeight={600}
         color="primary.main"
       >
-        {project.title}
+        {!loading ? project.title : <Skeleton variant="rectangular" height={16} width="100%" />}
       </Typography>
       <Typography
         fontSize={13}
@@ -42,7 +44,7 @@ const TitleAndDesc = ({ project }: { project: IProjectDetails }) => (
           },
         }}
       >
-        {project.description}
+        {!loading ? project.description : <Skeleton variant="rectangular" height={13} width="100%" />}
       </Typography>
     </Box>
   </Grid>

@@ -1,7 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  Box, Grid, IconButton, Typography,
+  Box, Grid, IconButton, Skeleton, Typography,
 } from '@mui/material';
 import axios from 'axios';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
@@ -38,21 +39,36 @@ const handleDownloadClick = async (attach: string) => {
 const FilePage = () => {
   const { id } = useParams();
   const [files, setFiles] = useState<IFile[]>([]);
-  const [isLoading, setIsLoadig] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoadig(true);
+    setIsLoading(true);
     axios.get(`/api/project/${id}/attachments`).then((res) => {
       setFiles(res.data.data);
-      setIsLoadig(false);
+      setIsLoading(false);
     });
   }, []);
 
-  if (isLoading) return <Box>Loading...</Box>;
-
   return (
     <Grid container spacing={2}>
-      {files.length ? (
+      {isLoading ? (
+        <Grid item xs={6}>
+          <Box
+            padding={2}
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            alignItems="center"
+            borderRadius={2}
+            bgcolor="secondary.main"
+            height="10vh"
+          >
+            <Skeleton variant="rectangular" height={16} width="100%" />
+            <Skeleton variant="rectangular" height={16} width="100%" />
+            <Skeleton variant="rectangular" height={16} width="100%" />
+          </Box>
+        </Grid>
+      ) : files.length ? (
         files.map((item) => (
           <Grid key={item.id} item xs={6}>
             <Box

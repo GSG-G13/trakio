@@ -76,7 +76,7 @@ const AccountPage = () => {
           </Grid>
         </Grid>
         <Box>
-          <Typography color="custom.fontGray" width="80%" marginBottom="2vh">
+          <Typography color="custom.fontGray" width="80%" marginBottom="2vh" textAlign="justify">
             We value your control and privacy. By clicking Delete
             Account you will permanently remove all of your personal data and
             account information from our system. This action is irreversible,

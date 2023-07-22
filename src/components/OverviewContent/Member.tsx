@@ -1,13 +1,13 @@
 import {
-  Avatar, Box, Grid, Typography,
+  Avatar, Box, Grid, Skeleton, Typography,
 } from '@mui/material';
 import { IMember } from '../../interfaces';
 
-const Member = ({ member }: { member: IMember }) => (
+const Member = ({ member, loading }: { member: IMember; loading: boolean; }) => (
   <Grid item xs={3}>
     <Box display="flex" alignItems="center">
       <Avatar sx={{ width: 56, height: 56, backgroundColor: 'deeppink' }}>
-        {member.name[0].toUpperCase()}
+        {!loading ? member.name[0].toUpperCase() : <Skeleton variant="rectangular" height={16} width="100%" />}
       </Avatar>
       <Box
         marginLeft={1}
@@ -18,7 +18,7 @@ const Member = ({ member }: { member: IMember }) => (
       >
         <Box display="flex" alignItems="center">
           <Typography color="custom.white" textTransform="capitalize">
-            {member.name}
+            {!loading ? member.name : <Skeleton variant="rectangular" height={16} width="100%" />}
           </Typography>
 
           <Typography
@@ -28,12 +28,12 @@ const Member = ({ member }: { member: IMember }) => (
             textTransform="capitalize"
             marginLeft={2}
           >
-            {member.role}
+            {!loading ? member.role : <Skeleton variant="rectangular" height={16} width="100%" />}
           </Typography>
         </Box>
 
         <Typography fontSize={12} color="custom.gray">
-          {member.email}
+          {!loading ? member.email : <Skeleton variant="rectangular" height={16} width="100%" />}
         </Typography>
       </Box>
     </Box>

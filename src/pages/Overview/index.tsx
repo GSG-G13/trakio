@@ -6,7 +6,10 @@ import Lottie from 'react-lottie';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import {
-  FloatingButton, Member, OverviewTaskCard, TitleAndDesc,
+  FloatingButton,
+  Member,
+  OverviewTaskCard,
+  TitleAndDesc,
 } from '../../components';
 import AddTaskModal from '../../components/AddTask';
 import presenation from '../../lotties/presentation.json';
@@ -28,9 +31,17 @@ const Overview = () => {
   const [sections, setSections] = useState<ISection[]>([]);
   const [tasks, setTasks] = useState<task[]>([]);
   const [members, setMembers] = useState<IMember[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigator = useNavigate();
 
   useEffect(() => {
+    axios.get('/api/sections').then((res) => {
+      setSections(res.data.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
     axios
       .get(`/api/project/${id}`)
       .then((res) => {
@@ -41,13 +52,10 @@ const Overview = () => {
         navigator('/', { state: { error: err.response.data.message } });
       });
 
-    axios.get('/api/sections').then((res) => {
-      setSections(res.data.data);
-    });
-
     axios
       .get(`/api/project/${id}/task`)
       .then((res) => {
+        setLoading(false);
         setTasks(res.data.data);
       })
       .catch((err) => {
@@ -67,7 +75,7 @@ const Overview = () => {
   return (
     <>
       <Grid container marginBottom={5} spacing={2}>
-        <TitleAndDesc project={project} />
+        <TitleAndDesc project={project} loading={loading} />
         <Grid item xs={4}>
           <Lottie
             height={180}
@@ -84,10 +92,12 @@ const Overview = () => {
         </Grid>
         {sections.map((item) => (
           <OverviewTaskCard
+            loading={loading}
             section={item}
             key={item.section}
             tasks={
-              tasks.filter((taskItem) => taskItem.section === item.section).length
+              tasks.filter((taskItem) => taskItem.section === item.section)
+                .length
             }
           />
         ))}
@@ -103,20 +113,23 @@ const Overview = () => {
         </Grid>
         {manager && (
           <Grid marginTop={2} item xs={2}>
-            <Button variant="outlined" onClick={handleOpen} endIcon={<AddIcon />}>
+            <Button
+              variant="outlined"
+              onClick={handleOpen}
+              endIcon={<AddIcon />}
+            >
               Add Members
             </Button>
           </Grid>
         )}
         <AddMemberModal open={open} handleClose={handleClose} />
         {members.map((item) => (
-          <Member member={item} key={item.id} />
+          <Member member={item} key={item.id} loading={loading} />
         ))}
       </Grid>
-      {manager && (<FloatingButton onClick={handleOpenTask} />)}
+      {manager && <FloatingButton onClick={handleOpenTask} />}
       <AddTaskModal open={openTask} handleClose={handleCloseTask} />
     </>
-
   );
 };
 
