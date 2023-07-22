@@ -57,7 +57,7 @@ const ProjectsCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState<iProjects>();
-  const [render, setRender] = useOutletContext<any>();
+  const [render, setRender] = useOutletContext<any>().render;
   const [openSuccess, setOpenSuccess] = useState<boolean>(false);
   const [messageSuccess, setMessageSuccess] = useState<string>('');
 

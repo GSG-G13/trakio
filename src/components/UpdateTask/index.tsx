@@ -204,6 +204,7 @@ const EditTaskForm = ({
                       onChange={handleDateChange}
                       sx={{ width: '90%' }}
                       format="YYYY-MM-DD"
+                      minDate={dayjs(new Date())}
                       value={dayjs(formData.dueDate)}
                     />
                   </DemoContainer>

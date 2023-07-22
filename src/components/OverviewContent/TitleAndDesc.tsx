@@ -22,7 +22,7 @@ const TitleAndDesc = ({ project, loading }: { project: IProjectDetails, loading:
         fontWeight={600}
         color="primary.main"
       >
-        {!loading ? project.title : <Skeleton variant="rectangular" height={16} width="100%" />}
+        {!loading ? project.title : <Skeleton variant="rectangular" height={16} width="50%" />}
       </Typography>
       <Typography
         fontSize={13}
@@ -44,7 +44,13 @@ const TitleAndDesc = ({ project, loading }: { project: IProjectDetails, loading:
           },
         }}
       >
-        {!loading ? project.description : <Skeleton variant="rectangular" height={13} width="100%" />}
+        {!loading ? project.description : (
+          <Box>
+            <Skeleton variant="rectangular" height={13} width="100%" sx={{ marginY: '0.5rem' }} />
+            <Skeleton variant="rectangular" height={13} width="100%" sx={{ marginY: '0.5rem' }} />
+            <Skeleton variant="rectangular" height={13} width="100%" sx={{ marginY: '0.5rem' }} />
+          </Box>
+        )}
       </Typography>
     </Box>
   </Grid>

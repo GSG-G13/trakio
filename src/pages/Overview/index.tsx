@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { useEffect, useState } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
@@ -28,17 +28,11 @@ const Overview = () => {
   const { id } = useParams();
   const [project, setProject] = useState<IProjectDetails>({});
   const [manager, setManager] = useState<boolean>(false);
-  const [sections, setSections] = useState<ISection[]>([]);
   const [tasks, setTasks] = useState<task[]>([]);
   const [members, setMembers] = useState<IMember[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigator = useNavigate();
-
-  useEffect(() => {
-    axios.get('/api/sections').then((res) => {
-      setSections(res.data.data);
-    });
-  }, []);
+  const { section }: {section: ISection[]} = useOutletContext<any>();
 
   useEffect(() => {
     setLoading(true);
@@ -90,7 +84,7 @@ const Overview = () => {
             }}
           />
         </Grid>
-        {sections.map((item) => (
+        {section.map((item) => (
           <OverviewTaskCard
             loading={loading}
             section={item}

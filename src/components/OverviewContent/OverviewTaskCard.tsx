@@ -81,20 +81,16 @@ const OverviewTaskCard = ({
         }}
       >
         {lotties[section.id - 1]}
-        <Typography padding={1} color="custom.gray">
-          {!loading ? (
-            section.section
-          ) : (
-            <Skeleton variant="rectangular" height={16} width="100%" />
-          )}
-        </Typography>
-        <Typography fontSize={18} fontWeight={700} color="custom.white">
-          {!loading ? (
-            tasks
-          ) : (
-            <Skeleton variant="rectangular" height={16} width="100%" />
-          )}
-        </Typography>
+        {!loading ? (
+          <Typography padding={1} color="custom.gray">
+            {section.section}
+          </Typography>
+        ) : <Skeleton variant="rectangular" height={12} width="40%" sx={{ marginY: '1rem' }} />}
+        {!loading ? (
+          <Typography fontSize={18} fontWeight={700} color="custom.white">
+            {tasks}
+          </Typography>
+        ) : <Skeleton variant="rectangular" height={18} width="25%" />}
       </Box>
     </Grid>
   );
