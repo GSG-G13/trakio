@@ -12,6 +12,7 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import { addProjectSchema } from '../../helper/validation/schema';
+import ENDPOINTS from '../../constants/endpoints';
 
 const UpdateProjectModal = ({
   open,
@@ -50,7 +51,9 @@ const UpdateProjectModal = ({
   const handleSubmit = (values: any) => {
     setLoading(true);
     axios
-      .put(`/api/project/${project.project_id}`, values)
+      .put(`${ENDPOINTS.PROJECT}/${project.project_id}`, values, {
+        withCredentials: true,
+      })
       .then((res) => {
         setLoading(false);
         setOpenSuccess(true);

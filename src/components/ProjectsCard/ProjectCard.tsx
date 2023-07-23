@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
-import { NavLink, useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import empty from '../../lotties/empty.json';
 import LongMenu from './Menu';
 import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
@@ -176,9 +176,9 @@ const ProjectsCard = () => {
                   <Box
                     sx={{ display: 'flex', justifyContent: 'space-between' }}
                   >
-                    <NavLink
+                    <Link
                       to={`/project/${project.project_id}`}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: 'none', color: 'inherit', backgroundColor: 'inherit' }}
                     >
                       <Typography
                         gutterBottom
@@ -194,7 +194,7 @@ const ProjectsCard = () => {
                       >
                         {project.title.toUpperCase()}
                       </Typography>
-                    </NavLink>
+                    </Link>
                     {project.role === 'manager' && (
                       <LongMenu
                         handleEditProject={handleEditProject}

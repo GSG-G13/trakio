@@ -65,8 +65,10 @@ const TaskBoard = () => {
     draggableTask[0].section = destination.droppableId;
     const { project_id: projectId, id: taskId } = draggableTask[0];
     axios
-      .put(`/api/project/${projectId}/task/${taskId}`, {
+      .put(`${ENDPOINTS.PROJECT}/${projectId}/task/${taskId}`, {
         destinationSection: sectionId[0].id,
+      }, {
+        withCredentials: true,
       })
       .then((response) => response)
       .catch(() => {
