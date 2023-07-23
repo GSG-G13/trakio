@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '..';
 import { addProjectSchema } from '../../helper/validation/schema';
 import { Props2 } from '../../interfaces';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AddProjectModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -20,7 +21,9 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
 
   const handleSubmit = (values: any) => {
     axios
-      .post('/api/project', values)
+      .post(ENDPOINTS.PROJECT, values, {
+        withCredentials: true,
+      })
       .then((res) => {
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
@@ -98,7 +101,15 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
                 }}
               />
               <ErrorMessage name="title">
-                {(msg) => <Typography fontSize={12} marginBottom={1} color="custom.deleteIcon">{msg}</Typography>}
+                {(msg) => (
+                  <Typography
+                    fontSize={12}
+                    marginBottom={1}
+                    color="custom.deleteIcon"
+                  >
+                    {msg}
+                  </Typography>
+                )}
               </ErrorMessage>
 
               <Field
@@ -132,7 +143,15 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
                 }}
               />
               <ErrorMessage name="description">
-                {(msg) => <Typography fontSize={12} marginBottom={1} color="custom.deleteIcon">{msg}</Typography>}
+                {(msg) => (
+                  <Typography
+                    fontSize={12}
+                    marginBottom={1}
+                    color="custom.deleteIcon"
+                  >
+                    {msg}
+                  </Typography>
+                )}
               </ErrorMessage>
 
               <Button type="submit" variant="contained">

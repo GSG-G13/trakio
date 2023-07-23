@@ -15,6 +15,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { ErrorAlert, SuccessAlert } from '..';
+import ENDPOINTS from '../../constants/endpoints';
 
 window.Buffer = window.Buffer || Buffer;
 
@@ -61,9 +62,11 @@ const UploadModal = ({
 
     s3Client
       .send(new PutObjectCommand(params))
-      .then(() => axios.post(`/api/project/${id}/attachments?taskId=${taskId}`, {
+      .then(() => axios.post(`${ENDPOINTS.PROJECT}/${id}/attachments?taskId=${taskId}`, {
         attachS3: `https://trackionizar.s3.amazonaws.com/${id}/${file.name}`,
         attachmentName: uploadedFile?.name,
+      }, {
+        withCredentials: true,
       }))
       .then((res: AxiosResponse) => {
         setLoading(false);

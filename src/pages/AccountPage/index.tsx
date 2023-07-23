@@ -7,6 +7,7 @@ import { AccountInput, ErrorAlert, ConfirmDialog } from '../../components';
 import { WrappBtn } from '../../components/AccountInput/acount.styled';
 import userContext from '../../UserContext/context';
 import profile from '../../lotties/profile.json';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AccountPage = () => {
   const navigator = useNavigate();
@@ -17,7 +18,9 @@ const AccountPage = () => {
 
   const handleDeleteAccount = () => {
     axios
-      .delete('/api/account')
+      .delete(ENDPOINTS.ACCOUNT, {
+        withCredentials: true,
+      })
       .then(() => navigator('/login'))
       .catch((error) => {
         setOpenError(true);
@@ -48,7 +51,13 @@ const AccountPage = () => {
           Profile Information
         </Typography>
         <Grid container spacing={1} sx={{ marginBottom: '2vw' }}>
-          <Grid item xs={6} display="flex" flexDirection="column" justifyContent="space-evenly">
+          <Grid
+            item
+            xs={6}
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-evenly"
+          >
             <Grid item xs={12}>
               <AccountInput label="Name" value={user?.user?.name} />
             </Grid>
@@ -76,12 +85,17 @@ const AccountPage = () => {
           </Grid>
         </Grid>
         <Box>
-          <Typography color="custom.fontGray" width="80%" marginBottom="2vh" textAlign="justify">
-            We value your control and privacy. By clicking Delete
-            Account you will permanently remove all of your personal data and
-            account information from our system. This action is irreversible,
-            and you will lose access to your account, including any saved
-            preferences, settings, and content
+          <Typography
+            color="custom.fontGray"
+            width="80%"
+            marginBottom="2vh"
+            textAlign="justify"
+          >
+            We value your control and privacy. By clicking Delete Account you
+            will permanently remove all of your personal data and account
+            information from our system. This action is irreversible, and you
+            will lose access to your account, including any saved preferences,
+            settings, and content
           </Typography>
           <WrappBtn onClick={() => setConfirmOpen(true)}>
             Delete Account

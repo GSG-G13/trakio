@@ -13,6 +13,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Props2 } from '../../interfaces';
 import { userData } from '../../interfaces/userData';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AddMemberModal = ({ open, handleClose }: Props2) => {
   const [allUsers, setAllUsers] = useState<userData[]>([]);
@@ -20,9 +21,13 @@ const AddMemberModal = ({ open, handleClose }: Props2) => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/api/project/${id}/users`).then((res) => {
-      setAllUsers(res.data.data);
-    });
+    axios
+      .get(`${ENDPOINTS.PROJECT}/${id}/users`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setAllUsers(res.data.data);
+      });
   }, [id]);
 
   return (
@@ -135,9 +140,15 @@ const AddMemberModal = ({ open, handleClose }: Props2) => {
             variant="contained"
             onClick={() => {
               axios
-                .post(`/api/project/${id}/members`, {
-                  users: selected.map((value) => value.id),
-                })
+                .post(
+                  `${ENDPOINTS.PROJECT}/${id}/members`,
+                  {
+                    users: selected.map((value) => value.id),
+                  },
+                  {
+                    withCredentials: true,
+                  },
+                )
                 .then(() => {
                   setSelected([]);
                   handleClose();

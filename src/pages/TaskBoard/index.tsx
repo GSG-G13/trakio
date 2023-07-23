@@ -5,13 +5,17 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Lottie from 'react-lottie';
 import {
-  DragDropContext, Droppable, Draggable, DropResult,
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
 } from 'react-beautiful-dnd';
 import { TaskCard } from '../../components';
 import { task } from '../../interfaces/task';
 import { ISection } from '../../interfaces';
 import empty from '../../lotties/empty.json';
 import TaskSkeleton from './TaskSkeleton';
+import ENDPOINTS from '../../constants/endpoints';
 
 const TaskBoard = () => {
   const navigate = useNavigate();
@@ -22,18 +26,24 @@ const TaskBoard = () => {
   const [emptyList, setEmptyList] = useState<boolean>(false);
   const { id } = useParams();
   const endpoint = pathname.includes('project')
-    ? `/api/project/${id}/task`
-    : '/api/tasks';
+    ? `${ENDPOINTS.PROJECT}/${id}/task`
+    : ENDPOINTS.TASKS;
 
   useEffect(() => {
     setLoading(true);
 
-    axios.get('/api/sections').then((res) => {
-      setSections(res.data.data);
-    });
+    axios
+      .get(ENDPOINTS.SECTIONS, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setSections(res.data.data);
+      });
 
     axios
-      .get(endpoint)
+      .get(endpoint, {
+        withCredentials: true,
+      })
       .then((res) => {
         setLoading(false);
         setTasks(res.data.data);
@@ -47,16 +57,21 @@ const TaskBoard = () => {
       });
   }, [pathname]);
 
-  const onDragStart = async ({ destination, draggableId }:any) => {
+  const onDragStart = async ({ destination, draggableId }: any) => {
     const draggableTask = tasks.filter((task) => task.id === +draggableId);
-    const sectionId = sections.filter((section) => section.section === destination.droppableId);
+    const sectionId = sections.filter(
+      (section) => section.section === destination.droppableId,
+    );
     draggableTask[0].section = destination.droppableId;
     const { project_id: projectId, id: taskId } = draggableTask[0];
-    axios.put(`/api/project/${projectId}/task/${taskId}`, {
-      destinationSection: sectionId[0].id,
-    }).then((response) => response).catch(() => {
-      console.log('error');
-    });
+    axios
+      .put(`/api/project/${projectId}/task/${taskId}`, {
+        destinationSection: sectionId[0].id,
+      })
+      .then((response) => response)
+      .catch(() => {
+        console.log('error');
+      });
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -117,7 +132,9 @@ const TaskBoard = () => {
                         <TaskSkeleton />
                       ) : (
                         tasks
-                          ?.filter((item: task) => item.section === section.section)
+                          ?.filter(
+                            (item: task) => item.section === section.section,
+                          )
                           .map((object: task, index: number) => (
                             <Draggable
                               key={object.id}
@@ -152,7 +169,12 @@ const TaskBoard = () => {
               alignItems: 'center',
             }}
           >
-            <Typography fontSize={24} fontWeight={700} mb={4} color="custom.gray">
+            <Typography
+              fontSize={24}
+              fontWeight={700}
+              mb={4}
+              color="custom.gray"
+            >
               No Tasks
             </Typography>
             <Lottie

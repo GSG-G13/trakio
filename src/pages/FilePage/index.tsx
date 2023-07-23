@@ -11,6 +11,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Lottie from 'react-lottie';
 import { IFile } from '../../interfaces';
 import noAttach from '../../lotties/noAttach.json';
+import ENDPOINTS from '../../constants/endpoints';
 
 const handleDownloadClick = async (attach: string) => {
   try {
@@ -20,6 +21,7 @@ const handleDownloadClick = async (attach: string) => {
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
       responseType: 'blob',
+      withCredentials: true,
     });
     const blob = new Blob([response.data], {
       type: response.headers['content-type'],
@@ -43,7 +45,9 @@ const FilePage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(`/api/project/${id}/attachments`).then((res) => {
+    axios.get(`${ENDPOINTS.PROJECT}/${id}/attachments`, {
+      withCredentials: true,
+    }).then((res) => {
       setFiles(res.data.data);
       setIsLoading(false);
     });

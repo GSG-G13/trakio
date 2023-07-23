@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import {
-  Modal, Box, TextField, Typography, CircularProgress,
+  Modal,
+  Box,
+  TextField,
+  Typography,
+  CircularProgress,
 } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -25,6 +29,7 @@ import {
 import { ErrorAlert, SuccessAlert } from '..';
 import { IMember, ISection, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -101,7 +106,9 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
 
   const handleSubmit = () => {
     axios
-      .post(`/api/project/${formData.projectId}/task`, formData)
+      .post(`${ENDPOINTS.PROJECT}/${formData.projectId}/task`, formData, {
+        withCredentials: true,
+      })
       .then((response) => {
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
@@ -116,20 +123,26 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
 
   useEffect(() => {
     axios
-      .get(`/api/project/${projectId}`)
+      .get(`${ENDPOINTS.PROJECT}/${projectId}`, {
+        withCredentials: true,
+      })
       .then((response) => setProjectTitle(response.data.data[0].title));
   });
 
   useEffect(() => {
     axios
-      .get(`/api/project/${projectId}/members`)
+      .get(`${ENDPOINTS.PROJECT}/${projectId}/members`, {
+        withCredentials: true,
+      })
       .then((response) => setMembers(response.data.data));
   }, [open]);
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get('/api/sections')
+      .get(ENDPOINTS.SECTIONS, {
+        withCredentials: true,
+      })
       .then((values) => {
         setLoading(false);
         setSections(values.data.data);

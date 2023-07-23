@@ -17,6 +17,7 @@ import {
 import { validationSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
 import userContext from '../../../UserContext/context';
+import ENDPOINTS from '../../../constants/endpoints';
 
 interface LoginFormValues {
   email: string;
@@ -34,7 +35,9 @@ const LoginForm = () => {
 
   const handleSubmit = (values: LoginFormValues) => {
     axios
-      .post('/api/login', values)
+      .post(ENDPOINTS.LOGIN, values, {
+        withCredentials: true,
+      })
       .then((res) => {
         setOpenSuccess(true);
         setUserData(res.data.data[0]);

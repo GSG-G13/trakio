@@ -4,6 +4,7 @@ import axios from 'axios';
 import { LinearProgress, Box } from '@mui/material';
 import { userData } from '../interfaces/userData';
 import userContext from './context';
+import ENDPOINTS from '../constants/endpoints';
 
 const AuthContext = ({ children }: { children: any }) => {
   const [user, setUserData] = useState<userData | null>(null);
@@ -11,13 +12,16 @@ const AuthContext = ({ children }: { children: any }) => {
 
   useEffect(() => {
     axios
-      .get('/api/user')
+      .get(ENDPOINTS.USER, {
+        withCredentials: true,
+      })
       .then((res) => {
         setLoading(false);
         setUserData(res.data.userData);
       })
       .catch(() => {
         setLoading(false);
+        setUserData(null);
         Cookie.remove('token');
       });
   }, []);
@@ -33,8 +37,20 @@ const AuthContext = ({ children }: { children: any }) => {
   return (
     <userContext.Provider value={contextValue}>
       {loading ? (
-        <Box width="30%" marginX="auto" marginY="35vh" display="flex" flexDirection="column" alignItems="center">
-          <Box component="img" src="/assets/logo.svg" width="100px" height="100px" />
+        <Box
+          width="30%"
+          marginX="auto"
+          marginY="35vh"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <Box
+            component="img"
+            src="/assets/logo.svg"
+            width="100px"
+            height="100px"
+          />
           <LinearProgress sx={{ width: '70%' }} />
         </Box>
       ) : (

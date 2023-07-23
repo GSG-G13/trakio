@@ -5,13 +5,22 @@ import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
-  EmailInput, PasswordInput, CustomIconButton, PasswordErrorMessage, UsernameInput,
-  SignupButton, GooglePlusButton, EmailErrorMessage,
-  PhoneInput, UsernameErrorMessage, PhoneErrorMessage,
+  EmailInput,
+  PasswordInput,
+  CustomIconButton,
+  PasswordErrorMessage,
+  UsernameInput,
+  SignupButton,
+  GooglePlusButton,
+  EmailErrorMessage,
+  PhoneInput,
+  UsernameErrorMessage,
+  PhoneErrorMessage,
 } from './signupForm';
 import { signupSchema } from '../../../helper/validation/schema';
 import { ErrorAlert, SuccessAlert } from '../..';
 import userContext from '../../../UserContext/context';
+import ENDPOINTS from '../../../constants/endpoints';
 
 interface SignupFormValues {
   email: string;
@@ -19,6 +28,7 @@ interface SignupFormValues {
   phone: string;
   username: string;
 }
+
 const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -30,7 +40,9 @@ const SignupForm = () => {
 
   const handleSubmit = (values: SignupFormValues) => {
     axios
-      .post('/api/signup', values)
+      .post(ENDPOINTS.SIGNUP, values, {
+        withCredentials: true,
+      })
       .then((res) => {
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
@@ -72,7 +84,11 @@ const SignupForm = () => {
               name="name"
               placeholder="Enter your name"
             />
-            <UsernameErrorMessage name="name" component="div" className="error-message" />
+            <UsernameErrorMessage
+              name="name"
+              component="div"
+              className="error-message"
+            />
           </div>
           <div>
             <EmailInput
@@ -80,7 +96,11 @@ const SignupForm = () => {
               name="email"
               placeholder="Enter your email address"
             />
-            <EmailErrorMessage name="email" component="div" className="error-message" />
+            <EmailErrorMessage
+              name="email"
+              component="div"
+              className="error-message"
+            />
           </div>
           <div>
             <PhoneInput
@@ -88,7 +108,11 @@ const SignupForm = () => {
               name="phone"
               placeholder="Enter your phone number"
             />
-            <PhoneErrorMessage name="phone" component="div" className="error-message" />
+            <PhoneErrorMessage
+              name="phone"
+              component="div"
+              className="error-message"
+            />
           </div>
           <div>
             <PasswordInput
@@ -97,16 +121,33 @@ const SignupForm = () => {
               placeholder="Enter your password"
             />
             <InputAdornment position="end">
-              <CustomIconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+              <CustomIconButton
+                onClick={() => setShowPassword(!showPassword)}
+                edge="end"
+              >
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </CustomIconButton>
             </InputAdornment>
-            <PasswordErrorMessage name="password" component="div" className="error-message" />
+            <PasswordErrorMessage
+              name="password"
+              component="div"
+              className="error-message"
+            />
           </div>
-          <SignupButton fullWidth size="large" type="submit" variant="contained">
+          <SignupButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+          >
             Sign Up
           </SignupButton>
-          <GooglePlusButton fullWidth size="large" type="submit" variant="contained">
+          <GooglePlusButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+          >
             Sign up with Google
           </GooglePlusButton>
         </Form>

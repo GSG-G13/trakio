@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
-import { useOutletContext } from 'react-router-dom';
+import { NavLink, useOutletContext } from 'react-router-dom';
 import empty from '../../lotties/empty.json';
 import LongMenu from './Menu';
 import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
@@ -18,6 +18,7 @@ import { iProjects, iProjectTasks } from '../../interfaces';
 import { ErrorAlert, ConfirmDialog, SuccessAlert } from '..';
 import Loader from './Loader';
 import UpdateProjectModal from '../UpdateProject';
+import ENDPOINTS from '../../constants/endpoints';
 
 const LinearProgressWithLabel = ({ value }: { value: number }) => (
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -63,7 +64,9 @@ const ProjectsCard = () => {
 
   const handleDeleteProject = (projectId: any) => {
     axios
-      .delete(`/api/project/${projectId}`)
+      .delete(`${ENDPOINTS.PROJECT}/${projectId}`, {
+        withCredentials: true,
+      })
       .then(() => {
         const updatedProjects = userProjects.filter(
           (project) => project.project_id !== projectId,
@@ -91,12 +94,15 @@ const ProjectsCard = () => {
 
   useEffect(() => {
     axios
-      .get('/api/projects')
+      .get(ENDPOINTS.PROJECTS, {
+        withCredentials: true,
+      })
       .then((res) => {
         setUserProjects(res.data.data);
         setRender(!render);
-        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios
-          .get(`/api/project/${project.project_id}/task`)
+        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`${ENDPOINTS.PROJECT}/${project.project_id}/task`, {
+          withCredentials: true,
+        })
           .then((task) => task.data.data));
 
         return Promise.all(fetchProjectTasks);
@@ -170,20 +176,25 @@ const ProjectsCard = () => {
                   <Box
                     sx={{ display: 'flex', justifyContent: 'space-between' }}
                   >
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        overflow: 'hidden',
-                        WebkitLineClamp: 1,
-                        display: '-webkit-box',
-                        WebkitBoxOrient: 'vertical',
-                        textAlign: 'left',
-                      }}
+                    <NavLink
+                      to={`/project/${project.project_id}`}
+                      style={{ textDecoration: 'none' }}
                     >
-                      {project.title.toUpperCase()}
-                    </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="div"
+                        sx={{
+                          overflow: 'hidden',
+                          WebkitLineClamp: 1,
+                          display: '-webkit-box',
+                          WebkitBoxOrient: 'vertical',
+                          textAlign: 'left',
+                        }}
+                      >
+                        {project.title.toUpperCase()}
+                      </Typography>
+                    </NavLink>
                     {project.role === 'manager' && (
                       <LongMenu
                         handleEditProject={handleEditProject}

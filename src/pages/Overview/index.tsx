@@ -17,6 +17,7 @@ import {
   IMember, IProjectDetails, ISection, task,
 } from '../../interfaces';
 import AddMemberModal from '../../components/AddMember';
+import ENDPOINTS from '../../constants/endpoints';
 
 const Overview = () => {
   const [open, setOpen] = useState(false);
@@ -37,8 +38,9 @@ const Overview = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`/api/project/${id}`)
-      .then((res) => {
+      .get(`${ENDPOINTS.PROJECT}/${id}`, {
+        withCredentials: true,
+      }).then((res) => {
         setProject(res.data.data[0]);
         setManager(res.data.manager);
       })
@@ -47,8 +49,9 @@ const Overview = () => {
       });
 
     axios
-      .get(`/api/project/${id}/task`)
-      .then((res) => {
+      .get(`${ENDPOINTS.PROJECT}/${id}/task`, {
+        withCredentials: true,
+      }).then((res) => {
         setLoading(false);
         setTasks(res.data.data);
       })
@@ -57,8 +60,10 @@ const Overview = () => {
       });
 
     axios
-      .get(`/api/project/${id}/members`)
-      .then((res) => {
+      .get(`${ENDPOINTS.PROJECT}/${id}/members`,
+        {
+          withCredentials: true,
+        }).then((res) => {
         setMembers(res.data.data);
       })
       .catch((err) => {

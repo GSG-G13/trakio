@@ -18,6 +18,7 @@ import { IPriority, ISection, task } from '../../interfaces';
 import THEME from '../../theme';
 import EditTaskForm from '../../components/UpdateTask';
 import TaskRowSkeleton from './TaskRowSkeleton';
+import ENDPOINTS from '../../constants/endpoints';
 
 const TaskRow = ({
   data,
@@ -50,7 +51,12 @@ const TaskRow = ({
 
   const handleDeleteTask = () => {
     axios
-      .delete(`/api/project/${data.project_id}/task?taskId=${data.id}`)
+      .delete(
+        `${ENDPOINTS.PROJECT}/${data.project_id}/task?taskId=${data.id}`,
+        {
+          withCredentials: true,
+        },
+      )
       .then((response: any) => {
         setMessageSuccess(response.data.message);
       })
@@ -68,13 +74,14 @@ const TaskRow = ({
 
   useEffect(() => {
     axios
-      .get('/api/sections')
-      .then((res) => {
+      .get(ENDPOINTS.SECTIONS, {
+        withCredentials: true,
+      }).then((res) => {
         setSections(res.data.data);
-        return axios.get('/api/priorities');
-      })
-
-      .then((res) => {
+        return axios.get(ENDPOINTS.PRIORITIES, {
+          withCredentials: true,
+        });
+      }).then((res) => {
         setPriorities(res.data.data);
         setIsLoading(false);
       });
