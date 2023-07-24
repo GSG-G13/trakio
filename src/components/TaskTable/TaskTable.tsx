@@ -18,6 +18,7 @@ import { task } from '../../interfaces';
 import Theme from '../../theme';
 import TaskRowSkeleton from './TaskRowSkeleton';
 import empty from '../../lotties/empty.json';
+import ENDPOINTS from '../../constants/endpoints';
 
 const TaskTable = () => {
   const [tasks, setTasks] = useState<task[]>([]);
@@ -27,7 +28,9 @@ const TaskTable = () => {
   const { id } = useParams();
   const navigator = useNavigate();
   const isProject = pathname.includes('project');
-  const endpoint = isProject ? `/api/project/${id}/task` : '/api/tasks';
+  const endpoint = isProject
+    ? `${ENDPOINTS.PROJECT}/${id}/task`
+    : ENDPOINTS.TASKS;
 
   const COLS = [
     'Task name',
@@ -42,7 +45,9 @@ const TaskTable = () => {
 
   useEffect(() => {
     axios
-      .get(endpoint)
+      .get(endpoint, {
+        withCredentials: true,
+      })
       .then((res) => {
         setLoading(false);
         setTasks(res.data.data);
@@ -53,7 +58,9 @@ const TaskTable = () => {
       });
 
     if (isProject) {
-      axios.get(`/api/project/${id}`).then((res) => {
+      axios.get(`${ENDPOINTS.PROJECT}/${id}`, {
+        withCredentials: true,
+      }).then((res) => {
         setIsManager(res.data.manager);
       });
     }
@@ -125,7 +132,15 @@ const TaskTable = () => {
           {loading ? (
             <TaskRowSkeleton />
           ) : (
-            tasks.map((item) => <TaskRow key={item.id} data={item} isManager={isManager} />)
+            tasks.map((item) => (
+              <TaskRow
+                key={item.id}
+                data={item}
+                isManager={isManager}
+                tasks={tasks}
+                setTasks={setTasks}
+              />
+            ))
           )}
         </TableBody>
       </Table>

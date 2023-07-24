@@ -13,7 +13,7 @@ import { SuccessAlert, ErrorAlert, ConfirmDialog } from './Alerts';
 import TabBar from './TabBar';
 import FloatingButton from './FloatingButton';
 import { TitleAndDesc, OverviewTaskCard, Member } from './OverviewContent';
-import UploadModal from './uploadModal';
+import UploadModal from './UploadModal';
 
 export {
   TaskTable,

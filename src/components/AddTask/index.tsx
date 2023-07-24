@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Modal, Box, TextField, Typography, CircularProgress } from '@mui/material';
+import {
+  Modal,
+  Box,
+  TextField,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -7,6 +13,7 @@ import { Formik, Field, Form } from 'formik';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
+import dayjs from 'dayjs';
 import {
   TaskBox,
   Label,
@@ -22,6 +29,7 @@ import {
 import { ErrorAlert, SuccessAlert } from '..';
 import { IMember, ISection, Props2 } from '../../interfaces';
 import { PRIORITIES } from '../../constants';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AddTaskModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -42,12 +50,11 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
     priorityId: 1,
     description: '',
   });
-
   const handleChange = (event: any) => {
     const { id, value } = event.target;
     if (id === 'section') {
       const selectedSection = sections.filter(
-        (section: any) => section.section === value
+        (section: any) => section.section === value,
       );
       const sectionId = selectedSection.length ? selectedSection[0].id : null;
       setFormData((prevFormData: any) => ({
@@ -56,7 +63,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
       }));
     } else if (id === 'priority') {
       const selectedPriority = PRIORITIES.find(
-        (priority) => priority.priority === value
+        (priority) => priority.priority === value,
       );
       const priorityId = selectedPriority ? selectedPriority.id : null;
       setFormData((prevFormData: any) => ({
@@ -70,7 +77,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
       }));
     } else if (id === 'member') {
       const selectedmember = members.filter(
-        (member: any) => member.email === value
+        (member: any) => member.email === value,
       );
       const memberId = selectedmember.length ? selectedmember[0].id : null;
       setFormData((prevFormData: any) => ({
@@ -93,16 +100,19 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
   const handleDateChange = (date: any) => {
     setFormData((prevFormData: any) => ({
       ...prevFormData,
-      dueDate: date,
+      dueDate: dayjs(date).format('YYYY-MM-DD'),
     }));
   };
 
   const handleSubmit = () => {
     axios
-      .post(`/api/project/${formData.projectId}/task`, formData)
+      .post(`${ENDPOINTS.PROJECT}/${formData.projectId}/task`, formData, {
+        withCredentials: true,
+      })
       .then((response) => {
         setOpenSuccess(true);
         setMessageSuccess(response.data.message);
+        setFormData((prev) => ({ ...prev, title: '', description: '' }));
         handleClose();
       })
       .catch((error) => {
@@ -113,20 +123,26 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
 
   useEffect(() => {
     axios
-      .get(`/api/project/${projectId}`)
+      .get(`${ENDPOINTS.PROJECT}/${projectId}`, {
+        withCredentials: true,
+      })
       .then((response) => setProjectTitle(response.data.data[0].title));
   });
 
   useEffect(() => {
     axios
-      .get(`/api/project/${projectId}/members`)
+      .get(`${ENDPOINTS.PROJECT}/${projectId}/members`, {
+        withCredentials: true,
+      })
       .then((response) => setMembers(response.data.data));
   }, [open]);
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get('/api/sections')
+      .get(ENDPOINTS.SECTIONS, {
+        withCredentials: true,
+      })
       .then((values) => {
         setLoading(false);
         setSections(values.data.data);
@@ -135,8 +151,6 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
         setLoading(false);
       });
   }, []);
-
-  if (isLoading) return <Box>Loading...</Box>;
 
   return (
     <>
@@ -150,7 +164,13 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
         message={messageError}
         setOpen={setOpenError}
       />
-      <Modal open={open} onClose={handleClose}>
+      <Modal
+        open={open}
+        onClose={() => {
+          setFormData((prev) => ({ ...prev, title: '', description: '' }));
+          handleClose();
+        }}
+      >
         <TaskBox>
           <Formik initialValues={formData} onSubmit={handleSubmit}>
             <Form
@@ -210,9 +230,12 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DatePicker']}>
                     <StyledDatePicker
+                      defaultValue={null}
                       label="Basic date picker"
                       onChange={handleDateChange}
                       sx={{ width: '90%' }}
+                      minDate={dayjs(new Date())}
+                      format="YYYY-MM-DD"
                     />
                   </DemoContainer>
                 </LocalizationProvider>

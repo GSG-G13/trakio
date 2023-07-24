@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import userContext from '../../UserContext/context';
 import { IProjectDetails } from '../../interfaces';
+import ENDPOINTS from '../../constants/endpoints';
 
 const TabBar = () => {
   const isProjectTab = useLocation().pathname.includes('project');
@@ -21,7 +22,9 @@ const TabBar = () => {
 
   useEffect(() => {
     if (isProjectTab) {
-      axios.get(`/api/project/${id}`).then((res) => {
+      axios.get(`${ENDPOINTS.PROJECT}/${id}`, {
+        withCredentials: true,
+      }).then((res) => {
         setProject(res.data.data[0]);
       });
     }

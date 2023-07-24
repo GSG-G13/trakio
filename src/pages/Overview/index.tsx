@@ -1,12 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 import { useEffect, useState } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import {
-  FloatingButton, Member, OverviewTaskCard, TitleAndDesc,
+  FloatingButton,
+  Member,
+  OverviewTaskCard,
+  TitleAndDesc,
 } from '../../components';
 import AddTaskModal from '../../components/AddTask';
 import presenation from '../../lotties/presentation.json';
@@ -14,6 +17,7 @@ import {
   IMember, IProjectDetails, ISection, task,
 } from '../../interfaces';
 import AddMemberModal from '../../components/AddMember';
+import ENDPOINTS from '../../constants/endpoints';
 
 const Overview = () => {
   const [open, setOpen] = useState(false);
@@ -25,15 +29,18 @@ const Overview = () => {
   const { id } = useParams();
   const [project, setProject] = useState<IProjectDetails>({});
   const [manager, setManager] = useState<boolean>(false);
-  const [sections, setSections] = useState<ISection[]>([]);
   const [tasks, setTasks] = useState<task[]>([]);
   const [members, setMembers] = useState<IMember[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigator = useNavigate();
+  const { section }: {section: ISection[]} = useOutletContext<any>();
 
   useEffect(() => {
+    setLoading(true);
     axios
-      .get(`/api/project/${id}`)
-      .then((res) => {
+      .get(`${ENDPOINTS.PROJECT}/${id}`, {
+        withCredentials: true,
+      }).then((res) => {
         setProject(res.data.data[0]);
         setManager(res.data.manager);
       })
@@ -41,13 +48,11 @@ const Overview = () => {
         navigator('/', { state: { error: err.response.data.message } });
       });
 
-    axios.get('/api/sections').then((res) => {
-      setSections(res.data.data);
-    });
-
     axios
-      .get(`/api/project/${id}/task`)
-      .then((res) => {
+      .get(`${ENDPOINTS.PROJECT}/${id}/task`, {
+        withCredentials: true,
+      }).then((res) => {
+        setLoading(false);
         setTasks(res.data.data);
       })
       .catch((err) => {
@@ -55,8 +60,10 @@ const Overview = () => {
       });
 
     axios
-      .get(`/api/project/${id}/members`)
-      .then((res) => {
+      .get(`${ENDPOINTS.PROJECT}/${id}/members`,
+        {
+          withCredentials: true,
+        }).then((res) => {
         setMembers(res.data.data);
       })
       .catch((err) => {
@@ -67,7 +74,7 @@ const Overview = () => {
   return (
     <>
       <Grid container marginBottom={5} spacing={2}>
-        <TitleAndDesc project={project} />
+        <TitleAndDesc project={project} loading={loading} />
         <Grid item xs={4}>
           <Lottie
             height={180}
@@ -82,12 +89,14 @@ const Overview = () => {
             }}
           />
         </Grid>
-        {sections.map((item) => (
+        {section.map((item) => (
           <OverviewTaskCard
+            loading={loading}
             section={item}
             key={item.section}
             tasks={
-              tasks.filter((taskItem) => taskItem.section === item.section).length
+              tasks.filter((taskItem) => taskItem.section === item.section)
+                .length
             }
           />
         ))}
@@ -103,20 +112,23 @@ const Overview = () => {
         </Grid>
         {manager && (
           <Grid marginTop={2} item xs={2}>
-            <Button variant="outlined" onClick={handleOpen} endIcon={<AddIcon />}>
+            <Button
+              variant="outlined"
+              onClick={handleOpen}
+              endIcon={<AddIcon />}
+            >
               Add Members
             </Button>
           </Grid>
         )}
         <AddMemberModal open={open} handleClose={handleClose} />
         {members.map((item) => (
-          <Member member={item} key={item.id} />
+          <Member member={item} key={item.id} loading={loading} />
         ))}
       </Grid>
-      {manager && (<FloatingButton onClick={handleOpenTask} />)}
+      {manager && <FloatingButton onClick={handleOpenTask} />}
       <AddTaskModal open={openTask} handleClose={handleCloseTask} />
     </>
-
   );
 };
 

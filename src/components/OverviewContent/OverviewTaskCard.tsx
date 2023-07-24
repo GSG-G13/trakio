@@ -1,4 +1,6 @@
-import { Grid, Box, Typography } from '@mui/material';
+import {
+  Grid, Box, Typography, Skeleton,
+} from '@mui/material';
 import Lottie from 'react-lottie';
 import todoSvg from '../../lotties/todoSvg.json';
 import inprogress from '../../lotties/inprogress.json';
@@ -9,9 +11,11 @@ import { ISection } from '../../interfaces';
 const OverviewTaskCard = ({
   section,
   tasks,
+  loading,
 }: {
   section: ISection;
   tasks: number;
+  loading: boolean;
 }) => {
   const lotties = [
     <Lottie
@@ -77,12 +81,16 @@ const OverviewTaskCard = ({
         }}
       >
         {lotties[section.id - 1]}
-        <Typography padding={1} color="custom.gray">
-          {section.section}
-        </Typography>
-        <Typography fontSize={18} fontWeight={700} color="custom.white">
-          {tasks}
-        </Typography>
+        {!loading ? (
+          <Typography padding={1} color="custom.gray">
+            {section.section}
+          </Typography>
+        ) : <Skeleton variant="rectangular" height={12} width="40%" sx={{ marginY: '1rem' }} />}
+        {!loading ? (
+          <Typography fontSize={18} fontWeight={700} color="custom.white">
+            {tasks}
+          </Typography>
+        ) : <Skeleton variant="rectangular" height={18} width="25%" />}
       </Box>
     </Grid>
   );

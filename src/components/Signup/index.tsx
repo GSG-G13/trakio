@@ -47,7 +47,7 @@ const Sigup = () => {
           <SigninText>Sign in</SigninText>
         </Link>
       </BodyContainer>
-      <SignupImage src="public/assets/todo.svg" alt="login" />
+      <SignupImage src="/assets/todo.svg" alt="login" />
     </>
   );
 };

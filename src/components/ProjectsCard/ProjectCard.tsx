@@ -10,14 +10,15 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Lottie from 'react-lottie';
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import empty from '../../lotties/empty.json';
 import LongMenu from './Menu';
 import { WrapperDes, WrapCards, Wrapper2 } from './cards.styled';
 import { iProjects, iProjectTasks } from '../../interfaces';
-import { ErrorAlert, ConfirmDialog } from '..';
+import { ErrorAlert, ConfirmDialog, SuccessAlert } from '..';
 import Loader from './Loader';
 import UpdateProjectModal from '../UpdateProject';
+import ENDPOINTS from '../../constants/endpoints';
 
 const LinearProgressWithLabel = ({ value }: { value: number }) => (
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -56,12 +57,16 @@ const ProjectsCard = () => {
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<iProjects[]>();
-  const [render, setRender] = useOutletContext<any>();
+  const [selectedProject, setSelectedProject] = useState<iProjects>();
+  const [render, setRender] = useOutletContext<any>().render;
+  const [openSuccess, setOpenSuccess] = useState<boolean>(false);
+  const [messageSuccess, setMessageSuccess] = useState<string>('');
 
   const handleDeleteProject = (projectId: any) => {
     axios
-      .delete(`/api/project/${projectId}`)
+      .delete(`${ENDPOINTS.PROJECT}/${projectId}`, {
+        withCredentials: true,
+      })
       .then(() => {
         const updatedProjects = userProjects.filter(
           (project) => project.project_id !== projectId,
@@ -76,9 +81,9 @@ const ProjectsCard = () => {
   };
 
   const handleEditProject = (projectId: any) => {
-    const project = userProjects.find(
-      (project:iProjects) => project.project_id === projectId,
-    );
+    const project: iProjects = userProjects.find(
+      (project: iProjects) => project.project_id === projectId,
+    )!;
     setSelectedProject(project);
     setOpenUpdateModal(true);
   };
@@ -89,12 +94,15 @@ const ProjectsCard = () => {
 
   useEffect(() => {
     axios
-      .get('/api/projects')
+      .get(ENDPOINTS.PROJECTS, {
+        withCredentials: true,
+      })
       .then((res) => {
         setUserProjects(res.data.data);
         setRender(!render);
-        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios
-          .get(`/api/project/${project.project_id}/task`)
+        const fetchProjectTasks = res.data.data.map((project: iProjects) => axios.get(`${ENDPOINTS.PROJECT}/${project.project_id}/task`, {
+          withCredentials: true,
+        })
           .then((task) => task.data.data));
 
         return Promise.all(fetchProjectTasks);
@@ -108,7 +116,7 @@ const ProjectsCard = () => {
         setMessageError(error.response.data.message);
         setIsLoading(false);
       });
-  }, []);
+  }, [selectedProject]);
 
   if (isLoading) {
     return (
@@ -120,7 +128,16 @@ const ProjectsCard = () => {
 
   return (
     <>
-      <ErrorAlert open={openError} message={messageError} setOpen={setOpenError} />
+      <SuccessAlert
+        open={openSuccess}
+        message={messageSuccess}
+        setOpen={setOpenSuccess}
+      />
+      <ErrorAlert
+        open={openError}
+        message={messageError}
+        setOpen={setOpenError}
+      />
       {!userProjects.length && !isLoading ? (
         <Box
           width="65vw"
@@ -153,32 +170,39 @@ const ProjectsCard = () => {
             projectTasks[index] as unknown as iProjectTasks[]
           )?.filter((task: iProjectTasks) => task.section === 'Done')?.length;
           return (
-            <WrapCards>
-              <Wrapper2 key={project.project_id}>
+            <WrapCards key={project.project_id}>
+              <Wrapper2>
                 <CardContent sx={{ flex: 1, padding: '0' }}>
                   <Box
                     sx={{ display: 'flex', justifyContent: 'space-between' }}
                   >
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        overflow: 'hidden',
-                        '-webkit-line-clamp': '1',
-                        display: '-webkit-box',
-                        '-webkit-box-orient': 'vertical',
-                        textAlign: 'left',
-                      }}
+                    <Link
+                      to={`/project/${project.project_id}`}
+                      style={{ textDecoration: 'none', color: 'inherit', backgroundColor: 'inherit' }}
                     >
-                      {project.title}
-                    </Typography>
-                    <LongMenu
-                      handleEditProject={handleEditProject}
-                      OpenConfirmation={OpenConfirmation}
-                      setProjectId={setProjectId}
-                      projectId={project.project_id}
-                    />
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="div"
+                        sx={{
+                          overflow: 'hidden',
+                          WebkitLineClamp: 1,
+                          display: '-webkit-box',
+                          WebkitBoxOrient: 'vertical',
+                          textAlign: 'left',
+                        }}
+                      >
+                        {project.title.toUpperCase()}
+                      </Typography>
+                    </Link>
+                    {project.role === 'manager' && (
+                      <LongMenu
+                        handleEditProject={handleEditProject}
+                        OpenConfirmation={OpenConfirmation}
+                        setProjectId={setProjectId}
+                        projectId={project.project_id}
+                      />
+                    )}
                   </Box>
                   <WrapperDes variant="body2" color="text.secondary">
                     {project.description}
@@ -209,6 +233,11 @@ const ProjectsCard = () => {
           open={openUpdateModal}
           handleClose={() => setOpenUpdateModal(false)}
           project={selectedProject}
+          setProject={setSelectedProject}
+          setOpenSuccess={setOpenSuccess}
+          setOpenError={setOpenError}
+          setMessageSuccess={setMessageSuccess}
+          setMessageError={setMessageError}
         />
       )}
     </>

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -12,6 +12,8 @@ import { iProjects } from '../../interfaces';
 import { NAV_LIST } from '../../constants';
 import { Logo, NavItem } from '../Common';
 import UserCard from '../UserCard';
+import ENDPOINTS from '../../constants/endpoints';
+import userContext from '../../UserContext/context';
 
 const Sidebar = ({ render }: any) => {
   const navigate = useNavigate();
@@ -20,11 +22,14 @@ const Sidebar = ({ render }: any) => {
   const [openError, setOpenError] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
+  const { setUserData } = useContext(userContext);
   const { pathname } = useLocation();
 
   useEffect(() => {
     axios
-      .get('/api/projects')
+      .get(ENDPOINTS.PROJECTS, {
+        withCredentials: true,
+      })
       .then((response) => {
         setProjects(response.data.data);
       })
@@ -36,9 +41,12 @@ const Sidebar = ({ render }: any) => {
 
   const handleLogout = () => {
     axios
-      .get('/api/logout')
+      .get(ENDPOINTS.LOGOUT, {
+        withCredentials: true,
+      })
       .then((data) => {
         setOpenSuccess(true);
+        setUserData(null);
         setMessageSuccess(data.data.message);
         navigate('/login', { state: { success: 'Logout Successfully' } });
       })

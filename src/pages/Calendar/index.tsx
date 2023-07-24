@@ -6,6 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Box } from '@mui/material';
 import axios from 'axios';
 import { task } from '../../interfaces';
+import ENDPOINTS from '../../constants/endpoints';
 
 const Calendar = () => {
   const [tasks, setTasks] = useState<task[]>([]);
@@ -13,12 +14,14 @@ const Calendar = () => {
   const { pathname } = useLocation();
   const { id } = useParams();
   const endpoint = pathname.includes('project')
-    ? `/api/project/${id}/task`
-    : '/api/tasks';
+    ? `${ENDPOINTS.PROJECT}/${id}/task`
+    : ENDPOINTS.TASKS;
 
   useEffect(() => {
     axios
-      .get(endpoint)
+      .get(endpoint, {
+        withCredentials: true,
+      })
       .then((res) => {
         setTasks(res.data.data);
       })

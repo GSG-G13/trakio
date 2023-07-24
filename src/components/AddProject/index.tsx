@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '..';
 import { addProjectSchema } from '../../helper/validation/schema';
 import { Props2 } from '../../interfaces';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AddProjectModal = ({ open, handleClose }: Props2) => {
   const [openError, setOpenError] = useState(false);
@@ -20,7 +21,9 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
 
   const handleSubmit = (values: any) => {
     axios
-      .post('/api/project', values)
+      .post(ENDPOINTS.PROJECT, values, {
+        withCredentials: true,
+      })
       .then((res) => {
         setOpenSuccess(true);
         setMessageSuccess(res.data.message);
@@ -75,10 +78,38 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
                 label="Title"
                 fullWidth
                 required
-                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+                sx={{
+                  marginBottom: '2vh',
+                  color: 'custom.gray',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'custom.gray',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '12px',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '14px',
+                  },
+                }}
               />
               <ErrorMessage name="title">
-                {(msg) => <Typography color="red">{msg}</Typography>}
+                {(msg) => (
+                  <Typography
+                    fontSize={12}
+                    marginBottom={1}
+                    color="custom.deleteIcon"
+                  >
+                    {msg}
+                  </Typography>
+                )}
               </ErrorMessage>
 
               <Field
@@ -89,10 +120,38 @@ const AddProjectModal = ({ open, handleClose }: Props2) => {
                 multiline
                 rows={4}
                 required
-                sx={{ marginBottom: '1rem', color: 'custom.gray' }}
+                sx={{
+                  marginBottom: '2vh',
+                  color: 'custom.gray',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'custom.gray',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '12px',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    color: 'custom.fontGray',
+                    fontFamily: 'Montserrat',
+                    fontWeight: '300',
+                    fontSize: '14px',
+                  },
+                }}
               />
               <ErrorMessage name="description">
-                {(msg) => <Typography color="custom.gray">{msg}</Typography>}
+                {(msg) => (
+                  <Typography
+                    fontSize={12}
+                    marginBottom={1}
+                    color="custom.deleteIcon"
+                  >
+                    {msg}
+                  </Typography>
+                )}
               </ErrorMessage>
 
               <Button type="submit" variant="contained">

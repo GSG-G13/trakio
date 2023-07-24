@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-vars */
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   TextField,
   Modal,
   Box,
-  Button,
   CircularProgress,
   Typography,
 } from '@mui/material';
@@ -16,10 +13,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LoadingButton } from '@mui/lab';
 import dayjs from 'dayjs';
-// import { PRIORITIES, SECTIONS } from '../../constants';
 import { ErrorAlert, SuccessAlert } from '..';
 import { task, ISection, IPriority } from '../../interfaces';
-// import { TaskBox, Label, Date, Section, Textarea } from './updateTask.styled';
 import {
   Title,
   TaskBox,
@@ -32,6 +27,7 @@ import {
   TextFieldInput,
   TitleField,
 } from '../AddTask/addTask.styled';
+import ENDPOINTS from '../../constants/endpoints';
 
 interface IProps {
   data: task;
@@ -103,8 +99,10 @@ const EditTaskForm = ({
     setLoading(true);
     axios
       .put(
-        `/api/project/${formData.projectId}/task?taskId=${data.id}`,
-        formData,
+        `${ENDPOINTS.PROJECT}/${formData.projectId}/task?taskId=${data.id}`,
+        formData, {
+          withCredentials: true,
+        },
       )
       .then((response) => {
         const newData = response.data.data[0];

@@ -3,7 +3,7 @@ import { WrapInput } from './acount.styled';
 
 const AccountInput = ({ label, value }: { label: string, value: string | undefined }) => (
   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-    <Typography color="custom.white" sx={{ marginBottom: '0.5rem' }}>
+    <Typography color="custom.fontGray" fontWeight="bold" sx={{ marginBottom: '0.5rem' }}>
       {label}
     </Typography>
     <WrapInput value={value} disabled />
