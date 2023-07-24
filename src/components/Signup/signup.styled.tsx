@@ -15,7 +15,7 @@ export const CustomTypography1 = styled(Typography)(({ theme: { palette: { custo
   fontWeight: '700',
   '@media(max-width: 600px)': {
     position: 'absolute',
-    right: '2.3125rem',
+    right: '3.3125rem',
   },
 }));
 
@@ -51,6 +51,7 @@ export const BodyContainer = styled(Container)(({ theme: { palette: { custom } }
   backgroundColor: custom.purple,
   '@media(max-width: 600px)': {
     backgroundColor: custom.background,
+    marginLeft: '-2rem',
   },
 }));
 
@@ -85,7 +86,7 @@ export const DontHaveAcount = styled(Typography)(() => ({
   '@media(max-width: 600px)': {
     width: '150px',
     position: 'absolute',
-    left: '65px',
+    left: '69px',
     top: '650px',
   },
 }));

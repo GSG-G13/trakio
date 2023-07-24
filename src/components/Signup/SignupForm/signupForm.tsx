@@ -60,7 +60,10 @@ export const UsernameInput = styled(Field)(() => ({
 
   },
   '@media(max-width: 600px)': {
-    width: '21rem',
+    width: '19rem',
+    position: 'absolute',
+    right: '3rem',
+    top: '14rem',
   },
 }));
 
@@ -85,7 +88,10 @@ export const EmailInput = styled(Field)(() => ({
     padding: '0.625rem',
   },
   '@media(max-width: 600px)': {
-    width: '21rem',
+    width: '19rem',
+    position: 'absolute',
+    right: '3rem',
+    top: '19rem',
   },
 }));
 
@@ -110,7 +116,10 @@ export const PhoneInput = styled(Field)(() => ({
     padding: '0.625rem',
   },
   '@media(max-width: 600px)': {
-    width: '21rem',
+    width: '19rem',
+    position: 'absolute',
+    right: '3rem',
+    top: '24rem',
   },
 }));
 
@@ -135,7 +144,10 @@ export const PasswordInput = styled(Field)(() => ({
     padding: '0.625rem',
   },
   '@media(max-width: 600px)': {
-    width: '21rem',
+    width: '19rem',
+    position: 'absolute',
+    right: '3rem',
+    top: '29rem',
   },
 }));
 
@@ -146,8 +158,8 @@ export const CustomIconButton = styled(IconButton)(() => ({
   top: '31.1875rem',
   '@media(max-width: 600px)': {
     position: 'absolute',
-    left: '370px',
-    buttom: '385px',
+    right: '5rem',
+    top: '29.5rem',
   },
 }));
 
@@ -166,7 +178,10 @@ export const SignupButton = styled(LoadingButton)(() => ({
   color: '#1E1F21',
   textTransform: 'none',
   '@media(max-width: 600px)': {
-    width: '21rem',
+    width: '19rem',
+    position: 'absolute',
+    right: '3rem',
+    top: '34rem',
   },
 }));
 
@@ -186,7 +201,10 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
   backgroundColor: '#fff',
   textTransform: 'none',
   '@media(max-width: 600px)': {
-    width: '21rem',
+    width: '19rem',
+    position: 'absolute',
+    right: '3rem',
+    top: '39rem',
   },
 }));
 
