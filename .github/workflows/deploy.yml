@@ -1,0 +1,38 @@
+name: Deploy to Amazon S3
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+   VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+   VITE_ACCESS_KEY: ${{ secrets.VITE_ACCESS_KEY }}
+   VITE_SECRET_ACCESS_KEY: ${{ secrets.VITE_SECRET_ACCESS_KEY }}
+jobs:
+  CypressTestReport:
+    timeout-minutes: 120
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm i --force
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload S3    
+        uses: shallwefootball/s3-upload-action@master
+        id: S3
+        with:
+          aws_key_id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws_secret_access_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: trackio
+          source_dir: dist
+          destination_dir: ''
+          
+      - name: Link To Deploy
+        run: echo "http://trackio.s3-website.eu-central-1.amazonaws.com/"
