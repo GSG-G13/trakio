@@ -21,7 +21,6 @@ const handleDownloadClick = async (attach: string) => {
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
       responseType: 'blob',
-      withCredentials: true,
     });
     const blob = new Blob([response.data], {
       type: response.headers['content-type'],

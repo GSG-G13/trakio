@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://trackio-f0a81d9359b8.herokuapp.com/',
+        target: 'https://trackio-0bb197af8651.herokuapp.com/',
         changeOrigin: true,
       },
     },
