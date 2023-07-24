@@ -56,9 +56,9 @@ export const WrapperDes = styled(Typography)(
     marginTop: '10px',
     fontSize: '13.8px',
     overflow: 'hidden',
-    '-webkit-line-clamp': '3',
+    WebkitLineClamp: '3',
     display: '-webkit-box',
-    '-webkit-box-orient': 'vertical',
+    WebkitBoxOrient: 'vertical',
     textAlign: 'left',
   }),
 );
