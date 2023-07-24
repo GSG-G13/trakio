@@ -13,6 +13,10 @@ export const CustomTypography1 = styled(Typography)(({ theme: { palette: { custo
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   fontWeight: '700',
+  '@media(max-width: 600px)': {
+    position: 'absolute',
+    right: '2.3125rem',
+  },
 }));
 
 export const CustomTypography2 = styled(Typography)(({ theme: { palette: { custom } } }) => ({
@@ -26,6 +30,10 @@ export const CustomTypography2 = styled(Typography)(({ theme: { palette: { custo
   fontStyle: 'normal',
   fontWeight: '700',
   fontSize: '1.875rem',
+  '@media(max-width: 600px)': {
+    position: 'absolute',
+    right: '2.3125rem',
+  },
 }));
 
 export const FormContent = styled('div')(() => ({
@@ -41,6 +49,9 @@ export const BodyContainer = styled(Container)(({ theme: { palette: { custom } }
   top: '0rem',
   left: '0rem',
   backgroundColor: custom.purple,
+  '@media(max-width: 600px)': {
+    backgroundColor: custom.background,
+  },
 }));
 
 export const CustomContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({
@@ -52,6 +63,15 @@ export const CustomContainer = styled(Container)(({ theme: { palette: { custom }
   background: custom.background,
   borderRadius: '4.125rem',
   borderColor: custom.white,
+  '@media(max-width: 600px)': {
+    position: 'absolute',
+    top: '-3rem',
+    width: '28rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: '7rem',
+  },
 }));
 
 export const DontHaveAcount = styled(Typography)(() => ({
@@ -62,6 +82,12 @@ export const DontHaveAcount = styled(Typography)(() => ({
   fontFamily: 'Montserrat',
   fontStyle: 'normal',
   color: '#777777',
+  '@media(max-width: 600px)': {
+    width: '150px',
+    position: 'absolute',
+    left: '65px',
+    top: '650px',
+  },
 }));
 
 export const SigninText = styled(Typography)(() => ({
@@ -70,4 +96,10 @@ export const SigninText = styled(Typography)(() => ({
   right: '7.8125rem',
   fontSize: '.75rem',
   color: '#FFDA3C',
+  '@media(max-width: 600px)': {
+    width: '70px',
+    position: 'absolute',
+    left: '220px',
+    top: '650px',
+  },
 }));

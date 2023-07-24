@@ -59,6 +59,9 @@ export const UsernameInput = styled(Field)(() => ({
     padding: '0.625rem',
 
   },
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 
 export const EmailInput = styled(Field)(() => ({
@@ -80,6 +83,9 @@ export const EmailInput = styled(Field)(() => ({
   '::placeholder': {
     fontSize: '1rem',
     padding: '0.625rem',
+  },
+  '@media(max-width: 600px)': {
+    width: '21rem',
   },
 }));
 
@@ -103,6 +109,9 @@ export const PhoneInput = styled(Field)(() => ({
     fontSize: '1rem',
     padding: '0.625rem',
   },
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 
 export const PasswordInput = styled(Field)(() => ({
@@ -125,6 +134,9 @@ export const PasswordInput = styled(Field)(() => ({
     fontSize: '1rem',
     padding: '0.625rem',
   },
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 
 export const CustomIconButton = styled(IconButton)(() => ({
@@ -132,6 +144,11 @@ export const CustomIconButton = styled(IconButton)(() => ({
   right: '2.5rem',
   color: '#818098',
   top: '31.1875rem',
+  '@media(max-width: 600px)': {
+    position: 'absolute',
+    left: '370px',
+    buttom: '385px',
+  },
 }));
 
 export const SignupButton = styled(LoadingButton)(() => ({
@@ -148,6 +165,9 @@ export const SignupButton = styled(LoadingButton)(() => ({
   textAlign: 'center',
   color: '#1E1F21',
   textTransform: 'none',
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 
 export const GooglePlusButton = styled(LoadingButton)(() => ({
@@ -165,6 +185,9 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
   color: '#1E1F21',
   backgroundColor: '#fff',
   textTransform: 'none',
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 
 export const SignupImage = styled('img')(() => ({
@@ -174,4 +197,7 @@ export const SignupImage = styled('img')(() => ({
   height: '37.5rem',
   left: '6.5rem',
   top: '150px',
+  '@media(max-width: 600px)': {
+    display: 'none',
+  },
 }));
