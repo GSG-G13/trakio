@@ -13,7 +13,7 @@ jobs:
           run: npm i --force
 
         - name: Build
-          run: npm build
+          run: npm run build
 
         - name: Deploy
           uses: reggionick/s3-deploy@v3
