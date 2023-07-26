@@ -72,7 +72,7 @@ const AccountPage = () => {
           <Grid item marginBottom="2vh" xs={6}>
             <Lottie
               height="auto"
-              width={400}
+              width={300}
               options={{
                 animationData: profile,
                 loop: true,

@@ -8,7 +8,6 @@ const BigBox = styled('body')({
   padding: 0,
   fontFamily: 'Tomorrow, sans-serif',
   height: '97vh',
-  backgroundImage: 'linear-gradient(to top, #2e1753, #1f1746, #131537, #0d1028, #050819)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
