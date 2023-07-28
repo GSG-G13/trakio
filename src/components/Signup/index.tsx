@@ -36,8 +36,8 @@ const Sigup = () => {
             marginLeft: '60px',
             '@media(max-width: 600px)': {
               marginTop: '4px',
-              width: '100px',
-              marginLeft: '34px',
+              width: '70px',
+              marginLeft: '50px',
               position: 'absolute',
               top: '0',
               left: '0',

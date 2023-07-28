@@ -40,6 +40,7 @@ export const BodyContainer = styled(Container)(({ theme: { palette: { custom } }
   backgroundColor: custom.purple,
   '@media(max-width: 600px)': {
     backgroundColor: custom.background,
+    marginLeft: '-2rem',
   },
 }));
 export const CustomContainer = styled(Container)(({ theme: { palette: { custom } } }) => ({

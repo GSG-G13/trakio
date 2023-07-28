@@ -37,7 +37,7 @@ const Login = () => {
           '@media(max-width: 600px)': {
             marginTop: '4px',
             width: '100px',
-            marginLeft: '30px',
+            marginLeft: '34px',
             position: 'absolute',
             top: '0',
             left: '0',
