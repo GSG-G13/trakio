@@ -5,6 +5,7 @@ import {
   TextField,
   Typography,
   CircularProgress,
+  Avatar,
 } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -207,10 +208,29 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   }}
                   sx={{ width: '90%' }}
                   autoHighlight
-                  getOptionLabel={(option: any) => option.email}
+                  getOptionLabel={(option: any) => option.name}
                   renderOption={(props, option: any) => (
-                    <Box component="li" {...props}>
-                      {option.email}
+                    <Box
+                      component="li"
+                      bgcolor="custom.background"
+                      padding={1}
+                      display="flex"
+                      flexDirection="row"
+                      {...props}
+                    >
+                      <Avatar>{option.name[0].toUpperCase()}</Avatar>
+                      <Box marginLeft={1} display="flex" flexDirection="column">
+                        <Typography
+                          color="custom.gray"
+                          fontWeight="bold"
+                          fontSize={14}
+                        >
+                          {option.name}
+                        </Typography>
+                        <Typography color="custom.gray" fontSize={11}>
+                          {option.email}
+                        </Typography>
+                      </Box>
                     </Box>
                   )}
                   renderInput={(params) => (
