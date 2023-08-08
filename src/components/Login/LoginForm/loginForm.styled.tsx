@@ -42,6 +42,9 @@ export const EmailInput = styled(Field)(() => ({
     fontSize: '16px',
     padding: '10px',
   },
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 export const PasswordInput = styled(Field)(() => ({
   position: 'absolute',
@@ -63,12 +66,20 @@ export const PasswordInput = styled(Field)(() => ({
     fontSize: '16px',
     padding: '10px',
   },
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 export const CustomIconButton = styled(IconButton)(() => ({
   position: 'absolute',
   left: '350px',
   top: '380px',
   color: '#818098',
+  '@media(max-width: 600px)': {
+    position: 'absolute',
+    left: '300px',
+    top: '385px',
+  },
 }));
 export const SigninButton = styled(LoadingButton)(() => ({
   position: 'absolute',
@@ -84,6 +95,9 @@ export const SigninButton = styled(LoadingButton)(() => ({
   textAlign: 'center',
   color: '#1E1F21',
   textTransform: 'none',
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 export const GooglePlusButton = styled(LoadingButton)(() => ({
   position: 'absolute',
@@ -100,6 +114,9 @@ export const GooglePlusButton = styled(LoadingButton)(() => ({
   color: '#1E1F21',
   backgroundColor: '#fff',
   textTransform: 'none',
+  '@media(max-width: 600px)': {
+    width: '21rem',
+  },
 }));
 
 export const LoginImage = styled('img')(() => ({
@@ -108,4 +125,7 @@ export const LoginImage = styled('img')(() => ({
   height: '600px',
   marginLeft: '450px',
   marginTop: '-210px',
+  '@media(max-width: 600px)': {
+    display: 'none',
+  },
 }));
