@@ -1,5 +1,5 @@
 import {
-  Typography, Container, Divider,
+  Typography, Container,
 } from '@mui/material';
 import Lottie from 'react-lottie';
 import { Link } from 'react-router-dom';
