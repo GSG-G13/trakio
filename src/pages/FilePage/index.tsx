@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box, Grid, IconButton, Skeleton, Typography,
 } from '@mui/material';
@@ -41,6 +41,7 @@ const FilePage = () => {
   const { id } = useParams();
   const [files, setFiles] = useState<IFile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigator = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -49,6 +50,11 @@ const FilePage = () => {
     }).then((res) => {
       setFiles(res.data.data);
       setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      if (err.response.status === 403) {
+        navigator('/', { state: { error: err.response.data.message } });
+      }
     });
   }, []);
 

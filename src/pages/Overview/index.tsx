@@ -45,7 +45,9 @@ const Overview = () => {
         setManager(res.data.manager);
       })
       .catch((err) => {
-        navigator('/', { state: { error: err.response.data.message } });
+        if (err.response.status === 403) {
+          navigator('/', { state: { error: err.response.data.message } });
+        }
       });
 
     axios
@@ -56,7 +58,9 @@ const Overview = () => {
         setTasks(res.data.data);
       })
       .catch((err) => {
-        navigator('/', { state: { error: err.response.data.message } });
+        if (err.response.status === 403) {
+          navigator('/', { state: { error: err.response.data.message } });
+        }
       });
 
     axios
@@ -67,7 +71,9 @@ const Overview = () => {
         setMembers(res.data.data);
       })
       .catch((err) => {
-        navigator('/', { state: { error: err.response.data.message } });
+        if (err.response.status === 403) {
+          navigator('/', { state: { error: err.response.data.message } });
+        }
       });
   }, [id, open]);
 

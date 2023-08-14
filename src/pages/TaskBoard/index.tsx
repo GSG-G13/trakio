@@ -53,7 +53,9 @@ const TaskBoard = () => {
       })
       .catch((err) => {
         setLoading(false);
-        navigate('/', { state: { error: err.response.data.message } });
+        if (err.response.status === 403) {
+          navigate('/', { state: { error: err.response.data.message } });
+        }
       });
   }, [pathname]);
 
