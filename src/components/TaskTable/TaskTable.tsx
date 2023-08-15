@@ -54,7 +54,9 @@ const TaskTable = () => {
       })
       .catch((err) => {
         setLoading(false);
-        navigator('/', { state: { error: err.response.data.message } });
+        if (err.response.status === 403) {
+          navigator('/', { state: { error: err.response.data.message } });
+        }
       });
 
     if (isProject) {

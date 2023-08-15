@@ -26,7 +26,9 @@ const Calendar = () => {
         setTasks(res.data.data);
       })
       .catch((err) => {
-        navigator('/', { state: { error: err.response.data.message } });
+        if (err.response.status === 403) {
+          navigator('/', { state: { error: err.response.data.message } });
+        }
       });
   }, [pathname]);
 
