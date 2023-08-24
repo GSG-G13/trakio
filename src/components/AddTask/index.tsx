@@ -208,7 +208,7 @@ const AddTaskModal = ({ open, handleClose }: Props2) => {
                   }}
                   sx={{ width: '90%' }}
                   autoHighlight
-                  getOptionLabel={(option: any) => option.name}
+                  getOptionLabel={(option: any) => option.email}
                   renderOption={(props, option: any) => (
                     <Box
                       component="li"
